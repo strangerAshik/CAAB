@@ -38,15 +38,15 @@
                             <ul class="treeview-menu">
                                 <li><a href="{{URL::to('qualification/personnel');}}"><i class="fa fa-angle-double-right"></i>Personal Info. </a></li>
                                 <li><a href="{{URL::to('qualification/education')}}"><i class="fa fa-angle-double-right"></i>Education</a></li>
-                                <li><a href="#"><i class="fa fa-angle-double-right"></i>Employment</a></li>
-                                <li><a href="#"><i class="fa fa-angle-double-right"></i>Professional Degree</a></li>
-                                <li><a href="#"><i class="fa fa-angle-double-right"></i>Training/Workshop/OJT</a></li>
-                                <li><a href="#"><i class="fa fa-angle-double-right"></i>Language</a></li>
-                                <li><a href="#"><i class="fa fa-angle-double-right"></i>CAA Technical Licence</a></li>
-                                <li><a href="#"><i class="fa fa-angle-double-right"></i>CAA Aircraft Qualification</a></li>
-								 <li><a href="#"><i class="fa fa-angle-double-right"></i>References</a></li>
-								 <li><a href="#"><i class="fa fa-angle-double-right"></i>Employee Verification</a></li>
-                                <li><a href="#"><i class="fa fa-angle-double-right"></i>Others</a></li>
+                                <li><a href="{{URL::to('qualification/employment')}}"><i class="fa fa-angle-double-right"></i>Employment</a></li>
+                                <li><a href="{{URL::to('qualification/pro_degree')}}"><i class="fa fa-angle-double-right"></i>Professional Degree</a></li>
+                                <li><a href="{{URL::to('qualification/taining_work_ojt')}}"><i class="fa fa-angle-double-right"></i>Training/Workshop/OJT</a></li>
+                                <li><a href="{{URL::to('qualification/language')}}"><i class="fa fa-angle-double-right"></i>Language</a></li>
+                                <li><a href="{{URL::to('qualification/technical_licence')}}"><i class="fa fa-angle-double-right"></i>CAA Technical Licence</a></li>
+                                <li><a href="{{URL::to('qualification/aircraft_qualification')}}"><i class="fa fa-angle-double-right"></i>CAA Aircraft Qualification</a></li>
+								 <li><a href="{{URL::to('qualification/reference')}}"><i class="fa fa-angle-double-right"></i>References</a></li>
+								 <li><a href="{{URL::to('qualification/emp_verification')}}"><i class="fa fa-angle-double-right"></i>Employee Verification</a></li>
+                                <li><a href="{{URL::to('qualification/other')}}"><i class="fa fa-angle-double-right"></i>Others</a></li>
                             </ul>
                         </li>
                       

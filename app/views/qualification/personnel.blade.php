@@ -13,7 +13,7 @@
 @stop
 @section('content')
 <section class="content" style="max-width:760px;margin:0 auto;">
-                    <div class="row">
+                    <div class="row" style="">
                         <!-- left column -->
                         <div class="col-md-12">
                             <!-- general form elements -->
@@ -30,6 +30,9 @@
 											{{Form::select('size', array('0' => '--Select--', 'Mr.' => 'Mr.','Ms.'=>'Ms.','Dr.'=>'Dr.','Prof.'=>'Prof.'), '0',array('class'=>'form-control'))}}
 											
                                         </div>
+										
+												
+										
 										
 										<div class="form-group">
 											{{Form::label('', 'First Name', array('class' => ''))}}
@@ -99,19 +102,23 @@
                                         </div>
 										 
 										<div class="form-group">
-                                        <label>Date Of Birth</label>
-                                        <div class="input-group">
-                                            <div class="input-group-addon">
-                                                <i class="fa fa-calendar"></i>
-                                            </div>
+												
+													{{Form::label('', 'Date Of Birth', array('class' => ''))}}
+												
+													<div class="row">
+														<div class="col-xs-4">
+														{{Form::selectRange('range', 1, 31,1,array('class'=>'form-control'))}}
+														</div>
+														<div class="col-xs-4">
+														{{Form::selectMonth('month',1,array('class'=>'form-control'))}}
 											
-											
-											{{Form::selectRange('range', 1, 31,1,array('class'=>'col-xs-4'))}}
-											{{Form::selectMonth('month',1,array('class'=>'col-xs-4'))}}
-											{{Form::selectYear('year', 1950, 2015,1950,array('class'=>'col-xs-4'))}}
-                                          
-                                        </div><!-- /.input group -->
-                                    </div>
+															
+														</div>
+														<div class="col-xs-4">
+															{{Form::selectYear('year', 1950, 2015,1950,array('class'=>'form-control'))}}
+														</div>
+													</div>
+										</div>
                                         <div class="form-group">
                                            
                                             
@@ -128,6 +135,16 @@
                                 </form>
                             </div><!-- /.box -->
 						</div>
+						
+				</div>
+				
 	</section>
 	
+	<script>
+		$(document).ready(function(){
+			$("#show_add").click(function(){
+        $(".row").fadeIn("slow");
+    });
+}); 
+	</script>
 @stop

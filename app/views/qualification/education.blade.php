@@ -25,9 +25,9 @@
                                 <form role="form">
                                     <div class="box-body">
                                         <div class="form-group">
-                                           
+                                          
 											{{Form::label('', ' Level [highest degree first]', array('class' => ''))}}
-											{{Form::select('size', array('0' => '--Select--', 'Mr.' => 'Mr.','Ms.'=>'Ms.','Dr.'=>'Dr.','Prof.'=>'Prof.'), '0',array('class'=>'form-control'))}}
+											{{Form::select('size', array('0' => '--Select--', 'Post Doctorate or Equivalent' => 'Post Doctorate or Equivalent','Doctorate'=>'Doctorate','Masters or Equivalent'=>'Masters or Equivalent','Bachelors or Equivalent'=>'Bachelors or Equivalent','Diploma'=>'Diploma','H.S.C. or Equivalent'=>'H.S.C. or Equivalent','S.S.C. or Equivalent'=>'S.S.C. or Equivalent','Below S.S.C'=>'Below S.S.C'), '0',array('class'=>'form-control'))}}
 											
                                         </div>
 										
@@ -46,14 +46,38 @@
                                         </div>
 										<div class="form-group">
                                            
-											{{Form::label('', 'Result Standard ', array('class' => ''))}}
-											{{Form::select('size', array('0' => '--Select--', 'Grade' => 'Grade','CGPA'=>'CGPA','Division'=>'Division','Class'=>'Class','Percentage'=>'Percentage'), '0',array('class'=>'form-control'))}}
+											
+											
 											
                                         </div>
 										 
 										<div class="form-group">
 											{{Form::label('', ' Result', array('class' => ''))}}
 											{{Form::text('result','', array('class' => 'form-control','placeholder'=>''))}}
+										</div>
+										<div class="form-group">
+												<div class="row">
+													<div class="col-xs-4">
+													{{Form::label('', 'Result Standard ', array('class' => ''))}}
+													</div>
+													<div class="col-xs-4">
+													{{Form::label('', 'Result', array('class' => ''))}}
+													</div>
+													<div class="col-xs-4">
+													{{Form::label('', 'Out Of', array('class' => ''))}}
+													</div>
+												</div>
+													<div class="row">
+														<div class="col-xs-4">
+														{{Form::select('Standard', array('0' => '--Select--', 'Grade' => 'Grade','CGPA'=>'CGPA','Division'=>'Division','Class'=>'Class','Percentage'=>'Percentage'), '0',array('class'=>'form-control','id'=>'Standard'))}}
+														</div>
+														<div class="col-xs-4">												
+														{{Form::text('result','', array('class' => 'form-control','placeholder'=>''))}}
+														</div>
+														<div class="col-xs-4">
+															{{Form::text('out_of','', array('class' => 'form-control','placeholder'=>'','disabled'=>'','id'=>'out_of'))}}
+														</div>
+													</div>
 										</div>
                                       
                                     </div><!-- /.box-body -->
@@ -65,5 +89,18 @@
                             </div><!-- /.box -->
 						</div>
 	</section>
+	
+<script>
+$(document).ready(function(){
+  
+  $("select#Standard").change(function(){
+     var standard=$( "#Standard option:selected" ).text();
+	 if(standard=='Grade'){$("#out_of").prop('disabled', false);}
+	 else $("#out_of").prop('disabled', true);
+	 
+});
+  
+});
+</script>
 	
 @stop
