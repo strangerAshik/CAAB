@@ -4,14 +4,12 @@
 <section class="content" style="max-width:760px;margin:0 auto;">
     <div class="row">
         <div class="col-md-12">
-            <div class="box">
+            <div class="box box-primary">
                 <div class="box-header">
                     <h3 class="box-title">Reference</h3>
                 </div>
                 <!-- /.box-header -->
-                <div class="box-body">
-					
-					</div>
+               
 					<div class="box-body">
                     <table class="table table-bordered">
                         <tbody>

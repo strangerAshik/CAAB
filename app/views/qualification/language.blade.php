@@ -4,12 +4,12 @@
 <section class="content" style="max-width:760px;margin:0 auto;">
     <div class="row">
         <div class="col-md-12">
-            <div class="box">
+            <div class="box box-primary">
                 <div class="box-header">
                     <h3 class="box-title">Language</h3>
                 </div>
                 <!-- /.box-header -->
-                <div class="box-body">
+                <!--<div class="box-body">
 					<table class="table table-bordered">
 						 <th >Mother Language</th><td>Bangle</td><th >
                                     <a href='' style='color:red;float:right;padding:5px;'>
@@ -20,12 +20,12 @@
                                     </a>
                                 </th>
 					</table>
-					</div>
+					</div>-->
 					<div class="box-body">
                     <table class="table table-bordered">
                         <tbody>
                             <tr>
-                                <th >Other Language  #01</th>
+                                <th > Language  #01</th>
                                 <th >
                                     <a href='' style='color:red;float:right;padding:5px;'>
                                         <span class="glyphicon glyphicon-trash"></span>
@@ -90,7 +90,7 @@
 											{{Form::label('', 'Speaking ability', array('class' => 'col-xs-4 control-label'))}}
 											
                             <div class="col-xs-6">
-											{{Form::select('', array('' => '--Select--', 'Fluent' => 'Fluent','Moderate'=>'Moderate','Not Fluent'=>'Not Fluent'), null,array('class'=>'form-control','id'=>'category','required'=>''))}}
+											{{Form::select('', array('' => '--Select--', 'Fluent' => 'Fluent','Moderate'=>'Moderate','Not Fluent'=>'Not Fluent'), null,array('class'=>'form-control','id'=>'','required'=>''))}}
 							</div>
                         </div>
 						<div class="form-group required">

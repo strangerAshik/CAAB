@@ -21,57 +21,38 @@ Route::get('resume', function()
 	return View::make('resume/resume');
 });
 
-Route::group(array('prefix' => 'qualification'), function()
+Route::group(array('prefix' => 'qualification','before'=>'auth.basic'), function()
 {
 
-Route::get('home', function()
+Route::get('/', function()
 	{
-		//return 'hello';
-		return View::make('qualification/home');
+		return 'hello';
+		//return View::make('qualification/home');
 	});
-	Route::get('personnel', function()
-	{
-		return View::make('qualification/personnel');
-	});
-	Route::get('education', function()
-	{
-		return View::make('qualification/education');
-	});
-	Route::get('employment', function()
-	{
-		return View::make('qualification/employment');
-	});
-	Route::get('pro_degree', function()
-	{
-		return View::make('qualification/pro_degree');
-	});
-	Route::get('taining_work_ojt', function()
-	{
-		return View::make('qualification/taining_work_ojt');
-	});
-	Route::get('language', function()
-	{
-		return View::make('qualification/language');
-	});
-	Route::get('technical_licence', function()
-	{
-		return View::make('qualification/technical_licence');
-	});
-	Route::get('aircraft_qualification', function()
-	{
-		return View::make('qualification/aircraft_qualification');
-	});
-	Route::get('reference', function()
-	{
-		return View::make('qualification/reference');
-	});
-	Route::get('emp_verification', function()
-	{
-		return View::make('qualification/emp_verification');
-	});
-	Route::get('other', function()
-	{
-		return View::make('qualification/other');
-	});
+	Route::get('personnel', 'QualificationController@personnel');
+	Route::get('education', 'QualificationController@education');
+	Route::get('employment', 'QualificationController@employment');
+	Route::get('pro_degree', 'QualificationController@pro_degree');
+	Route::get('taining_work_ojt', 'QualificationController@taining_work_ojt');
+	Route::get('language', 'QualificationController@language');
+	Route::get('technical_licence', 'QualificationController@technical_licence');
+	Route::get('aircraft_qualification', 'QualificationController@aircraft_qualification');
+	Route::get('reference', 'QualificationController@reference');
+	Route::get('emp_verification', 'QualificationController@emp_verification');
+	Route::get('other', 'QualificationController@other');
+	//insert data
+	Route::post('savePersonnel', 'QualificationController@savePersonnel');
+	//delete data 
+	Route::get('deletePersonnel/{id}', function($id){
+		DB::table('qualification_personal')->where('id', '=', $id)->delete();
+		return Redirect::to('qualification/personnel')->with('message', 'Successfully Saved!!');
+		
+		});
+	//Edit data
+	Route::post('editPersonnel', 'QualificationController@editPersonnel');
+	
+	
+
+	
 
 });

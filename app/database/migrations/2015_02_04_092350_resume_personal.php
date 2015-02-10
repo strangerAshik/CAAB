@@ -12,7 +12,7 @@ class ResumePersonal extends Migration {
 	 */
 	public function up()
 	{
-			Schema::create('resume_personal',function($table){
+			Schema::create('qualification_personal',function($table){
 			//personal info
 			$table->increments('id');
 			$table->integer('emp_id');
@@ -32,7 +32,10 @@ class ResumePersonal extends Migration {
 			$table->string('sex');
 			$table->string('blood_group');
 			$table->string('date_of_birth');
+			$table->string('month_of_birth');
+			$table->string('year_of_birth');
 			$table->string('photo');
+			$table->timestamps();
 			});
 	}
 
@@ -43,7 +46,7 @@ class ResumePersonal extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('resume_personal');
+		Schema::drop('qualification_personal');
 	}
 
 }
