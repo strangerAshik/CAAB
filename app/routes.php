@@ -42,6 +42,8 @@ Route::get('/', function()
 	Route::get('other', 'QualificationController@other');
 	//insert data
 	Route::post('savePersonnel', 'QualificationController@savePersonnel');
+	Route::post('saveAccademic', 'QualificationController@saveAccademic');
+	Route::post('saveThesis', 'QualificationController@saveThesis');
 	//delete data 
 	Route::get('deletePersonnel/{id}', function($id){
 		DB::table('qualification_personal')->where('id', '=', $id)->delete();

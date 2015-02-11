@@ -4,7 +4,11 @@
                     <!-- Sidebar user panel -->
                     <div class="user-panel">
                         <div class="pull-left image">
-                            <img src="{{URL::asset('img/avatar3.png')}}" class="img-circle" alt="User Image" />
+						{{-- @if($infos!=null)
+							{{HTML::image('img/PersonnelPhoto/'.$info->photo,'User',array('class'=>'img-circle'))}}
+							@else--}} 
+							{{HTML::image('img/avatar5.png','User',array('class'=>'img-circle'))}}
+								{{--@endif--}}
                         </div>
                         <div class="pull-left info">
                             <p>Hello, Jane</p>

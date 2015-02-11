@@ -10,83 +10,59 @@
                                     <h3 class="box-title">Academic Qualification  </h3>
                                 </div><!-- /.box-header -->
                                 <div class="box-body">
+								
+									
+								@foreach($accas as $acca)								
+									
                                     <table class="table table-bordered">
                                         <tbody>
 										<tr>                                           
-                                            <th >Academic Qualification   #01</th>
-                                            <th >
+                                            <th colspan='2' >Academic Qualification   #{{++$a_sl}}
+											
 											<a href='' style='color:red;float:right;padding:5px;'><span class="glyphicon glyphicon-trash"></span></a>
 											<a href='' style='color:green;float:right;padding:5px;'><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>
 											</th>
                                         </tr>
                                         <tr>
                                            
-                                            <td>Level of Education </td>
-                                            <td>Masters or Equivalent</td>
+                                            <td style='width:50%'>Level of Education </td>
+                                            <td style='width:50%'>{{$acca->level}}</td>
                                             
                                         </tr>
                                         
 										<tr>
                                            
-                                            <td>
-												Name of Degree
-											</td>
-                                            <td>
-                                                Name of Degree
-                                            </td>
+                                            <td>Name of Degree</td>
+                                            <td>{{$acca->name_of_degree}}</td>
                                             
                                         </tr>
 										<tr>
                                            
-                                            <td>
-											Educational Institue
-											</td>
-                                            <td>
-                                               Educational Institue
-                                            </td>
+                                            <td>Educational Institute</td>
+                                            <td>{{$acca->institute}}</td>
                                             
                                         </tr> 
 										<tr>
-                                            <td>
-												Passing Year
-											</td>
-                                            <td>
-                                                2009
-                                            </td>
+                                            <td>Passing Year</td>
+                                            <td>{{$acca->pussing_year}}</td>
                                             
                                         </tr>
 										<tr>
-                                            <td>												
-												Class/CGPA/ Grade/ Percentage 
-											</td>
-                                            <td>
-                                               5.00
-                                            </td>
+                                            <td>Class/CGPA/ Grade/ Percentage</td>
+                                            <td>{{$acca->standard .' :  '.$acca->grade_division }}</td>
                                             
                                         </tr>
 										<tr>
-                                            <td>
-												Discipline
-											</td>
-                                            <td>
-                                               Science
-                                            </td>
+                                            <td>Discipline</td>
+                                            <td>{{$acca->discipline}}</td>
                                             
                                         </tr>
 										<tr>
-                                            <td>
-												Specialization
-											</td>
-                                            <td>
-                                                 Geography
-                                            </td>
-                                            
+                                            <td>Specialization</td>
+                                            <td>{{$acca->specialization}}</td>                                        
                                         </tr>
-										
-										
-                                            
-                                       
                                     </tbody></table>
+									@endforeach
                                 </div><!-- /.box-body -->
                             </div>    
                             </div>    
@@ -98,7 +74,7 @@
 
 <!--Button for popup-->
 <p class="text-center">
-    <button class="btn btn-primary btn-block" data-toggle="modal" data-target="#EmploymentDetails">Add New</button>
+    <button class="btn btn-primary btn-block" data-toggle="modal" data-target="#EmploymentDetails">Add New Academic Qualification</button>
 	
 </p>
 <!-- start of oppup content-->
@@ -112,14 +88,14 @@
 
             <div class="modal-body">
                 <!-- The form is placed inside the body of modal -->
-                <form id="#" method="post" class="form-horizontal" data-toggle="validator" role="form">
-
+               
+				{{Form::open(array('url' => 'qualification/saveAccademic', 'method' => 'post',  'class'=>'form-horizontal','data-toggle'=>'validator', 'role'=>'form'))}}
 					
 					<div class="form-group required">
                                         
-											{{Form::label('', 'Level [highest degree first]', array('class' => 'col-xs-4 control-label'))}}
+											{{Form::label('level', 'Level [highest degree first]', array('class' => 'col-xs-4 control-label'))}}
 											<div class="col-xs-6">
-											{{Form::select('', array('0' => '--Select--', 'Post Doctorate or Equivalent' => 'Post Doctorate or Equivalent','Doctorate'=>'Doctorate','Masters or Equivalent'=>'Masters or Equivalent','Bachelors or Equivalent'=>'Bachelors or Equivalent','Diploma'=>'Diploma','H.S.C. or Equivalent'=>'H.S.C. or Equivalent','S.S.C. or Equivalent'=>'S.S.C. or Equivalent','Below S.S.C.'=>'Below S.S.C.'), 0,array('class'=>'form-control','id'=>'category','required'=>''))}}
+											{{Form::select('level', array('Null' => '--Select--', 'Post Doctorate or Equivalent' => 'Post Doctorate or Equivalent','Doctorate'=>'Doctorate','Masters or Equivalent'=>'Masters or Equivalent','Bachelors or Equivalent'=>'Bachelors or Equivalent','Diploma'=>'Diploma','H.S.C. or Equivalent'=>'H.S.C. or Equivalent','S.S.C. or Equivalent'=>'S.S.C. or Equivalent','Below S.S.C.'=>'Below S.S.C.'), 0,array('class'=>'form-control','id'=>'category','required'=>''))}}
 											</div>
 											
                     </div>
@@ -129,31 +105,31 @@
                                         
 											{{Form::label('', ' Name of degree', array('class' => 'col-xs-4 control-label'))}}
 											<div class="col-xs-6">
-											{{Form::text('id','', array('class' => 'form-control','placeholder'=>''))}}
+											{{Form::text('name_of_degree','', array('class' => 'form-control','placeholder'=>'','required'=>''))}}
 											</div>
 											
                     </div>
 					<div class="form-group required">
                                         
-											{{Form::label('', 'Discipline', array('class' => 'col-xs-4 control-label'))}}
+											{{Form::label('discipline', 'Discipline', array('class' => 'col-xs-4 control-label'))}}
 											<div class="col-xs-6">
-											{{Form::select('', array('0' => '--Select--', 'Arts' => 'Arts','Science'=>'Science','Commerce'=>'Commerce','Biological Science'=>'Biological Science','Business Studies/ Administration'=>'Business Studies/ Administration','Engineering/ Technology/ Applied Science'=>'Engineering/ Technology/ Applied Science','Medical Science'=>'Medical Science','Social Science'=>'Social Science'), null,array('class'=>'form-control','id'=>'category','required'=>''))}}
+											{{Form::select('discipline', array('Null' => '--Select--', 'Arts' => 'Arts','Science'=>'Science','Commerce'=>'Commerce','Biological Science'=>'Biological Science','Business Studies/ Administration'=>'Business Studies/ Administration','Engineering/ Technology/ Applied Science'=>'Engineering/ Technology/ Applied Science','Medical Science'=>'Medical Science','Social Science'=>'Social Science'), null,array('class'=>'form-control','id'=>'category','required'=>''))}}
 											</div>
 											
                     </div>
 					<div class="form-group ">
                                         
-											{{Form::label('', 'Specialization', array('class' => 'col-xs-4 control-label'))}}
+											{{Form::label('specialization', 'Specialization', array('class' => 'col-xs-4 control-label'))}}
 											<div class="col-xs-6">
-											{{Form::text('id','', array('class' => 'form-control','placeholder'=>''))}}
+											{{Form::text('specialization','', array('class' => 'form-control','placeholder'=>'',))}}
 											</div>
 											
                     </div>
 					<div class="form-group required">
                                            
-											{{Form::label('', 'Educational institute', array('class' => 'col-xs-4 control-label'))}}
+											{{Form::label('institute', 'Educational institute', array('class' => 'col-xs-4 control-label'))}}
 											<div class="col-xs-6">
-											{{Form::text('national_id','', array('class' => 'form-control','placeholder'=>''))}}
+											{{Form::text('institute','', array('class' => 'form-control','placeholder'=>'','required'=>''))}}
 											</div>
 											
                     </div>
@@ -161,7 +137,7 @@
                                            
 											{{Form::label('', ' Passing year', array('class' => 'col-xs-4 control-label'))}}
 											<div class="col-xs-6">
-											{{Form::selectYear('year', 1950, 2015,'hello',array('class'=>'form-control'))}}
+											{{Form::selectYear('pussing_year', 1950, 2015,'hello',array('class'=>'form-control','required'=>''))}}
 											</div>
 											
                     </div>
@@ -169,13 +145,13 @@
 					{{Form::label('', 'Result', array('class' => 'col-xs-4 control-label'))}}
 					<div class="row">
 														<div class="col-xs-3">
-														{{Form::select('Standard', array('0' => '--Select--', 'Grade' => 'Grade','CGPA'=>'CGPA','Division'=>'Division','Class'=>'Class','Percentage'=>'Percentage'), '0',array('class'=>'form-control','id'=>'Standard'))}}
+														{{Form::select('standard', array('Null' => '--Select--', 'Grade' => 'Grade','CGPA'=>'CGPA','Division'=>'Division','Class'=>'Class','Percentage'=>'Percentage'), '0',array('class'=>'form-control','id'=>'Standard','required'=>''))}}
 														</div>
 														<div class="col-xs-2">												
-														{{Form::text('result','', array('class' => 'form-control','placeholder'=>''))}}
+														{{Form::text('grade_division','', array('class' => 'form-control','placeholder'=>'grade or division','required'=>''))}}
 														</div>
 														<div class="col-xs-2">
-															{{Form::text('out_of','', array('class' => 'form-control','placeholder'=>'','disabled'=>'','id'=>'out_of'))}}
+															{{Form::text('out_of','', array('class' => 'form-control','placeholder'=>'out of','disabled'=>'','id'=>'out_of'))}}
 														</div>
 													</div>
 					</div>
@@ -189,7 +165,7 @@
                             <button type="submit" class="btn btn-primary">Save</button>
                         </div>
                     </div>
-                </form>
+					{{Form::close()}}
             </div>
         </div>
     </div>
@@ -205,10 +181,11 @@
                                     <h3 class="box-title">Thesis/Project/Internship/Dissertation  </h3>
                                 </div><!-- /.box-header -->
                                 <div class="box-body">
+								@foreach($thesis as $thes)
                                     <table class="table table-bordered">
                                         <tbody>
 										<tr>                                           
-                                            <th >Thesis/Project/Internship/Dissertation    #01</th>
+                                            <th >Thesis/Project/Internship/Dissertation    #{{++$t_sl}}</th>
                                             <th >
 											<a href='' style='color:red;float:right;padding:5px;'><span class="glyphicon glyphicon-trash"></span></a>
 											<a href='' style='color:green;float:right;padding:5px;'><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>
@@ -216,52 +193,37 @@
                                         </tr>
                                         <tr>
                                            
-                                            <td>Degree level</td>
-                                            <td>Degree level</td>
+                                            <td style='width:50%;'>Degree level</td>
+                                            <td style='width:50%;'>{{$thes->level}}</td>
                                             
                                         </tr>
                                         
 										<tr>
                                            
-                                            <td>
-												Type
-											</td>
-                                            <td>
-                                                Type
-                                            </td>
+                                            <td>Type</td>
+                                            <td>{{$thes->type}}</td>
                                             
                                         </tr>
 										<tr>
                                            
-                                            <td>
-											Title
-											</td>
-                                            <td>
-                                               Title
-                                            </td>
+                                            <td>Title</td>
+                                            <td>{{$thes->title}}</td>
                                             
                                         </tr> 
 										<tr>
-                                            <td>
-												Institute
-											</td>
-                                            <td>
-                                                Institute
-                                            </td>
+                                            <td>Institute</td>
+                                            <td>{{$thes->institute}}</td>
                                             
                                         </tr>
 										<tr>
-                                            <td>												
-												Duration
-											</td>
-                                            <td>
-                                              Duration
-                                            </td>
+                                            <td>Duration</td>
+                                            <td>{{$thes->duration}}</td>
                                             
                                         </tr>
 										                            
                                        
                                     </tbody></table>
+									@endforeach
                                 </div><!-- /.box-body -->
                             </div>    
                             </div>    
@@ -273,7 +235,7 @@
 
 <!--Button for popup-->
 <p class="text-center">
-    <button class="btn btn-primary btn-block" data-toggle="modal" data-target="#Thesis">Add New</button>
+    <button class="btn btn-primary btn-block" data-toggle="modal" data-target="#Thesis">Add New Thesis/Project/Internship/Dissertation</button>
 	
 </p>
 <!-- start of oppup content-->
@@ -282,53 +244,55 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title">Training/ Workshop/ OJT </h4>
+                <h4 class="modal-title">Thesis/Project/Internship/Dissertation </h4>
             </div>
 
             <div class="modal-body">
                 <!-- The form is placed inside the body of modal -->
-                <form id="#" method="post" class="form-horizontal" data-toggle="validator" role="form">
+                
+				{{Form::open(array('url'=>'qualification/saveThesis','method'=>'post','class'=>'form-horizontal','data-toggle'=>'validator','role'=>'form'))}}
+				
 
 					
 					<div class="form-group required">
                                         
-											{{Form::label('', ' Degree level', array('class' => 'col-xs-4 control-label'))}}
+											{{Form::label('level', ' Degree level', array('class' => 'col-xs-4 control-label'))}}
 											<div class="col-xs-6">
-											{{Form::select('', array('0' => '--Select--', 'Doctorate' => 'Doctorate','Masters or Equivalent'=>'Masters or Equivalent','Bachelors or Equivalent'=>'Bachelors or Equivalent'), null,array('class'=>'form-control','id'=>'','required'=>''))}}
+											{{Form::select('level', array('Null' => '--Select--', 'Doctorate' => 'Doctorate','Masters or Equivalent'=>'Masters or Equivalent','Bachelors or Equivalent'=>'Bachelors or Equivalent'), null,array('class'=>'form-control','id'=>'','required'=>''))}}
 											</div>
 											
                     </div>
 					
 					<div class="form-group required">
                                         
-											{{Form::label('', 'Type ', array('class' => 'col-xs-4 control-label'))}}
+											{{Form::label('type', 'Type ', array('class' => 'col-xs-4 control-label'))}}
 											<div class="col-xs-6">
-											{{Form::select('size', array('' => '--Select--', 'Thesis' => 'Thesis','Project'=>'Project','Internship'=>'Internship','Dissertation'=>'Dissertation'), null,array('class'=>'form-control'))}}
+											{{Form::select('type', array('Null' => '--Select--', 'Thesis' => 'Thesis','Project'=>'Project','Internship'=>'Internship','Dissertation'=>'Dissertation'), null,array('class'=>'form-control','required'=>''))}}
 											</div>
 											
                     </div>
 					<div class="form-group required">
                                            
-											{{Form::label('', 'Title', array('class' => 'col-xs-4 control-label'))}}
+											{{Form::label('title', 'Title', array('class' => 'col-xs-4 control-label'))}}
 											<div class="col-xs-6">
-											{{Form::text('national_id','', array('class' => 'form-control','placeholder'=>''))}}
+											{{Form::text('title','', array('class' => 'form-control','placeholder'=>'','required'=>''))}}
 											</div>
 											
                     </div>
 					<div class="form-group required">
                                            
-											{{Form::label('', 'Institute', array('class' => 'col-xs-4 control-label'))}}
+											{{Form::label('institute', 'Institute', array('class' => 'col-xs-4 control-label'))}}
 											<div class="col-xs-6">
-											{{Form::text('national_id','', array('class' => 'form-control','placeholder'=>''))}}
+											{{Form::text('institute','', array('class' => 'form-control','placeholder'=>'','required'=>''))}}
 											</div>
 											
                     </div>
 					 
 					<div class="form-group required">
                                            
-											{{Form::label('', 'Duration', array('class' => 'col-xs-4 control-label'))}}
+											{{Form::label('duration', 'Duration', array('class' => 'col-xs-4 control-label'))}}
 											<div class="col-xs-6">
-											{{Form::text('national_id','', array('class' => 'form-control','placeholder'=>''))}}
+											{{Form::text('duration','', array('class' => 'form-control','placeholder'=>'','required'=>''))}}
 											</div>
 											
                     </div>
@@ -342,7 +306,8 @@
                             <button type="submit" class="btn btn-primary">Save</button>
                         </div>
                     </div>
-                </form>
+                
+				{{Form::close()}}
             </div>
         </div>
     </div>

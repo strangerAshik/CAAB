@@ -86,12 +86,21 @@ class QualificationController extends \BaseController {
 		$id = Auth::user()->emp_id();
 		$query=DB::table('qualification_personal')->where('emp_id', '=', $id)->get();
 		return View::make('qualification/personnel')
-		->with('PageName','personnel')
+		->with('PageName','Personnel')
 		->with('infos',$query);
 	}
 	public function education()
-	{
-		return View::make('qualification/education')->with('PageName','education');
+	{	
+		$id = Auth::user()->emp_id();
+		$query1=DB::table('qualification_edu_accademic')->where('emp_id', '=', $id)->get();
+		$query2=DB::table('qualification_edu_thesis')->where('emp_id', '=', $id)->get();
+		return View::make('qualification/education')
+		->with('PageName','Education')
+		->with('a_sl','0')
+		->with('accas',$query1)
+		->with('t_sl','0')
+		->with('thesis',$query2)
+		;
 	}
 	public function employment()
 	{
@@ -131,14 +140,16 @@ class QualificationController extends \BaseController {
 	}
 	
 	//Insert data
-	public function savePersonnel(){
-		
+	public function savePersonnel(){		
 		//image upload
 		if($file = Input::file('photo')){
 		$destinationPath = 'img/PersonnelPhoto';
 		//$filename = $file->getClientOriginalName();
 		$filename = time().'_'.Auth::user()->getId().'.'.$file->getClientOriginalExtension();
 		$upload_success = Input::file('photo')->move($destinationPath, $filename);
+		}
+		else{
+			$filename='Null';
 		}
 		//image upload end  
 		
@@ -220,5 +231,37 @@ class QualificationController extends \BaseController {
 			return Redirect::to('qualification/personnel')->with('message', 'Successfully Saved!!');
 	}
 
-
+	public function saveAccademic(){
+		DB::table('qualification_edu_accademic')->insert(array(
+		'emp_id' => Auth::user()->emp_id(),
+		'level' => Input::get('level'),
+		'name_of_degree' => Input::get('name_of_degree'),
+		'discipline' =>Input::get('discipline') ,
+		'specialization' => Input::get('specialization'),
+		'institute' => Input::get('institute'),
+		'pussing_year' => Input::get('pussing_year'),
+		'standard' => Input::get('standard'),
+		'grade_division' => Input::get('grade_division'),
+		'out_of' => Input::get('out_of',false),		
+		'created_at' => time(),
+		'updated_at' =>time()		
+		));
+			
+		return Redirect::to('qualification/education')->with('message', 'Successfully Saved!!');
+	}
+	public function saveThesis(){
+		
+		DB::table('qualification_edu_thesis')->insert(array(
+		'emp_id' => Auth::user()->emp_id(),
+		'level' => Input::get('level'),
+		'type' => Input::get('type'),
+		'title' => Input::get('title'),
+		'institute' =>Input::get('institute') ,
+		'duration' => Input::get('duration'),	
+		'created_at' => time(),
+		'updated_at' =>time()		
+		));
+		return Redirect::to('qualification/education')->with('message', 'Successfully Saved!!');
+	}
+	
 }
