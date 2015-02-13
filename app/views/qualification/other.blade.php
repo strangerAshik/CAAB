@@ -10,39 +10,26 @@
                                     <h3 class="box-title">Publication</h3>
                                 </div><!-- /.box-header -->
                                 <div class="box-body">
+								@foreach($pubs as $pub)
                                     <table class="table table-bordered">
                                         <tbody>
 										<tr>                                           
-                                            <th colspan='2'>Publication   #01 
+                                            <th colspan='2'>Publication   #{{++$a_sl}}
 											<a href='' style='color:red;float:right;padding:5px;'><span class="glyphicon glyphicon-trash"></span></a>
 											<a href='' style='color:green;float:right;padding:5px;'><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>
 											</th>
                                         </tr>
                                         <tr>
                                            
-                                            <td>Title</td>
-                                            <td>Description</td>
+                                            <td>{{$pub->title}}</td>
+                                            <td>{{$pub->description}}</td>
                                             
                                         </tr>
                                         
                                     </tbody>
 									</table>
-									  <table class="table table-bordered">
-                                        <tbody>
-										<tr>                                           
-                                            <th colspan='2'>Publication   #02 
-											<a href='' style='color:red;float:right;padding:5px;'><span class="glyphicon glyphicon-trash"></span></a>
-											<a href='' style='color:green;float:right;padding:5px;'><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>
-											</th>
-                                        </tr>
-                                        <tr>
-                                           
-                                            <td>Title</td>
-                                            <td>Description</td>
-                                            
-                                        </tr>
-                                        
-                                    </tbody></table>
+								@endforeach
+									  
                                 </div><!-- /.box-body -->
                             </div>    
                             </div>    
@@ -68,24 +55,24 @@
 
             <div class="modal-body">
                 <!-- The form is placed inside the body of modal -->
-                <form id="#" method="post" class="form-horizontal" data-toggle="validator" role="form">
-
+               
+				{{Form::open(array('url' => 'qualification/savePublication', 'method' => 'post', 'files'=>true, 'class'=>'form-horizontal','data-toggle'=>'validator', 'role'=>'form'))}}
 					
 					
 					
 				
 					<div class="form-group required">
                                         
-											{{Form::label('', 'Title', array('class' => 'col-xs-4 control-label'))}}
+											{{Form::label('title', 'Title', array('class' => 'col-xs-4 control-label'))}}
 											<div class="col-xs-6">
-											{{Form::text('id','', array('class' => 'form-control','placeholder'=>''))}}
+											{{Form::text('title','', array('class' => 'form-control','placeholder'=>''))}}
 											</div>
 											
                     </div>
 					<div class="form-group required">
-											{{Form::label('', 'Description', array('class' => 'control-label col-xs-4'))}}
+											{{Form::label('description', 'Description', array('class' => 'control-label col-xs-4'))}}
 											<div class="col-xs-6">
-											{{Form::textarea('Description','', array('class' => 'form-control','placeholder'=>'','size'=>'30x3'))}}
+											{{Form::textarea('description','', array('class' => 'form-control','placeholder'=>'','size'=>'30x3'))}}
 											 </div>
 					</div>
 					
@@ -94,7 +81,7 @@
                             <button type="submit" class="btn btn-primary">Save</button>
                         </div>
                     </div>
-                </form>
+					{{Form::close()}}
             </div>
         </div>
     </div>
@@ -110,23 +97,25 @@
                                     <h3 class="box-title">Membership</h3>
                                 </div><!-- /.box-header -->
                                 <div class="box-body">
+								@foreach($membs as $memb)
                                     <table class="table table-bordered">
                                         <tbody>
 										<tr>                                           
-                                            <th colspan='2'>Membership   #01 
+                                            <th colspan='2'>Membership   #{{++$t_sl}}
 											<a href='' style='color:red;float:right;padding:5px;'><span class="glyphicon glyphicon-trash"></span></a>
 											<a href='' style='color:green;float:right;padding:5px;'><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>
 											</th>
                                         </tr>
                                         <tr>
                                            
-                                            <td>Title</td>
-                                            <td>Description</td>
+                                            <td>{{$memb->title}}</td>
+                                            <td>{{$memb->description}}</td>
                                             
                                         </tr>
                                         
                                     </tbody>
 									</table>
+								@endforeach
                                 </div><!-- /.box-body -->
                             </div>    
                             </div>    
@@ -147,39 +136,37 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title">Training/ Workshop/ OJT </h4>
+                <h4 class="modal-title">Add Membership </h4>
             </div>
 
             <div class="modal-body">
                 <!-- The form is placed inside the body of modal -->
-                <form id="#" method="post" class="form-horizontal" data-toggle="validator" role="form">
-
+              {{Form::open(array('url' => 'qualification/saveMembership', 'method' => 'post', 'files'=>true, 'class'=>'form-horizontal','data-toggle'=>'validator', 'role'=>'form'))}}
 					
+					
+					
+				
 					<div class="form-group required">
                                         
-											{{Form::label('', 'Title', array('class' => 'col-xs-4 control-label'))}}
+											{{Form::label('title', 'Title', array('class' => 'col-xs-4 control-label'))}}
 											<div class="col-xs-6">
-											{{Form::text('id','', array('class' => 'form-control','placeholder'=>''))}}
+											{{Form::text('title','', array('class' => 'form-control','placeholder'=>''))}}
 											</div>
 											
                     </div>
 					<div class="form-group required">
-											{{Form::label('', 'Description', array('class' => 'control-label col-xs-4'))}}
+											{{Form::label('description', 'Description', array('class' => 'control-label col-xs-4'))}}
 											<div class="col-xs-6">
-											{{Form::textarea('Description','', array('class' => 'form-control','placeholder'=>'','size'=>'30x3'))}}
+											{{Form::textarea('description','', array('class' => 'form-control','placeholder'=>'','size'=>'30x3'))}}
 											 </div>
 					</div>
 					
-					
-					
-                    
-
-                    <div class="form-group">
+					<div class="form-group">
                         <div class="col-xs-5 col-xs-offset-3">
                             <button type="submit" class="btn btn-primary">Save</button>
                         </div>
                     </div>
-                </form>
+					{{Form::close()}}
             </div>
         </div>
     </div>

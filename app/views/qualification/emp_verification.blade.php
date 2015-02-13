@@ -13,10 +13,11 @@
 					
 					</div>
 					<div class="box-body">
+					@foreach($infos as $info)
                     <table class="table table-bordered">
                         <tbody>
                             <tr>
-                                <th >Employee verification #01</th>
+                                <th >Employee verification</th>
                                 <th >
                                     <a href='' style='color:red;float:right;padding:5px;'>
                                         <span class="glyphicon glyphicon-trash"></span>
@@ -27,37 +28,38 @@
                                 </th>
                             </tr>
                             <tr>
-                                <td>Name</td>
-                                <td>Mr.x</td>
+                                <td style="width:50%">Name</td>
+                                <td style="width:50%">{{$info->name}}</td>
                             </tr>
                             <tr>
                                 <td>Employee ID</td>
-                                <td>CAAB-1324</td>
+                                <td>{{Auth::user()->emp_id()}}</td>
                             </tr>
                             <tr>
                                 <td>Date Of Entry</td>
-                                <td>14 January 2013</td>
+                                <td>{{$info->entry_date." ".$info->entry_month." ".$info->entry_year}}</td>
                             </tr>
 							<tr>
                                 <td>Active</td>
-                                <td> Yes</td>
+                                <td> {{$info->active}}</td>
                             </tr>
                             <tr>
-                                <td>Termination Date</td>
-                                <td> </td>
+                                <td>Termination/ Separation Date</td>
+                                  <td>{{$info->termination_date." ".$info->termination_month." ".$info->termination_year}}</td>
                             </tr>
                             <tr>
                                 <td>Position </td>
-                                <td>Pilot</td>
+                                <td>{{$info->position}}</td>
                             </tr>
 							<tr>
                                 <td>Note </td>
-                                <td>when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+                                <td>{{$info->note}}
 								</td>
                             </tr>
 							
                         </tbody>
                     </table>
+					@endforeach
                 </div>
                 <!-- /.box-body -->
             </div>
@@ -77,45 +79,38 @@
                 </div>
                 <div class="modal-body">
                     <!-- The form is placed inside the body of modal -->
-                    <form id="#" method="post" class="form-horizontal" data-toggle="validator" role="form">
+                 {{Form::open(array('url'=>'qualification/EmpVerification','method'=>'post','class'=>'form-horizontal','data-toggle'=>'validator','role'=>'form'))}}
                         
 						<div class="form-group required">
                                            
-											{{Form::label('', 'Name', array('class' => 'col-xs-4 control-label'))}}
+											{{Form::label('name', 'Name', array('class' => 'col-xs-4 control-label'))}}
 											
                                 <div class="col-xs-6">
-											{{Form::text('national_id','', array('class' => 'form-control','placeholder'=>'','required'=>''))}}
+											{{Form::text('name','', array('class' => 'form-control','placeholder'=>'','required'=>''))}}
 											</div>
                         </div>
-						<div class="form-group required">
-                                           
-											{{Form::label('', 'Employee ID', array('class' => 'col-xs-4 control-label'))}}
-											
-                                <div class="col-xs-6">
-											{{Form::text('national_id','', array('class' => 'form-control','placeholder'=>'','required'=>''))}}
-											</div>
-                        </div>
+						
 						<div class="form-group required">
 												
-													{{Form::label('', 'Date Of Entry', array('class' => 'col-xs-4 control-label'))}}
+													{{Form::label('entry_date', 'Date Of Entry', array('class' => 'col-xs-4 control-label'))}}
 												
 													<div class="row">
 														<div class="col-xs-2">
-														{{Form::selectRange('range', 1, 31,1,array('class'=>'form-control'))}}
+														{{Form::select('entry_date',$dates,'0',array('class'=>'form-control'))}}
 														</div>
-														<div class="col-xs-2">
-														{{Form::selectMonth('month',1,array('class'=>'form-control'))}}
+														<div class="col-xs-3">
+														{{Form::select('entry_month',$months,'0',array('class'=>'form-control'))}}
 											
 															
 														</div>
 														<div class="col-xs-2">
-															{{Form::selectYear('year', 1950, 2015,1950,array('class'=>'form-control'))}}
+															{{Form::select('entry_year', $years,'0',array('class'=>'form-control'))}}
 														</div>
 													</div>
 						</div>
 						<div class="form-group required">
                                            
-											{{Form::label('', 'Active', array('class' => 'col-xs-4 control-label'))}}
+											{{Form::label('active', 'Active', array('class' => 'col-xs-4 control-label'))}}
 											
                                 <div class="col-xs-6">
 										<div class="radio">
@@ -128,34 +123,37 @@
                         </div>
 						<div class="form-group">
 												
-													{{Form::label('', 'Termination Date', array('class' => 'col-xs-4 control-label'))}}
+													{{Form::label('termination_date', 'Termination Date/ Separation Date', array('class' => 'col-xs-4 control-label'))}}
 												
 													<div class="row">
 														<div class="col-xs-2">
-														{{Form::selectRange('range', 1, 31,1,array('class'=>'form-control'))}}
+													
+															{{Form::select('termination_date',$dates,'0',array('class'=>'form-control'))}}
 														</div>
-														<div class="col-xs-2">
-														{{Form::selectMonth('month',1,array('class'=>'form-control'))}}
+														<div class="col-xs-3">
+														
+														{{Form::select('termination_month',$months,'0',array('class'=>'form-control'))}}
 											
 															
 														</div>
 														<div class="col-xs-2">
-															{{Form::selectYear('year', 1950, 2015,1950,array('class'=>'form-control'))}}
+															
+															{{Form::select('termination_year', $years,'0',array('class'=>'form-control'))}}
 														</div>
 													</div>
 						</div>
 						<div class="form-group required">
                                            
-											{{Form::label('', 'Position', array('class' => 'col-xs-4 control-label'))}}
+											{{Form::label('position', 'Position', array('class' => 'col-xs-4 control-label'))}}
 											
                                 <div class="col-xs-6">
-											{{Form::text('national_id','', array('class' => 'form-control','placeholder'=>'','required'=>''))}}
+											{{Form::text('position','', array('class' => 'form-control','placeholder'=>'','required'=>''))}}
 											</div>
                         </div>
 						<div class="form-group " >											
-											{{Form::label('', 'Note', array('class' => 'col-xs-4 control-label'))}}
+											{{Form::label('note', 'Note', array('class' => 'col-xs-4 control-label'))}}
 											<div class="col-xs-6">
-											{{Form::textarea('m_address','', array('class' => 'form-control','placeholder'=>'','size'=>'30x3'))}}
+											{{Form::textarea('note','', array('class' => 'form-control','placeholder'=>'','size'=>'30x3'))}}
 											</div>
 					</div>
 						
@@ -166,7 +164,7 @@
                                 <button type="submit" class="btn btn-primary">Save</button>
                             </div>
                         </div>
-                    </form>
+						{{Form::close()}}
                 </div>
             </div>
         </div>

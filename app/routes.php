@@ -44,6 +44,16 @@ Route::get('/', function()
 	Route::post('savePersonnel', 'QualificationController@savePersonnel');
 	Route::post('saveAccademic', 'QualificationController@saveAccademic');
 	Route::post('saveThesis', 'QualificationController@saveThesis');
+	Route::post('saveEmployment', 'QualificationController@saveEmployment');
+	Route::post('pro_degree', 'QualificationController@proDegree');
+	Route::post('saveTrainingWorkOJT','QualificationController@saveTrainingWorkOJT');
+	Route::post('saveLanguage','QualificationController@saveLanguage');
+	Route::post('saveTechnicalLicence','QualificationController@saveTechnicalLicence');
+ Route::post('saveAircraftQualification','QualificationController@saveAircraftQualification');
+	Route::post('saveReference','QualificationController@saveReference');
+	Route::post('EmpVerification','QualificationController@EmpVerification');
+	Route::post('savePublication','QualificationController@savePublication');
+	Route::post('saveMembership','QualificationController@saveMembership');
 	//delete data 
 	Route::get('deletePersonnel/{id}', function($id){
 		DB::table('qualification_personal')->where('id', '=', $id)->delete();

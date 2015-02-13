@@ -8,6 +8,7 @@
                                     <h3 class="box-title">Professional Degree </h3>
                                 </div><!-- /.box-header -->
                                 <div class="box-body">
+								
                                     <table class="table table-bordered">
                                         <tbody>
 										<tr>                                           
@@ -16,17 +17,21 @@
                                             <th >Duration</th>
                                             <th >Class/ Grade/ Percentage</th>
                                             <th >Major/Area</th>
+                                            <th >Year</th>
                                             <th >Edit</th>
                                             <th >Delete</th>
                                             
                                         </tr>
+										@foreach($infos as $info)
                                         <tr>
                                            
-                                            <td>Degree Name</td>
-                                            <td>Institute</td>
-                                            <td>2 years</td>
-                                            <td>4.00 out of 5</td>
-                                            <td>Information Technology </td>
+                                            <td>{{$info->pro_degree_name}}</td>
+                                            <td>{{$info->pro_degree_institute}}</td>
+                                            <td>{{$info->pro_degree_duration}}</td>
+                                            <td>{{$info->pro_degree_grade}}</td>
+                                            <td>{{$info->pro_degree_major_area}}</td>
+                                            <td>{{$info->pro_degree_year}}</td>
+                                            
                                             <td >
 												<a href='' style='color:green'><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>
 												
@@ -34,13 +39,14 @@
                                             <td><a href='' style='color:red'><span class="glyphicon glyphicon-trash"></span></a> </td>
                                             
                                         </tr>
-                                        
+                                        	@endforeach
 										
 										
 										
                                             
                                        
                                     </tbody></table>
+								
                                 </div><!-- /.box-body -->
                             </div>    
                             </div>    
@@ -66,45 +72,53 @@
 
             <div class="modal-body">
                 <!-- The form is placed inside the body of modal -->
-                <form id="#" method="post" class="form-horizontal">
+               {{Form::open(array('url'=>'qualification/pro_degree','method'=>'post','class'=>'form-horizontal','role'=>'form','data-toggle'=>'validator'))}}
 
 					<div class="form-group">
                                            
-											{{Form::label('', 'Name of professional degree', array('class' => 'col-xs-5 control-label'))}}
+											{{Form::label('pro_degree_name', 'Name of professional degree', array('class' => 'col-xs-5 control-label'))}}
 											<div class="col-xs-6">
-											{{Form::text('national_id','', array('class' => 'form-control','placeholder'=>''))}}
+											{{Form::text('pro_degree_name','', array('class' => 'form-control','placeholder'=>''))}}
 											</div>
 											
                     </div>
 					<div class="form-group">
                                            
-											{{Form::label('', 'Educational institute', array('class' => 'col-xs-5 control-label'))}}
+											{{Form::label('pro_degree_institute', 'Educational institute', array('class' => 'col-xs-5 control-label'))}}
 											<div class="col-xs-6">
-											{{Form::text('national_id','', array('class' => 'form-control','placeholder'=>''))}}
+											{{Form::text('pro_degree_institute','', array('class' => 'form-control','placeholder'=>''))}}
 											</div>
 											
                     </div>
 					<div class="form-group">
                                            
-											{{Form::label('', 'Duration', array('class' => 'col-xs-5 control-label'))}}
+											{{Form::label('pro_degree_duration', 'Duration', array('class' => 'col-xs-5 control-label'))}}
 											<div class="col-xs-6">
-											{{Form::text('national_id','', array('class' => 'form-control','placeholder'=>''))}}
+											{{Form::text('pro_degree_duration','', array('class' => 'form-control','placeholder'=>'i.e 2 Days/1 month/ 1 Year'))}}
 											</div>
 											
                     </div>
 					<div class="form-group">
                                            
-											{{Form::label('', 'Class/Grade/Percentage', array('class' => 'col-xs-5 control-label'))}}
+											{{Form::label('pro_degree_grade', 'Class/Grade/Percentage', array('class' => 'col-xs-5 control-label'))}}
 											<div class="col-xs-6">
-											{{Form::text('national_id','', array('class' => 'form-control','placeholder'=>''))}}
+											{{Form::text('pro_degree_grade','', array('class' => 'form-control','placeholder'=>''))}}
 											</div>
 											
                     </div>
 					<div class="form-group">
                                            
-											{{Form::label('', 'Major/Area', array('class' => 'col-xs-5 control-label'))}}
+											{{Form::label('pro_degree_major_area', 'Major/Area', array('class' => 'col-xs-5 control-label'))}}
 											<div class="col-xs-6">
-											{{Form::text('national_id','', array('class' => 'form-control','placeholder'=>''))}}
+											{{Form::text('pro_degree_major_area','', array('class' => 'form-control','placeholder'=>''))}}
+											</div>
+											
+                    </div>
+					<div class="form-group">
+                                           
+											{{Form::label('pro_degree_year', 'Year', array('class' => 'col-xs-5 control-label'))}}
+											<div class="col-xs-6">
+											{{Form::select('pro_degree_year', $year, '01', array('class' => 'form-control','placeholder'=>'')) }}
 											</div>
 											
                     </div>
@@ -116,7 +130,7 @@
                             <button type="submit" class="btn btn-primary">Save</button>
                         </div>
                     </div>
-                </form>
+					{{Form::close()}}
             </div>
         </div>
     </div>

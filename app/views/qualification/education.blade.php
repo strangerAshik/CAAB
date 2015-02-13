@@ -17,7 +17,7 @@
                                     <table class="table table-bordered">
                                         <tbody>
 										<tr>                                           
-                                            <th colspan='2' >Academic Qualification   #{{++$a_sl}}
+                                            <th  >Academic Qualification   #{{++$a_sl}}</th><th>
 											
 											<a href='' style='color:red;float:right;padding:5px;'><span class="glyphicon glyphicon-trash"></span></a>
 											<a href='' style='color:green;float:right;padding:5px;'><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>
@@ -135,9 +135,10 @@
                     </div>
 					<div class="form-group required">
                                            
-											{{Form::label('', ' Passing year', array('class' => 'col-xs-4 control-label'))}}
+											{{Form::label('pussing_year', ' Passing year', array('class' => 'col-xs-4 control-label'))}}
 											<div class="col-xs-6">
-											{{Form::selectYear('pussing_year', 1950, 2015,'hello',array('class'=>'form-control','required'=>''))}}
+											{{Form::select('pussing_year', $year, '01', array('class' => 'form-control','placeholder'=>'')) }}
+											
 											</div>
 											
                     </div>

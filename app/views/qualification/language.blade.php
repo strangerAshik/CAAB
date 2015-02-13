@@ -22,10 +22,11 @@
 					</table>
 					</div>-->
 					<div class="box-body">
+					@foreach($infos as $info)
                     <table class="table table-bordered">
                         <tbody>
                             <tr>
-                                <th > Language  #01</th>
+                                <th > Language  #{{+$a_sl}}</th>
                                 <th >
                                     <a href='' style='color:red;float:right;padding:5px;'>
                                         <span class="glyphicon glyphicon-trash"></span>
@@ -37,26 +38,27 @@
                             </tr>
                             <tr>
                                 <td>Language</td>
-                                <td>English</td>
+                                <td>{{$info->language}}</td>
                             </tr>
                             <tr>
                                 <td>Speak</td>
-                                <td>Fluent</td>
+                                <td>{{$info->lang_speak}}</td>
                             </tr>
                             <tr>
                                 <td>Understand</td>
-                                <td> Fluent</td>
+                                <td> {{$info->lang_understanding}}</td>
                             </tr>
                             <tr>
                                 <td>Read</td>
-                                <td>Fluent</td>
+                                <td>{{$info->lang_reading}}</td>
                             </tr>
                             <tr>
                                 <td>Write</td>
-                                <td>Fluent</td>
+                                <td>{{$info->lang_writing}}</td>
                             </tr>
                         </tbody>
                     </table>
+					@endforeach
                 </div>
                 <!-- /.box-body -->
             </div>
@@ -76,45 +78,46 @@
                 </div>
                 <div class="modal-body">
                     <!-- The form is placed inside the body of modal -->
-                    <form id="#" method="post" class="form-horizontal" data-toggle="validator" role="form">
+                   
+					{{Form::open(array('url'=>'qualification/saveLanguage','method'=>'post','class'=>'form-horizontal','data-toggle'=>'validator','role'=>'form'))}}
                         <div class="form-group required">
                                            
-											{{Form::label('', 'Language', array('class' => 'col-xs-4 control-label'))}}
+											{{Form::label('language', 'Language', array('class' => 'col-xs-4 control-label'))}}
 											
                                 <div class="col-xs-6">
-											{{Form::text('national_id','', array('class' => 'form-control','placeholder'=>'','required'=>''))}}
+											{{Form::text('language','', array('class' => 'form-control','placeholder'=>'','required'=>''))}}
 											</div>
                             </div>
 						<div class="form-group required">
                                         
-											{{Form::label('', 'Speaking ability', array('class' => 'col-xs-4 control-label'))}}
+											{{Form::label('lang_speak', 'Speaking ability', array('class' => 'col-xs-4 control-label'))}}
 											
                             <div class="col-xs-6">
-											{{Form::select('', array('' => '--Select--', 'Fluent' => 'Fluent','Moderate'=>'Moderate','Not Fluent'=>'Not Fluent'), null,array('class'=>'form-control','id'=>'','required'=>''))}}
+											{{Form::select('lang_speak', array('' => '--Select--', 'Fluent' => 'Fluent','Moderate'=>'Moderate','Not Fluent'=>'Not Fluent'), null,array('class'=>'form-control','id'=>'','required'=>''))}}
 							</div>
                         </div>
 						<div class="form-group required">
                                         
-											{{Form::label('', 'Understanding', array('class' => 'col-xs-4 control-label'))}}
+											{{Form::label('lang_understanding', 'Understanding', array('class' => 'col-xs-4 control-label'))}}
 											
                             <div class="col-xs-6">
-											{{Form::select('', array('' => '--Select--', 'Fluent' => 'Fluent','Moderate'=>'Moderate','Not Fluent'=>'Not Fluent'), null,array('class'=>'form-control','id'=>'category','required'=>''))}}
+											{{Form::select('lang_understanding', array('' => '--Select--', 'Fluent' => 'Fluent','Moderate'=>'Moderate','Not Fluent'=>'Not Fluent'), null,array('class'=>'form-control','id'=>'category','required'=>''))}}
 							</div>
                         </div>
 						<div class="form-group required">
                                         
-											{{Form::label('', 'Reading ability', array('class' => 'col-xs-4 control-label'))}}
+											{{Form::label('lang_reading', 'Reading ability', array('class' => 'col-xs-4 control-label'))}}
 											
                             <div class="col-xs-6">
-											{{Form::select('', array('' => '--Select--', 'Fluent' => 'Fluent','Moderate'=>'Moderate','Not Fluent'=>'Not Fluent'), null,array('class'=>'form-control','id'=>'category','required'=>''))}}
+											{{Form::select('lang_reading', array('' => '--Select--', 'Fluent' => 'Fluent','Moderate'=>'Moderate','Not Fluent'=>'Not Fluent'), null,array('class'=>'form-control','id'=>'category','required'=>''))}}
 							</div>
                         </div>
 						<div class="form-group required">
                                         
-											{{Form::label('', ' Writing ability', array('class' => 'col-xs-4 control-label'))}}
+											{{Form::label('lang_writing', ' Writing ability', array('class' => 'col-xs-4 control-label'))}}
 											
                             <div class="col-xs-6">
-											{{Form::select('', array('' => '--Select--', 'Fluent' => 'Fluent','Moderate'=>'Moderate','Not Fluent'=>'Not Fluent'), null,array('class'=>'form-control','id'=>'category','required'=>''))}}
+											{{Form::select('lang_writing', array('' => '--Select--', 'Fluent' => 'Fluent','Moderate'=>'Moderate','Not Fluent'=>'Not Fluent'), null,array('class'=>'form-control','id'=>'category','required'=>''))}}
 							</div>
                         </div>
                        
@@ -123,7 +126,7 @@
                                 <button type="submit" class="btn btn-primary">Save</button>
                             </div>
                         </div>
-                    </form>
+						{{Form::close()}}
                 </div>
             </div>
         </div>

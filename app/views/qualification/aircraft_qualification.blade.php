@@ -13,11 +13,11 @@
 					
 					</div>
 					<div class="box-body">
+					@foreach($infos as $info)
                     <table class="table table-bordered">
                         <tbody>
                             <tr>
-                                <th >LICENSE  #01</th>
-                                <th >
+                                <th colspan='2'>Aircraft Qualification  #{{++$a_sl}}
                                     <a href='' style='color:red;float:right;padding:5px;'>
                                         <span class="glyphicon glyphicon-trash"></span>
                                     </a>
@@ -27,52 +27,53 @@
                                 </th>
                             </tr>
                             <tr>
-                                <td>Active</td>
-                                <td>Yes</td>
+                                <td style="width:50%">Active</td>
+                                <td style="width:50%">{{$info->active}}</td>
                             </tr>
                             <tr>
                                 <td>Qualification Type</td>
-                                <td>Aircraft Initial</td>
+                                <td>{{$info->qualification_type}}</td>
                             </tr>
                             <tr>
                                 <td>Total Hours</td>
-                                <td>20</td>
+                                <td>{{$info->total_hours}}</td>
                             </tr>
 							<tr>
                                 <td>Aircraft MM</td>
-                                <td> 234-boing blabla</td>
+                                <td> {{$info->aircraft_mm}}</td>
                             </tr>
                             <tr>
-                                <td>Aircraft MSM</td>
-                                <td> 234-boing blabla</td>
+                                <td>Aircraft MSN</td>
+                                <td>{{$info->aircraft_msm}}</td>
                             </tr>
                             <tr>
                                 <td>Completion Date </td>
-                                <td>25 November 2014</td>
+                                <td>{{$info->completion_date." ".$info->completion_month." ".$info->completion_year}}</td>
                             </tr>
 							<tr>
                                 <td>Status</td>
-                                <td>Active</td>
+                                <td>{{$info->status}}</td>
                             </tr>
 							<tr>
                                 <td>Training Institute</td>
-                                <td>CAAB</td>
+                                <td>{{$info->institute}}</td>
                             </tr>
 							<tr>
                                 <td>Instructor name</td>
-                                <td>CAAB</td>
+                                <td>{{$info->instructor}}</td>
                             </tr>
 							<tr>
-                                <td>Proof of Completion</td>
-                                <td>Proof of Completion</td>
+                                <td>Certificate Issued</td>
+                                <td>{{$info->proof}}</td>
                             </tr>
 							<tr>
                                 <td>Management Certification</td>
-                                <td>Management Certification</td>
+                                <td>{{$info->certification}}</td>
                             </tr>
 							
                         </tbody>
                     </table>
+					@endforeach
                 </div>
                 <!-- /.box-body -->
             </div>
@@ -92,10 +93,10 @@
                 </div>
                 <div class="modal-body">
                     <!-- The form is placed inside the body of modal -->
-                    <form id="#" method="post" class="form-horizontal" data-toggle="validator" role="form">
+                    {{Form::open(array('url'=>'qualification/saveAircraftQualification','method'=>'post','class'=>'form-horizontal','data-toggle'=>'validator','role'=>'form','files'=>true))}}
                         <div class="form-group required">
                                            
-											{{Form::label('', 'Active', array('class' => 'col-xs-4 control-label'))}}
+											{{Form::label('active', 'Active', array('class' => 'col-xs-4 control-label'))}}
 											
                                 <div class="col-xs-6">
 										<div class="radio">
@@ -108,94 +109,114 @@
                         </div>
 						<div class="form-group required">
                                         
-											{{Form::label('', 'Qualification Type', array('class' => 'col-xs-4 control-label'))}}
+											{{Form::label('qualification_type', 'Qualification Type', array('class' => 'col-xs-4 control-label'))}}
 											<div class="col-xs-6">
-											{{Form::select('', array('' => '--Select--', 'Aircraft Initial' => 'Aircraft Initial','Aircraft Recurrent'=>'Aircraft Recurrent','Flight Proficiency '=>'Flight Proficiency','Recency of Experience '=>'Recency of Experience','Aircraft System'=>'Aircraft System','Recurrent Qualification'=>'Recurrent Qualification'), null,array('class'=>'form-control','id'=>'category','required'=>''))}}
+											{{Form::select('qualification_type', array('' => '--Select--', 'Aircraft Initial' => 'Aircraft Initial','Aircraft Recurrent'=>'Aircraft Recurrent','Flight Proficiency '=>'Flight Proficiency','Recency of Experience '=>'Recency of Experience','Aircraft System'=>'Aircraft System','Recurrent Qualification'=>'Recurrent Qualification'), null,array('class'=>'form-control','id'=>'category','required'=>''))}}
 											</div>
 											
 						</div>
 						<div class="form-group ">
                                            
-											{{Form::label('', 'Total Hours', array('class' => 'col-xs-4 control-label'))}}
+											{{Form::label('total_hours', 'Total Hours', array('class' => 'col-xs-4 control-label'))}}
 											
                                 <div class="col-xs-6">
-											{{Form::text('national_id','', array('class' => 'form-control','placeholder'=>'','required'=>''))}}
+											{{Form::text('total_hours','', array('class' => 'form-control','placeholder'=>'','required'=>''))}}
 											</div>
                         </div>
 						<div class="form-group required">
                                         
-											{{Form::label('', 'Aircraft MM', array('class' => 'col-xs-4 control-label'))}}
+											{{Form::label('aircraft_mm', 'Aircraft MM', array('class' => 'col-xs-4 control-label'))}}
 											<div class="col-xs-6">
-											{{Form::select('', array('' => '--Select--', 'Training' => 'Training','OJT'=>'OJT','Workshop'=>'Workshop'), null,array('class'=>'form-control','id'=>'category','required'=>''))}}
+											
+											{{Form::text('aircraft_mm','', array('class' => 'form-control','placeholder'=>'','required'=>''))}}
 											</div>
 											
 						</div>
 						<div class="form-group required">
                                         
-											{{Form::label('', 'Aircraft MSM', array('class' => 'col-xs-4 control-label'))}}
+											{{Form::label('', 'Aircraft MSN', array('class' => 'col-xs-4 control-label'))}}
 											<div class="col-xs-6">
-											{{Form::select('', array('' => '--Select--', 'Training' => 'Training','OJT'=>'OJT','Workshop'=>'Workshop'), null,array('class'=>'form-control','id'=>'category','required'=>''))}}
+											
+											{{Form::text('aircraft_msm','', array('class' => 'form-control','placeholder'=>'','required'=>''))}}
 											</div>
 											
 						</div>
 						<div class="form-group required">
 												
-													{{Form::label('', 'Completion Date', array('class' => 'col-xs-4 control-label'))}}
+													{{Form::label('completion_date', 'Completion Date', array('class' => 'col-xs-4 control-label'))}}
 												
 													<div class="row">
 														<div class="col-xs-2">
-														{{Form::selectRange('range', 1, 31,1,array('class'=>'form-control'))}}
+														{{Form::select('completion_date', $dates, '0',array('class'=>'form-control'))}}
 														</div>
-														<div class="col-xs-2">
-														{{Form::selectMonth('month',1,array('class'=>'form-control'))}}
+														<div class="col-xs-3">
+														{{Form::select('completion_month',$months,'0',array('class'=>'form-control'))}}
 											
 															
 														</div>
 														<div class="col-xs-2">
-															{{Form::selectYear('year', 1950, 2015,1950,array('class'=>'form-control'))}}
+															{{Form::select('completion_year',$years, '0',array('class'=>'form-control'))}}
 														</div>
 													</div>
 						</div>
 						<div class="form-group ">
                                         
-											{{Form::label('', 'Status', array('class' => 'col-xs-4 control-label'))}}
+											{{Form::label('status', 'Status', array('class' => 'col-xs-4 control-label'))}}
 											<div class="col-xs-6">
-											{{Form::select('', array('' => '--Select--', 'Training' => 'Training','OJT'=>'OJT','Workshop'=>'Workshop'), null,array('class'=>'form-control','id'=>'category','required'=>''))}}
+											{{Form::select('status', array('' => '--Select--', 'Training' => 'Training','OJT'=>'OJT','Workshop'=>'Workshop'), null,array('class'=>'form-control','id'=>'category','required'=>''))}}
 											</div>
 											
 						</div>
 						<div class="form-group ">
                                            
-											{{Form::label('', 'Training Institute', array('class' => 'col-xs-4 control-label'))}}
+											{{Form::label('institute', 'Training Institute', array('class' => 'col-xs-4 control-label'))}}
 											
                                 <div class="col-xs-6">
-											{{Form::text('national_id','', array('class' => 'form-control','placeholder'=>'','required'=>''))}}
+											{{Form::text('institute','', array('class' => 'form-control','placeholder'=>'','required'=>''))}}
 											</div>
                         </div>
 						<div class="form-group ">
                                            
-											{{Form::label('', 'Instructor name', array('class' => 'col-xs-4 control-label'))}}
+											{{Form::label('instructor', 'Instructor name', array('class' => 'col-xs-4 control-label'))}}
 											
                                 <div class="col-xs-6">
-											{{Form::text('national_id','', array('class' => 'form-control','placeholder'=>'','required'=>''))}}
+											{{Form::text('instructor','', array('class' => 'form-control','placeholder'=>'','required'=>''))}}
 											</div>
                         </div>
-						<div class="form-group ">
+						
+						 <div class="form-group required">
                                            
-											{{Form::label('', 'Proof of Completion', array('class' => 'col-xs-4 control-label'))}}
+											{{Form::label('', 'Certificate Issued', array('class' => 'col-xs-4 control-label'))}}
 											
                                 <div class="col-xs-6">
-											{{Form::text('national_id','', array('class' => 'form-control','placeholder'=>'','required'=>''))}}
-											</div>
+										<div class="radio">
+									 
+									  <label> <label> {{ Form::radio('proof', 'Yes') }} &nbsp  Yes</label>
+									 <label> {{ Form::radio('proof', 'No') }} &nbsp  No</label>
+									</div>
+									
+								</div>
                         </div>
-						<div class="form-group ">
+					
+					<div class="form-group ">											
+											{{Form::label('certification', 'Management Certification', array('class' => 'col-xs-4 control-label'))}}
+											<div class="col-xs-6">
+										
+											{{Form::select('certification', array('' => '--Select--', 'Verified'=>'Verified','Non verified'=>'Non verified'), null,array('class'=>'form-control'))}}
+											</div>
+											
+					</div>
+					<div class="form-group ">
                                            
-											{{Form::label('', 'Management Certification', array('class' => 'col-xs-4 control-label'))}}
-											
-                                <div class="col-xs-6">
-											{{Form::text('national_id','', array('class' => 'form-control','placeholder'=>'','required'=>''))}}
-											</div>
-                        </div>
+                                            
+											 {{ Form::label('pdf', 'Upload PDF Document: ',array('class'=>'control-label col-xs-4')) }}
+											 <div class="col-xs-6">
+											 {{ Form::file('pdf') }}
+											 
+											 
+											 </div>
+                    </div>
+						
 						
 						
 					
@@ -205,7 +226,7 @@
                                 <button type="submit" class="btn btn-primary">Save</button>
                             </div>
                         </div>
-                    </form>
+						{{Form::close()}}
                 </div>
             </div>
         </div>

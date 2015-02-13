@@ -8,11 +8,11 @@
                                     <h3 class="box-title">Employment History </h3>
                                 </div><!-- /.box-header -->
                                 <div class="box-body">
+								@foreach($infos as $info)
                                     <table class="table table-bordered">
                                         <tbody>
 										<tr>                                           
-                                            <th >Previous Employment #01</th>
-                                            <th >
+                                            <th colspan='2' >Previous Employment #{{++$a_sl}}
 											<a href='' style='color:red;float:right;padding:5px;'><span class="glyphicon glyphicon-trash"></span></a>
 											<a href='' style='color:green;float:right;padding:5px;'><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>
 											</th>
@@ -20,7 +20,7 @@
                                         <tr>
                                            
                                             <td>Name of organization</td>
-                                            <td>Geomark Limited  </td>
+                                            <td>{{$info->organisation_name}}</td>
                                             
                                         </tr>
                                         
@@ -30,7 +30,7 @@
 												Type of organization
 											</td>
                                             <td>
-                                                Private company
+                                               {{$info->organisation_type}}
                                             </td>
                                             
                                         </tr>
@@ -41,7 +41,7 @@
 												Address of organization:
 											</td>
                                             <td>
-                                               Geomark Limited, House-23, Road-12, Pisci Culture Housing, Muhammadpur, Dhaka 
+                                             {{$info->organisation_address}}
                                             </td>
                                             
                                         </tr> 
@@ -51,7 +51,7 @@
 												Designation
 											</td>
                                             <td>
-                                                GIS & Remote Sensing Consultant
+                                               {{$info->designation}}
                                             </td>
                                             
                                         </tr>
@@ -60,10 +60,7 @@
 												Major responsibilities:
 											</td>
                                             <td>
-                                               (1) Consulting land use and socio-economic survey works with adaptation of GIS analysis. 
-												(2) GIS technology adaptation for survey and decision making organization
-												(3) Map production, interpretation, anlysis and report generation supervising for project.
-												(4) Project mangement and supervision
+                                               {{$info->responsibility}}
                                             </td>
                                             
                                         </tr>
@@ -72,7 +69,7 @@
 												Name of supervisor:
 											</td>
                                             <td>
-                                                A.N.M Safiqul Islam Shahin
+                                               {{$info->supervisor_name}}
                                             </td>
                                             
                                         </tr>
@@ -81,7 +78,7 @@
 												Telephone of supervisor:
 											</td>
                                             <td>
-                                                 01716291050
+                                                 {{$info->supervisor_phone}}
                                             </td>
                                             
                                         </tr>
@@ -90,7 +87,16 @@
 												Date of joining:
 											</td>
                                             <td>
-                                                 01 Mar 2012
+                                                 {{$info->start_date." ".$info->start_month." ".$info->start_year}}
+                                            </td>
+                                            
+                                        </tr>
+										<tr>
+                                            <td>
+												Date of Terminating:
+											</td>
+                                            <td>
+                                                 {{$info->end_date." ".$info->end_month." ".$info->end_year}}
                                             </td>
                                             
                                         </tr>
@@ -98,6 +104,7 @@
                                             
                                        
                                     </tbody></table>
+									@endforeach
                                 </div><!-- /.box-body -->
                             </div>    
                             </div>    
@@ -123,66 +130,67 @@
 
             <div class="modal-body">
                 <!-- The form is placed inside the body of modal -->
-                <form id="#" method="post" class="form-horizontal">
+                
+				{{Form::open(array('url'=>'qualification/saveEmployment','method'=>'post','class'=>'form-horizontal','data-toggle'=>'validator','role'=>'form'))}}
 
-					<div class="form-group">
+					<div class="form-group required">
                                            
-											{{Form::label('', 'Name Of Organisation', array('class' => 'col-xs-4 control-label'))}}
+											{{Form::label('organisation_name', 'Name Of Organisation', array('class' => 'col-xs-4 control-label'))}}
 											<div class="col-xs-6">
-											{{Form::text('national_id','', array('class' => 'form-control','placeholder'=>''))}}
+											{{Form::text('organisation_name','', array('class' => 'form-control','placeholder'=>''))}}
+											</div>
+											
+                    </div>
+					<div class="form-group required">
+                                        
+											{{Form::label('organisation_type', 'Type of organization', array('class' => 'col-xs-4 control-label'))}}
+											<div class="col-xs-6">
+											{{Form::select('organisation_type', array('' => '--Select--', 'International' => 'International','Multinational'=>'Multinational','Government organization'=>'Government organization','Public limited company'=>'Public limited company','Private company'=>'Private company','Others'=>'Others'), null,array('class'=>'form-control'))}}
 											</div>
 											
                     </div>
 					<div class="form-group">
                                         
-											{{Form::label('', 'Type of organization', array('class' => 'col-xs-4 control-label'))}}
+											{{Form::label('organisation_address', 'Address of organization', array('class' => 'col-xs-4 control-label'))}}
 											<div class="col-xs-6">
-											{{Form::select('size', array('' => '--Select--', 'International' => 'International','Multinational'=>'Multinational','Government organization'=>'Government organization','Public limited company'=>'Public limited company','Private company'=>'Private company','Others'=>'Others'), null,array('class'=>'form-control'))}}
-											</div>
-											
-                    </div>
-					<div class="form-group">
-                                        
-											{{Form::label('', 'Address of organization', array('class' => 'col-xs-4 control-label'))}}
-											<div class="col-xs-6">
-											{{Form::textarea('m_address','', array('class' => 'form-control','placeholder'=>'','size'=>'30x3'))}}
+											{{Form::textarea('organisation_address','', array('class' => 'form-control','placeholder'=>'','size'=>'30x3'))}}
 											</div>
 											
                     </div>
 					
-					<div class="form-group">
+					<div class="form-group required">
                                            
-											{{Form::label('', 'Your designation', array('class' => 'col-xs-4 control-label'))}}
+											{{Form::label('designation', 'Your designation', array('class' => 'col-xs-4 control-label'))}}
 											<div class="col-xs-6">
-											{{Form::text('national_id','', array('class' => 'form-control','placeholder'=>''))}}
+											{{Form::text('designation','', array('class' => 'form-control','placeholder'=>''))}}
 											</div>
 											
                     </div>
 					
-					<div class="form-group">
+					<div class="form-group required">
                                         
-											{{Form::label('', 'Major responsibilities', array('class' => 'col-xs-4 control-label'))}}
+											{{Form::label('responsibility', 'Major responsibilities', array('class' => 'col-xs-4 control-label'))}}
 											<div class="col-xs-6">
-											{{Form::textarea('m_address','', array('class' => 'form-control','placeholder'=>'','size'=>'30x3'))}}
+											{{Form::textarea('responsibility','', array('class' => 'form-control','placeholder'=>'','size'=>'30x3'))}}
 											</div>
 											
                     </div>
 					
-					<div class="form-group">
+					<div class="form-group required">
 												
-													{{Form::label('', 'Start Date', array('class' => 'col-xs-4 control-label'))}}
+													{{Form::label('start_date', 'Start Date', array('class' => 'col-xs-4 control-label'))}}
 												
 													<div class="row">
 														<div class="col-xs-2">
-														{{Form::selectRange('range', 1, 31,1,array('class'=>'form-control'))}}
+														{{Form::select('start_date',$dates,'0',array('class'=>'form-control'))}}
 														</div>
-														<div class="col-xs-2">
-														{{Form::selectMonth('month',1,array('class'=>'form-control'))}}
+														<div class="col-xs-3">
+														{{Form::select('start_month',$months,'0',array('class'=>'form-control'))}}
 											
 															
 														</div>
 														<div class="col-xs-2">
-															{{Form::selectYear('year', 1950, 2015,1950,array('class'=>'form-control'))}}
+															{{Form::select('start_year',$years,'01',array('class'=>'form-control'))}}
 														</div>
 													</div>
 					</div>
@@ -194,38 +202,42 @@
 											</div>
 											
                     </div>-->
-					<div class="form-group">
+					<div class="form-group required">
 												
-													{{Form::label('', 'End Date', array('class' => 'col-xs-4 control-label'))}}
+													{{Form::label('end_date', 'End Date', array('class' => 'col-xs-4 control-label'))}}
 												
 													<div class="row">
 														<div class="col-xs-2">
-														{{Form::selectRange('range', 1, 31,1,array('class'=>'form-control'))}}
+														
+														{{Form::select('end_date',$dates,'0',array('class'=>'form-control'))}}
 														</div>
-														<div class="col-xs-2">
-														{{Form::selectMonth('month',1,array('class'=>'form-control'))}}
+														<div class="col-xs-3">
+														
+															{{Form::select('end_month',$months,'0',array('class'=>'form-control'))}}
 											
 															
 														</div>
 														<div class="col-xs-2">
-															{{Form::selectYear('year', 1950, 2015,1950,array('class'=>'form-control'))}}
+															
+																{{Form::select('end_year',$years,'01',array('class'=>'form-control'))}}
+															
 														</div>
 													</div>
 					</div>
 					
-					 <div class="form-group">
+					 <div class="form-group required">
                                            
-											{{Form::label('', ' Name of supervisor', array('class' => 'col-xs-4 control-label'))}}
+											{{Form::label('supervisor_name', ' Name of supervisor', array('class' => 'col-xs-4 control-label'))}}
 											<div class="col-xs-6">
-											{{Form::text('national_id','', array('class' => 'form-control','placeholder'=>''))}}
+											{{Form::text('supervisor_name','', array('class' => 'form-control','placeholder'=>''))}}
 											</div>
 											
                     </div>
 					<div class="form-group">
                                            
-											{{Form::label('', 'Telephone of supervisor', array('class' => 'col-xs-4 control-label'))}}
+											{{Form::label('supervisor_phone', 'Telephone of supervisor', array('class' => 'col-xs-4 control-label'))}}
 											<div class="col-xs-6">
-											{{Form::text('national_id','', array('class' => 'form-control','placeholder'=>''))}}
+											{{Form::text('supervisor_phone','', array('class' => 'form-control','placeholder'=>''))}}
 											</div>
 											
                     </div>
@@ -236,7 +248,7 @@
                             <button type="submit" class="btn btn-primary">Save</button>
                         </div>
                     </div>
-                </form>
+					{{Form::close()}}
             </div>
         </div>
     </div>

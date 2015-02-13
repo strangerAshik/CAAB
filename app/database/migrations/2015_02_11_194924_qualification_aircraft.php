@@ -28,6 +28,7 @@ class QualificationAircraft extends Migration {
 			$table->string('institute');
 			$table->string('instructor');
 			$table->string('proof');
+			$table->string('pdf');
 			$table->string('certification');
 			$table->timestamps();
 		});

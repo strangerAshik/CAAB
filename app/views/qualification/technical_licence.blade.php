@@ -13,11 +13,11 @@
 					
 					</div>
 					<div class="box-body">
+					@foreach($infos as $info)
                     <table class="table table-bordered">
                         <tbody>
                             <tr>
-                                <th >LICENSE  #01</th>
-                                <th >
+                                <th colsapn='2'>LICENSE  #{{++$a_sl}}</th><th>
                                     <a href='' style='color:red;float:right;padding:5px;'>
                                         <span class="glyphicon glyphicon-trash"></span>
                                     </a>
@@ -27,32 +27,33 @@
                                 </th>
                             </tr>
                             <tr>
-                                <td>Active</td>
-                                <td>Yes</td>
+                                <td style='width:50%'>Active</td>
+                                <td style='width:50%'>{{$info->active}}</td>
                             </tr>
                             <tr>
                                 <td>Licence Number</td>
-                                <td>gtrytr5675</td>
+                                <td>{{$info->licence_no}}</td>
                             </tr>
                             <tr>
                                 <td> Licence Type</td>
-                                <td> Licence</td>
+                                <td> {{$info->licence_type}}</td>
                             </tr>
 							<tr>
                                 <td>Issue Date</td>
-                                <td> 25 November 2010</td>
+                                <td> {{$info->issue_date.' '.$info->issue_month.' '.$info->issue_year}}</td>
                             </tr>
                             <tr>
                                 <td>Expiration Date</td>
-                                <td>25 November 2015</td>
+                                <td>{{$info->expiration_date.' '.$info->expiration_month.' '.$info->expiration_year}}</td>
                             </tr>
                             <tr>
                                 <td>Rating </td>
-                                <td>5</td>
+                                <td>{{$info->rating}}</td>
                             </tr>
 							
                         </tbody>
                     </table>
+					@endforeach
                 </div>
                 <!-- /.box-body -->
             </div>
@@ -72,7 +73,8 @@
                 </div>
                 <div class="modal-body">
                     <!-- The form is placed inside the body of modal -->
-                    <form id="#" method="post" class="form-horizontal" data-toggle="validator" role="form">
+                  
+					{{Form::open(array('url'=>'qualification/saveTechnicalLicence','method'=>'post','class'=>'form-horizontal','data-toggle'=>'validator','role'=>'form'))}}
                         <div class="form-group required">
                                            
 											{{Form::label('', 'Active', array('class' => 'col-xs-4 control-label'))}}
@@ -88,60 +90,61 @@
                         </div>
 						<div class="form-group required">
                                            
-											{{Form::label('', 'Licence Number', array('class' => 'col-xs-4 control-label'))}}
+											{{Form::label('licence_no', 'Licence Number', array('class' => 'col-xs-4 control-label'))}}
 											
                                 <div class="col-xs-6">
-											{{Form::text('national_id','', array('class' => 'form-control','placeholder'=>'','required'=>''))}}
+											{{Form::text('licence_no','', array('class' => 'form-control','placeholder'=>'','required'=>''))}}
 											</div>
                         </div>
 						<div class="form-group required">
                                            
-											{{Form::label('', 'Licence Type', array('class' => 'col-xs-4 control-label'))}}
+											{{Form::label('licence_type', 'Licence Type', array('class' => 'col-xs-4 control-label'))}}
 											
                                 <div class="col-xs-6">
-											{{Form::text('national_id','', array('class' => 'form-control','placeholder'=>'','required'=>''))}}
+											{{Form::text('licence_type','', array('class' => 'form-control','placeholder'=>'','required'=>''))}}
 											</div>
                         </div>
 						<div class="form-group required">
 												
-													{{Form::label('', 'Issue Date', array('class' => 'col-xs-4 control-label'))}}
+													{{Form::label('issue_date', 'Issue Date', array('class' => 'col-xs-4 control-label'))}}
 												
 													<div class="row">
 														<div class="col-xs-2">
-														{{Form::selectRange('range', 1, 31,1,array('class'=>'form-control'))}}
+														{{Form::select('issue_date',$dates, '0',array('class'=>'form-control'))}}
 														</div>
-														<div class="col-xs-2">
-														{{Form::selectMonth('month',1,array('class'=>'form-control'))}}
+														<div class="col-xs-3">
+														{{Form::select('issue_month',$months,'0',array('class'=>'form-control'))}}
 											
 															
 														</div>
 														<div class="col-xs-2">
-															{{Form::selectYear('year', 1950, 2015,1950,array('class'=>'form-control'))}}
+															{{Form::select('issue_year',$years,'0',array('class'=>'form-control'))}}
 														</div>
 													</div>
 						</div>
 						<div class="form-group">
 												
-													{{Form::label('', 'Expiration Date', array('class' => 'col-xs-4 control-label'))}}
+													{{Form::label('expiration_date', 'Expiration Date', array('class' => 'col-xs-4 control-label'))}}
 												
 													<div class="row">
 														<div class="col-xs-2">
-														{{Form::selectRange('range', 1, 31,1,array('class'=>'form-control'))}}
+														{{Form::select('expiration_date',$dates, '0',array('class'=>'form-control'))}}
 														</div>
-														<div class="col-xs-2">
-														{{Form::selectMonth('month',1,array('class'=>'form-control'))}}
-											
+														<div class="col-xs-3">
+														
+														{{Form::select('expiration_month',$months,'0',array('class'=>'form-control'))}}
 															
 														</div>
 														<div class="col-xs-2">
-															{{Form::selectYear('year', 1950, 2015,1950,array('class'=>'form-control'))}}
+															
+															{{Form::select('expiration_year',$years,'0',array('class'=>'form-control'))}}
 														</div>
 													</div>
 						</div>
 						<div class="form-group " >											
-											{{Form::label('', 'Rating', array('class' => 'col-xs-4 control-label'))}}
+											{{Form::label('rating', 'Rating', array('class' => 'col-xs-4 control-label'))}}
 											<div class="col-xs-6">
-											{{Form::textarea('m_address','', array('class' => 'form-control','placeholder'=>'','size'=>'30x3'))}}
+											{{Form::textarea('rating','', array('class' => 'form-control','placeholder'=>'','size'=>'30x3'))}}
 											</div>
 					</div>
 						
@@ -152,7 +155,7 @@
                                 <button type="submit" class="btn btn-primary">Save</button>
                             </div>
                         </div>
-                    </form>
+						{{Form::close()}}
                 </div>
             </div>
         </div>

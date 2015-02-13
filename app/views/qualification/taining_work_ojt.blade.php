@@ -8,39 +8,63 @@
                                     <h3 class="box-title">Training/ Workshop/ OJT  </h3>
                                 </div><!-- /.box-header -->
                                 <div class="box-body">
+								@foreach($infos as $info)
                                     <table class="table table-bordered">
                                         <tbody>
 										<tr>                                           
-                                            <th >Training/ Workshop/ OJT  #01</th>
-                                            <th >
+                                            <th colspan='2'>Training/ Workshop/ OJT  #{{++$a_sl}}
 											<a href='' style='color:red;float:right;padding:5px;'><span class="glyphicon glyphicon-trash"></span></a>
 											<a href='' style='color:green;float:right;padding:5px;'><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>
 											</th>
                                         </tr>
                                         <tr>
                                            
-                                            <td>Category</td>
-                                            <td>Geomark Limited  </td>
+                                            <td style="width:50%">Category</td>
+                                            <td style="width:50%">{{$info->category}}</td>
                                             
                                         </tr>
-                                        
+                                        @if($info->category=='Training')
+											<tr>
+												<td>Type of Training</td><td>{{$info->type_of_training}}</td>
+											</tr>
+											<tr>
+												<td>Type of Training</td><td>{{$info->training_course}}</td>
+											</tr>
+											<tr>
+												<td>Subject</td><td>{{$info->subject}}</td>
+											</tr>
+										@endif
+										@if($info->category=='OJT')
+											<tr>
+												<td>Training Task</td><td>{{$info->training_task}}</td>
+											</tr>
+											
+											
+										@endif
+										@if($info->category=='Workshop')
+											<tr>
+												<td>Topic</td><td>{{$info->topic}}</td>
+											</tr>
+											
+											
+										@endif
 										<tr>
                                            
                                             <td>
 												Major Area
 											</td>
                                             <td>
-                                                Private company
+                                               {{$info->major_area}}
                                             </td>
                                             
                                         </tr>
 										<tr>
                                            
                                             <td>
-											Instructor:
+											Instructor(s):
 											</td>
                                             <td>
-                                               Geomark Limitedfkdshkg
+                                               {{$info->instructor}}
                                             </td>
                                             
                                         </tr> 
@@ -50,26 +74,26 @@
 												Institute:
 											</td>
                                             <td>
-                                                GIS & Remote Sensing Consultant
+                                               {{$info->institute}}
                                             </td>
                                             
                                         </tr>
 										<tr>
                                             <td>												
-												Location:
+												Address:
 											</td>
                                             <td>
-                                               (1) Consulting land use and socio-economic survey works with adaptation of GIS analysis. 
+                                               {{$info->location}}
 												
                                             </td>
                                             
                                         </tr>
 										<tr>
                                             <td>
-												Proof of completion:
+												Certificate Issued:
 											</td>
                                             <td>
-                                                A.N.M Safiqul Islam Shahin
+                                               {{$info->proof}}
                                             </td>
                                             
                                         </tr>
@@ -78,7 +102,7 @@
 												Management Certification:
 											</td>
                                             <td>
-                                                 01716291050
+                                                {{$info->certification}}
                                             </td>
                                             
                                         </tr>
@@ -87,7 +111,7 @@
 												Duration:
 											</td>
                                             <td>
-                                                 2 months
+                                                {{$info->duration}}
                                             </td>
                                             
                                         </tr>
@@ -95,6 +119,7 @@
                                             
                                        
                                     </tbody></table>
+								@endforeach
                                 </div><!-- /.box-body -->
                             </div>    
                             </div>    
@@ -120,14 +145,16 @@
 
             <div class="modal-body">
                 <!-- The form is placed inside the body of modal -->
-                <form id="#" method="post" class="form-horizontal" data-toggle="validator" role="form">
+                
+				
+				{{Form::open(array('url'=>'qualification/saveTrainingWorkOJT','method'=>'post','class'=>'form-horizontal','data-toggle'=>'validator','role'=>'form','files'=>true))}}
 
 					
 					<div class="form-group required">
                                         
-											{{Form::label('', 'Category', array('class' => 'col-xs-4 control-label'))}}
+											{{Form::label('category', 'Category', array('class' => 'col-xs-4 control-label'))}}
 											<div class="col-xs-6">
-											{{Form::select('', array('' => '--Select--', 'Training' => 'Training','OJT'=>'OJT','Workshop'=>'Workshop'), null,array('class'=>'form-control','id'=>'category','required'=>''))}}
+											{{Form::select('category', array('' => '--Select--', 'Training' => 'Training','OJT'=>'OJT','Workshop'=>'Workshop'), null,array('class'=>'form-control','id'=>'category','required'=>''))}}
 											</div>
 											
                     </div>
@@ -135,25 +162,25 @@
 					<div id='training' style='display:none;'>
 					<div class="form-group required">
                                         
-											{{Form::label('', 'Type of Training', array('class' => 'col-xs-4 control-label'))}}
+											{{Form::label('type_of_training', 'Type of Training', array('class' => 'col-xs-4 control-label'))}}
 											<div class="col-xs-6">
-											{{Form::select('size', array('' => '--Select--', 'Formal Training' => 'Formal Training','Class Room'=>'Class Room','Others'=>'Others'), null,array('class'=>'form-control'))}}
+											{{Form::select('type_of_training', array('' => '--Select--', 'Class Room'=>'Class Room','CBT'=>'CBT','Others'=>'Others'), null,array('class'=>'form-control'))}}
 											</div>
 											
                     </div>
 					<div class="form-group required">
                                            
-											{{Form::label('', 'Training Course', array('class' => 'col-xs-4 control-label'))}}
+											{{Form::label('training_course', 'Training Course', array('class' => 'col-xs-4 control-label'))}}
 											<div class="col-xs-6">
-											{{Form::text('national_id','', array('class' => 'form-control','placeholder'=>''))}}
+											{{Form::text('training_course','', array('class' => 'form-control','placeholder'=>''))}}
 											</div>
 											
                     </div>
 					<div class="form-group required">
                                            
-											{{Form::label('', 'Subject', array('class' => 'col-xs-4 control-label'))}}
+											{{Form::label('subject', 'Subject', array('class' => 'col-xs-4 control-label'))}}
 											<div class="col-xs-6">
-											{{Form::text('national_id','', array('class' => 'form-control','placeholder'=>''))}}
+											{{Form::text('subject','', array('class' => 'form-control','placeholder'=>''))}}
 											</div>
 											
                     </div>
@@ -163,9 +190,9 @@
 					<div id='workshop' style='display:none;'> 
 					<div class="form-group required">
                                            
-											{{Form::label('', 'Topic', array('class' => 'col-xs-4 control-label'))}}
+											{{Form::label('topic', 'Topic', array('class' => 'col-xs-4 control-label'))}}
 											<div class="col-xs-6">
-											{{Form::text('national_id','', array('class' => 'form-control','placeholder'=>''))}}
+											{{Form::text('topic','', array('class' => 'form-control','placeholder'=>''))}}
 											</div>
 											
                     </div>
@@ -176,63 +203,85 @@
 					<div id='ojt' style='display:none;'> 
 						<div class="form-group required required">
                                            
-											{{Form::label('', 'Training Task', array('class' => 'col-xs-4 control-label '))}}
+											{{Form::label('training_task', 'Training Task', array('class' => 'col-xs-4 control-label '))}}
 											<div class="col-xs-6">
-											{{Form::text('national_id','', array('class' => 'form-control','placeholder'=>''))}}
+											{{Form::text('training_task','', array('class' => 'form-control','placeholder'=>''))}}
 											</div>
 											
 						</div>
 					</div>
 					<!--End OJT -->
 					<!--Start Common content-->
+					<div class="form-group required">											
+											{{Form::label('duration', 'Duration', array('class' => 'col-xs-4 control-label'))}}
+											<div class="col-xs-6">
+											{{Form::text('duration','', array('class' => 'form-control','placeholder'=>'','required'=>''))}}
+											</div>
+					</div>
 					<div class="form-group required">
                                            
-											{{Form::label('', 'Major Area', array('class' => 'col-xs-4 control-label'))}}
+											{{Form::label('major_area', 'Major Area', array('class' => 'col-xs-4 control-label'))}}
 											<div class="col-xs-6">
-											{{Form::text('national_id','', array('class' => 'form-control','placeholder'=>'','required'=>''))}}
+											{{Form::text('major_area','', array('class' => 'form-control','placeholder'=>'','required'=>''))}}
 											</div>
 											
                     </div>
-					<div class="form-group required">
+					<div class="form-group ">
                                            
-											{{Form::label('', 'Instructor', array('class' => 'col-xs-4 control-label'))}}
+											{{Form::label('instructor', 'Instructor(s)', array('class' => 'col-xs-4 control-label'))}}
 											<div class="col-xs-6">
-											{{Form::text('national_id','', array('class' => 'form-control','placeholder'=>''))}}
+											{{Form::text('instructor','', array('class' => 'form-control','placeholder'=>''))}}
 											</div>
 											
                     </div>
 					<div class="form-group  required">
                                            
-											{{Form::label('', 'Institute', array('class' => 'col-xs-4 control-label'))}}
+											{{Form::label('institute', 'Institute', array('class' => 'col-xs-4 control-label'))}}
 											<div class="col-xs-6">
-											{{Form::text('national_id','', array('class' => 'form-control','placeholder'=>''))}}
+											{{Form::text('institute','', array('class' => 'form-control','placeholder'=>'','required'=>''))}}
 											</div>
 											
                     </div>
-					<div class="form-group required" >											
-											{{Form::label('', 'Location', array('class' => 'col-xs-4 control-label'))}}
+					<div class="form-group " >											
+											{{Form::label('location', 'Address', array('class' => 'col-xs-4 control-label'))}}
 											<div class="col-xs-6">
-											{{Form::textarea('m_address','', array('class' => 'form-control','placeholder'=>'','size'=>'30x3'))}}
+											{{Form::textarea('location','', array('class' => 'form-control','placeholder'=>'','size'=>'30x3'))}}
 											</div>
 					</div>
-					<div class="form-group required">											
-											{{Form::label('', 'Proof of completion', array('class' => 'col-xs-4 control-label'))}}
+					
+					 <div class="form-group required">
+                                           
+											{{Form::label('', 'Certificate Issued', array('class' => 'col-xs-4 control-label'))}}
+											
+                                <div class="col-xs-6">
+										<div class="radio">
+									 
+									  <label> <label> {{ Form::radio('proof', 'Yes') }} &nbsp  Yes</label>
+									 <label> {{ Form::radio('proof', 'No') }} &nbsp  No</label>
+									</div>
+									
+								</div>
+                        </div>
+					
+					<div class="form-group ">											
+											{{Form::label('certification', 'Management Certification', array('class' => 'col-xs-4 control-label'))}}
 											<div class="col-xs-6">
-											{{Form::textarea('m_address','', array('class' => 'form-control','placeholder'=>'','size'=>'30x3'))}}
+										
+											{{Form::select('certification', array('' => '--Select--', 'Verified'=>'Verified','Non verified'=>'Non verified'), null,array('class'=>'form-control'))}}
 											</div>
+											
 					</div>
-					<div class="form-group required">											
-											{{Form::label('', 'Management Certification', array('class' => 'col-xs-4 control-label'))}}
-											<div class="col-xs-6">
-											{{Form::textarea('m_address','', array('class' => 'form-control','placeholder'=>'','size'=>'30x3'))}}
-											</div>
-					</div>
-					<div class="form-group required">											
-											{{Form::label('', 'Duration', array('class' => 'col-xs-4 control-label'))}}
-											<div class="col-xs-6">
-											{{Form::text('national_id','', array('class' => 'form-control','placeholder'=>''))}}
-											</div>
-					</div>
+					<div class="form-group ">
+                                           
+                                            
+											 {{ Form::label('pdf', 'Upload PDF Document: ',array('class'=>'control-label col-xs-4')) }}
+											 <div class="col-xs-6">
+											 {{ Form::file('pdf') }}
+											 
+											 
+											 </div>
+                    </div>
+					
 					<!--End Common content-->
 					
                     
@@ -242,7 +291,7 @@
                             <button type="submit" class="btn btn-primary">Save</button>
                         </div>
                     </div>
-                </form>
+					{{Form::close()}}
             </div>
         </div>
     </div>

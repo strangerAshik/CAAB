@@ -30,9 +30,7 @@
                             </tr>
                             <tr>
                                 <td>
-									@if (Auth::check())
-									{{$id = Auth::user()->getId();}}
-									@endif
+									
 									Title
 								</td>
                                 <td>{{$info->title}}</td>
@@ -246,15 +244,15 @@
 												
 													<div class="row">
 														<div class="col-xs-2">
-														{{Form::selectRange('date_of_birth', 1, 31,1,array('class'=>'form-control'))}}
+														{{Form::select('date_of_birth', $dates,'0',array('class'=>'form-control'))}}
 														</div>
-														<div class="col-xs-2">
-														{{Form::selectMonth('month_of_birth',1,array('class'=>'form-control'))}}
+														<div class="col-xs-3">
+														{{Form::select('month_of_birth',$months,'0',array('class'=>'form-control'))}}
 											
 															
 														</div>
 														<div class="col-xs-2">
-															{{Form::selectYear('year_of_birth', 1950, 2015,1950,array('class'=>'form-control'))}}
+															{{Form::select('year_of_birth',$years,'0',array('class'=>'form-control'))}}
 														</div>
 													</div>
 										</div>
@@ -409,15 +407,15 @@
 												
 													<div class="row">
 														<div class="col-xs-2">
-														{{Form::selectRange('date_of_birth', 1, 31,$info->date_of_birth,array('class'=>'form-control'))}}
+														{{Form::select('date_of_birth', $dates ,$info->date_of_birth,array('class'=>'form-control'))}}
 														</div>
-														<div class="col-xs-2">
-														{{Form::selectMonth('month_of_birth',$info->month_of_birth,array('class'=>'form-control'))}}
+														<div class="col-xs-3">
+														{{Form::select('month_of_birth',$months,$info->month_of_birth,array('class'=>'form-control'))}}
 											
 															
 														</div>
 														<div class="col-xs-2">
-															{{Form::selectYear('year_of_birth', 1950, 2015,$info->year_of_birth,array('class'=>'form-control'))}}
+															{{Form::select('year_of_birth',$years,$info->year_of_birth,array('class'=>'form-control'))}}
 														</div>
 													</div>
 										</div>
