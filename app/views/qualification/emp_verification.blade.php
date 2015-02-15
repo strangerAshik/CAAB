@@ -19,17 +19,17 @@
                             <tr>
                                 <th >Employee verification</th>
                                 <th >
-                                    <a href='' style='color:red;float:right;padding:5px;'>
+                                    <a href="{{'deleteEnpVeri/'.$info->id}}" style='color:red;float:right;padding:5px;'>
                                         <span class="glyphicon glyphicon-trash"></span>
                                     </a>
-                                    <a href='' style='color:green;float:right;padding:5px;'>
+                                    <a data-toggle="modal" data-target="#{{'EV'.$info->id}}" href='' style='color:green;float:right;padding:5px;'>
                                         <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                                     </a>
                                 </th>
                             </tr>
                             <tr>
-                                <td style="width:50%">Name</td>
-                                <td style="width:50%">{{$info->name}}</td>
+                                <td class="col-md-4">Name</td>
+                                <td >{{$info->name}}</td>
                             </tr>
                             <tr>
                                 <td>Employee ID</td>
@@ -169,6 +169,109 @@
             </div>
         </div>
     </div>
+	<!--------------------Start Update Pop up area--------------------------->
+	 @foreach($infos as $info)
+	 <div class="modal fade" id="{{'EV'.$info->id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Add Employee verification </h4>
+                </div>
+                <div class="modal-body">
+                    <!-- The form is placed inside the body of modal -->
+                 {{Form::open(array('url'=>'qualification/updateEmpVerification','method'=>'post','class'=>'form-horizontal','data-toggle'=>'validator','role'=>'form'))}}
+					 {{Form::hidden('id',$info->id)}}
+						<div class="form-group required">
+                                           
+											{{Form::label('name', 'Name', array('class' => 'col-xs-4 control-label'))}}
+											
+                                <div class="col-xs-6">
+											{{Form::text('name',$info->name, array('class' => 'form-control','placeholder'=>'','required'=>''))}}
+											</div>
+                        </div>
+						
+						<div class="form-group required">
+												
+													{{Form::label('entry_date', 'Date Of Entry', array('class' => 'col-xs-4 control-label'))}}
+												
+													<div class="row">
+														<div class="col-xs-2">
+														{{Form::select('entry_date',$dates, $info->entry_date ,array('class'=>'form-control'))}}
+														</div>
+														<div class="col-xs-3">
+														{{Form::select('entry_month',$months, $info->entry_month ,array('class'=>'form-control'))}}
+											
+															
+														</div>
+														<div class="col-xs-2">
+															{{Form::select('entry_year', $years, $info->entry_year ,array('class'=>'form-control'))}}
+														</div>
+													</div>
+						</div>
+						<div class="form-group required">
+                                           
+											{{Form::label('active', 'Active', array('class' => 'col-xs-4 control-label'))}}
+											
+                                <div class="col-xs-6">
+										<div class="radio">
+									 
+									  <label> <label> {{ Form::radio('active', 'Yes') }} &nbsp  Yes</label>
+									 <label> {{ Form::radio('active', 'No') }} &nbsp  No</label>
+									</div>
+									
+								</div>
+                        </div>
+						<div class="form-group">
+												
+													{{Form::label('termination_date', 'Termination Date/ Separation Date', array('class' => 'col-xs-4 control-label'))}}
+												
+													<div class="row">
+														<div class="col-xs-2">
+													
+															{{Form::select('termination_date',$dates, $info->termination_date ,array('class'=>'form-control'))}}
+														</div>
+														<div class="col-xs-3">
+														
+														{{Form::select('termination_month',$months, $info->termination_month ,array('class'=>'form-control'))}}
+											
+															
+														</div>
+														<div class="col-xs-2">
+															
+															{{Form::select('termination_year', $years, $info->termination_year ,array('class'=>'form-control'))}}
+														</div>
+													</div>
+						</div>
+						<div class="form-group required">
+                                           
+											{{Form::label('position', 'Position', array('class' => 'col-xs-4 control-label'))}}
+											
+                                <div class="col-xs-6">
+											{{Form::text('position', $info->position , array('class' => 'form-control','placeholder'=>'','required'=>''))}}
+											</div>
+                        </div>
+						<div class="form-group " >											
+											{{Form::label('note', 'Note', array('class' => 'col-xs-4 control-label'))}}
+											<div class="col-xs-6">
+											{{Form::textarea('note', $info->note , array('class' => 'form-control','placeholder'=>'','size'=>'30x3'))}}
+											</div>
+					</div>
+						
+					
+                       
+                        <div class="form-group">
+                            <div class="col-xs-5 col-xs-offset-3">
+                                <button type="submit" class="btn btn-primary">Save</button>
+                            </div>
+                        </div>
+						{{Form::close()}}
+                </div>
+            </div>
+        </div>
+    </div>
+	@endforeach
+	<!--------------------End Update Pop up area--------------------------->
     <script>
 $(document).ready(function(){
   

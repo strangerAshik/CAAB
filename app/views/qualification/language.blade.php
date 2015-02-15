@@ -26,18 +26,17 @@
                     <table class="table table-bordered">
                         <tbody>
                             <tr>
-                                <th > Language  #{{+$a_sl}}</th>
-                                <th >
-                                    <a href='' style='color:red;float:right;padding:5px;'>
+                                <th colspan='2'> Language  #{{++$a_sl}}
+                                    <a href="{{'deleteLanguage/'.$info->id}}" style='color:red;float:right;padding:5px;'>
                                         <span class="glyphicon glyphicon-trash"></span>
                                     </a>
-                                    <a href='' style='color:green;float:right;padding:5px;'>
+                                  <a data-toggle="modal" data-target="#{{'lang'.$info->id}}" href='' style='color:green;float:right;padding:5px;'>
                                         <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                                     </a>
                                 </th>
                             </tr>
                             <tr>
-                                <td>Language</td>
+                                <td class='col-md-4'>Language</td>
                                 <td>{{$info->language}}</td>
                             </tr>
                             <tr>
@@ -131,7 +130,74 @@
             </div>
         </div>
     </div>
-    <script>
+	<!-----------------Start Update Pop up----------------------------->
+	@foreach($infos as $info)
+	 <div class="modal fade" id="{{'lang'.$info->id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Add Language </h4>
+                </div>
+                <div class="modal-body">
+                    <!-- The form is placed inside the body of modal -->
+                   
+					{{Form::open(array('url'=>'qualification/updateLanguage','method'=>'post','class'=>'form-horizontal','data-toggle'=>'validator','role'=>'form'))}}
+							{{Form::hidden('id',$info->id)}}
+                        <div class="form-group required">
+                                           
+											{{Form::label('language', 'Language', array('class' => 'col-xs-4 control-label'))}}
+											
+                                <div class="col-xs-6">
+											{{Form::text('language',$info->language, array('class' => 'form-control','placeholder'=>'','required'=>''))}}
+											</div>
+                            </div>
+						<div class="form-group required">
+                                        
+											{{Form::label('lang_speak', 'Speaking ability', array('class' => 'col-xs-4 control-label'))}}
+											
+                            <div class="col-xs-6">
+											{{Form::select('lang_speak', array('' => '--Select--', 'Fluent' => 'Fluent','Moderate'=>'Moderate','Not Fluent'=>'Not Fluent'), $info->lang_speak,array('class'=>'form-control','id'=>'','required'=>''))}}
+							</div>
+                        </div>
+						<div class="form-group required">
+                                        
+											{{Form::label('lang_understanding', 'Understanding', array('class' => 'col-xs-4 control-label'))}}
+											
+                            <div class="col-xs-6">
+											{{Form::select('lang_understanding', array('' => '--Select--', 'Fluent' => 'Fluent','Moderate'=>'Moderate','Not Fluent'=>'Not Fluent'), $info->lang_understanding,array('class'=>'form-control','id'=>'category','required'=>''))}}
+							</div>
+                        </div>
+						<div class="form-group required">
+                                        
+											{{Form::label('lang_reading', 'Reading ability', array('class' => 'col-xs-4 control-label'))}}
+											
+                            <div class="col-xs-6">
+											{{Form::select('lang_reading', array('' => '--Select--', 'Fluent' => 'Fluent','Moderate'=>'Moderate','Not Fluent'=>'Not Fluent'), $info->lang_reading,array('class'=>'form-control','id'=>'category','required'=>''))}}
+							</div>
+                        </div>
+						<div class="form-group required">
+                                        
+											{{Form::label('lang_writing', ' Writing ability', array('class' => 'col-xs-4 control-label'))}}
+											
+                            <div class="col-xs-6">
+											{{Form::select('lang_writing', array('' => '--Select--', 'Fluent' => 'Fluent','Moderate'=>'Moderate','Not Fluent'=>'Not Fluent'), $info->lang_writing,array('class'=>'form-control','id'=>'category','required'=>''))}}
+							</div>
+                        </div>
+                       
+                        <div class="form-group">
+                            <div class="col-xs-5 col-xs-offset-3">
+                                <button type="submit" class="btn btn-primary">Save</button>
+                            </div>
+                        </div>
+						{{Form::close()}}
+                </div>
+            </div>
+        </div>
+    </div>
+	@endforeach
+	<!-----------------End Update Pop up----------------------------->
+ <script>
 $(document).ready(function(){
   
  

@@ -93,7 +93,7 @@
                             </tr>
 							<tr>
                                 <td>Date Of Birth</td>
-                                <td>{{$info->date_of_birth .'/'.$info->month_of_birth .'/'.$info->year_of_birth  }}</td>
+                                <td>{{$info->date_of_birth .' '.$info->month_of_birth .' '.$info->year_of_birth  }}</td>
                             </tr>
 							<tr>
                                 <td>Photo</td>

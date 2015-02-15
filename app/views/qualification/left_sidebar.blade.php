@@ -2,20 +2,20 @@
  <!-- sidebar: style can be found in sidebar.less -->
                 <section class="sidebar">
                     <!-- Sidebar user panel -->
-                    <div class="user-panel">
+				 @foreach($personnel as $personal)
+				   <div class="user-panel">
                         <div class="pull-left image">
-						{{-- @if($infos!=null)
-							{{HTML::image('img/PersonnelPhoto/'.$info->photo,'User',array('class'=>'img-circle'))}}
-							@else--}} 
-							{{HTML::image('img/avatar5.png','User',array('class'=>'img-circle'))}}
-								{{--@endif--}}
+						
+							{{HTML::image('img/PersonnelPhoto/'.$personal->photo,'User',array('class'=>'img-circle'))}}						 
+						
                         </div>
                         <div class="pull-left info">
-                            <p>Hello, Jane</p>
+                            <p>{{$personal->first_name}}</p>
 
                             <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
                         </div>
                     </div>
+					 @endforeach
                     <!-- search form -->
                     <!--<form action="#" method="get" class="sidebar-form">
                         <div class="input-group">
@@ -51,6 +51,7 @@
 								 <li><a href="{{URL::to('qualification/reference')}}"><i class="fa fa-angle-double-right"></i>References</a></li>
 								 <li><a href="{{URL::to('qualification/emp_verification')}}"><i class="fa fa-angle-double-right"></i>Employee Verification</a></li>
                                 <li><a href="{{URL::to('qualification/other')}}"><i class="fa fa-angle-double-right"></i>Others</a></li>
+                                <li><a href="{{URL::to('qualification/comp_view')}}"><i class="fa fa-angle-double-right"></i>Comprehensive View </a></li>
                             </ul>
                         </li>
                       

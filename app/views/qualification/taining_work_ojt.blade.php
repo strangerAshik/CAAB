@@ -9,18 +9,20 @@
                                 </div><!-- /.box-header -->
                                 <div class="box-body">
 								@foreach($infos as $info)
-                                    <table class="table table-bordered">
+                                 <table class="table table-bordered">
                                         <tbody>
 										<tr>                                           
                                             <th colspan='2'>Training/ Workshop/ OJT  #{{++$a_sl}}
-											<a href='' style='color:red;float:right;padding:5px;'><span class="glyphicon glyphicon-trash"></span></a>
-											<a href='' style='color:green;float:right;padding:5px;'><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>
+											<a href="{{'deleteTraining/'.$info->id}}" style='color:red;float:right;padding:5px;'><span class="glyphicon glyphicon-trash"></span></a>
+											<a data-toggle="modal" data-target="#{{'training'.$info->id}}" href='' style='color:green;float:right;padding:5px;'>
+                                        <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                                    </a>
 											</th>
                                         </tr>
                                         <tr>
                                            
-                                            <td style="width:50%">Category</td>
-                                            <td style="width:50%">{{$info->category}}</td>
+                                            <td class="col-md-4">Category</td>
+                                            <td >{{$info->category}}</td>
                                             
                                         </tr>
                                         @if($info->category=='Training')
@@ -296,6 +298,170 @@
         </div>
     </div>
 </div>
+<!--------------------Edit Pop up Start---------------------------->
+@foreach($infos as $info)
+<div class="modal fade" id="{{'training'.$info->id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Training/ Workshop/ OJT </h4>
+            </div>
+
+            <div class="modal-body">
+                <!-- The form is placed inside the body of modal -->
+                {{Form::open(array('url'=>'qualification/updateTrainingWorkOJT','method'=>'post','class'=>'form-horizontal','data-toggle'=>'validator','role'=>'form','files'=>true))}}
+						{{Form::hidden('id', $info->id)}}
+						{{Form::hidden('old_file', $info->pdf)}}
+					
+					<div class="form-group required">
+                                        
+											{{Form::label('category', 'Category', array('class' => 'col-xs-4 control-label'))}}
+											<div class="col-xs-6">
+											{{Form::select('category', array('' => '--Select--', 'Training' => 'Training','OJT'=>'OJT','Workshop'=>'Workshop'), $info->category,array('class'=>'form-control','id'=>'category','required'=>''))}}
+											</div>
+											
+                    </div>
+					<!--IF training -->
+					<div id='training' style='display:none;'>
+					<div class="form-group required">
+                                        
+											{{Form::label('type_of_training', 'Type of Training', array('class' => 'col-xs-4 control-label'))}}
+											<div class="col-xs-6">
+											{{Form::select('type_of_training', array('' => '--Select--', 'Class Room'=>'Class Room','CBT'=>'CBT','Others'=>'Others'),$info->type_of_training,array('class'=>'form-control'))}}
+											</div>
+											
+                    </div>
+					<div class="form-group required">
+                                           
+											{{Form::label('training_course', 'Training Course', array('class' => 'col-xs-4 control-label'))}}
+											<div class="col-xs-6">
+											{{Form::text('training_course',$info->training_course, array('class' => 'form-control','placeholder'=>''))}}
+											</div>
+											
+                    </div>
+					<div class="form-group required">
+                                           
+											{{Form::label('subject', 'Subject', array('class' => 'col-xs-4 control-label'))}}
+											<div class="col-xs-6">
+											{{Form::text('subject',$info->subject, array('class' => 'form-control','placeholder'=>''))}}
+											</div>
+											
+                    </div>
+					</div>
+					<!--end training -->
+					<!--If workshop / seminar -->
+					<div id='workshop' style='display:none;'> 
+					<div class="form-group required">
+                                           
+											{{Form::label('topic', 'Topic', array('class' => 'col-xs-4 control-label'))}}
+											<div class="col-xs-6">
+											{{Form::text('topic',$info->topic, array('class' => 'form-control','placeholder'=>''))}}
+											</div>
+											
+                    </div>
+					
+					<!--end workshop / seminar -->
+					</div>
+					<!--If OJT -->
+					<div id='ojt' style='display:none;'> 
+						<div class="form-group required required">
+                                           
+											{{Form::label('training_task', 'Training Task', array('class' => 'col-xs-4 control-label '))}}
+											<div class="col-xs-6">
+											{{Form::text('training_task',$info->training_task, array('class' => 'form-control','placeholder'=>''))}}
+											</div>
+											
+						</div>
+					</div>
+					<!--End OJT -->
+					<!--Start Common content-->
+					<div class="form-group required">											
+											{{Form::label('duration', 'Duration', array('class' => 'col-xs-4 control-label'))}}
+											<div class="col-xs-6">
+											{{Form::text('duration',$info->duration, array('class' => 'form-control','placeholder'=>'','required'=>''))}}
+											</div>
+					</div>
+					<div class="form-group required">
+                                           
+											{{Form::label('major_area', 'Major Area', array('class' => 'col-xs-4 control-label'))}}
+											<div class="col-xs-6">
+											{{Form::text('major_area',$info->major_area, array('class' => 'form-control','placeholder'=>'','required'=>''))}}
+											</div>
+											
+                    </div>
+					<div class="form-group ">
+                                           
+											{{Form::label('instructor', 'Instructor(s)', array('class' => 'col-xs-4 control-label'))}}
+											<div class="col-xs-6">
+											{{Form::text('instructor',$info->instructor, array('class' => 'form-control','placeholder'=>''))}}
+											</div>
+											
+                    </div>
+					<div class="form-group  required">
+                                           
+											{{Form::label('institute', 'Institute', array('class' => 'col-xs-4 control-label'))}}
+											<div class="col-xs-6">
+											{{Form::text('institute',$info->institute, array('class' => 'form-control','placeholder'=>'','required'=>''))}}
+											</div>
+											
+                    </div>
+					<div class="form-group " >											
+											{{Form::label('location', 'Address', array('class' => 'col-xs-4 control-label'))}}
+											<div class="col-xs-6">
+											{{Form::textarea('location',$info->location, array('class' => 'form-control','placeholder'=>'','size'=>'30x3'))}}
+											</div>
+					</div>
+					
+					 <div class="form-group required">
+                                           
+											{{Form::label('', 'Certificate Issued', array('class' => 'col-xs-4 control-label'))}}
+											
+                                <div class="col-xs-6">
+										<div class="radio">
+									 
+									  <label> <label> {{ Form::radio('proof', 'Yes',Input::old('proof', $info->proof == 'Yes'),array()) }} &nbsp  Yes</label>
+									 <label> {{ Form::radio('proof', 'No',Input::old('proof', $info->proof == 'No'),array()) }} &nbsp  No</label>
+									</div>
+									
+								</div>
+                        </div>
+					
+					<div class="form-group ">											
+											{{Form::label('certification', 'Management Certification', array('class' => 'col-xs-4 control-label'))}}
+											<div class="col-xs-6">
+										
+											{{Form::select('certification', array('' => '--Select--', 'Verified'=>'Verified','Non verified'=>'Non verified'), $info->certification,array('class'=>'form-control'))}}
+											</div>
+											
+					</div>
+					<div class="form-group ">
+                                           
+                                            
+											 {{ Form::label('pdf', 'Upload PDF Document: ',array('class'=>'control-label col-xs-4')) }}
+											 <div class="col-xs-6">
+											 {{ Form::file('pdf') }}
+											 
+											 
+											 </div>
+                    </div>
+					
+					<!--End Common content-->
+					
+                    
+
+                    <div class="form-group">
+                        <div class="col-xs-5 col-xs-offset-3">
+                            <button type="submit" class="btn btn-primary">Save</button>
+                        </div>
+                    </div>
+					{{Form::close()}}
+            </div>
+        </div>
+    </div>
+</div>
+@endforeach
+<!--------------------Edit Pop up End---------------------------->
 
 <script>
 $(document).ready(function(){

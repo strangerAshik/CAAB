@@ -15,19 +15,18 @@
                     <table class="table table-bordered">
                         <tbody>
                             <tr>
-                                <th >Reference  #{{++$a_sl}}</th>
-                                <th >
-                                    <a href='' style='color:red;float:right;padding:5px;'>
+                                <th colspan='2' >Reference  #{{++$a_sl}}
+                                    <a href="{{'deleteReference/'.$info->id}}" style='color:red;float:right;padding:5px;'>
                                         <span class="glyphicon glyphicon-trash"></span>
                                     </a>
-                                    <a href='' style='color:green;float:right;padding:5px;'>
+                                    <a data-toggle="modal" data-target="#{{'R'.$info->id}}" href='' style='color:green;float:right;padding:5px;'>
                                         <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                                     </a>
                                 </th>
                             </tr>
                             <tr>
-                                <td style="width:50%">Referee Type</td>
-                                <td style="width:50%">{{$info->referee_type}}</td>
+                                <td class="col-md-4">Referee Type</td>
+                                <td >{{$info->referee_type}}</td>
                             </tr>
                             <tr>
                                 <td>Name</td>
@@ -158,6 +157,98 @@
             </div>
         </div>
     </div>
+	<!-----------Update Pop up start------------------>
+	@foreach($infos as $info)
+	<div class="modal fade" id="{{'R'.$info->id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Add Reference </h4>
+                </div>
+                <div class="modal-body">
+                    <!-- The form is placed inside the body of modal -->
+                    {{Form::open(array('url'=>'qualification/updateReference','method'=>'post','class'=>'form-horizontal','data-toggle'=>'validator','role'=>'form'))}}
+						{{Form::hidden('id',$info->id)}}
+						<div class="form-group required">
+                                        
+											{{Form::label('referee_type', 'Referee type', array('class' => 'col-xs-4 control-label'))}}
+											
+                            <div class="col-xs-6">
+											{{Form::select('referee_type', array('' => '--Select--', 'Present supervisor' => 'Present supervisor','Past supervisor'=>'Past supervisor','Academic supervisor'=>'Academic supervisor'), $info->referee_type ,array('class'=>'form-control','id'=>'category','required'=>''))}}
+							</div>
+                        </div>
+						<div class="form-group required">
+                                           
+											{{Form::label('name', 'Name', array('class' => 'col-xs-4 control-label'))}}
+											
+                                <div class="col-xs-6">
+											{{Form::text('name',$info->name, array('class' => 'form-control','placeholder'=>'','required'=>''))}}
+											</div>
+                        </div>
+						<div class="form-group required">
+                                           
+											{{Form::label('designation', ' Designation', array('class' => 'col-xs-4 control-label'))}}
+											
+                                <div class="col-xs-6">
+											{{Form::text('designation', $info->designation , array('class' => 'form-control','placeholder'=>'','required'=>''))}}
+											</div>
+                        </div>
+						
+						<div class="form-group">
+											{{Form::label('address', ' Address', array('class' => 'col-xs-4 control-label'))}}
+														
+                                <div class="col-xs-6">
+											{{Form::textarea('address', $info->address , array('class' => 'form-control','placeholder'=>'','size'=>'30x3'))}}
+								</div>
+						</div>
+						<div class="form-group required">
+                                           
+											{{Form::label('telephone', 'Telephone', array('class' => 'col-xs-4 control-label'))}}
+											
+                                <div class="col-xs-6">
+											{{Form::text('telephone', $info->telephone , array('class' => 'form-control','placeholder'=>'','required'=>''))}}
+											</div>
+                        </div>
+						<div class="form-group required">
+                                           
+											{{Form::label('years_acquainted', '  Years acquainted', array('class' => 'col-xs-4 control-label'))}}
+											
+                                <div class="col-xs-6">
+											{{Form::text('years_acquainted',$info->years_acquainted, array('class' => 'form-control','placeholder'=>'','required'=>''))}}
+											</div>
+                        </div>
+						<div class="form-group required">
+                                           
+											{{Form::label('email_address', 'E-mail address', array('class' => 'col-xs-4 control-label'))}}
+											
+                                <div class="col-xs-6">
+											{{Form::text('email_address', $info->email_address, array('class' => 'form-control','placeholder'=>'','required'=>''))}}
+											</div>
+                        </div>
+						
+						<div class="form-group required">
+                                        
+											{{Form::label('may_we_request', ' May we request a reference?', array('class' => 'col-xs-4 control-label'))}}
+											
+                            <div class="col-xs-6">
+											{{Form::select('may_we_request', array('' => '--Select--', 'Yes' => 'Yes','No'=>'No'), $info->may_we_request ,array('class'=>'form-control','id'=>''))}}
+							</div>
+                        </div>
+					
+                       
+                        <div class="form-group">
+                            <div class="col-xs-5 col-xs-offset-3">
+                                <button type="submit" class="btn btn-primary">Save</button>
+                            </div>
+                        </div>
+					{{Form::close()}}
+                </div>
+            </div>
+        </div>
+    </div>
+	@endforeach 
+	<!-----------Update Pop up End------------------>
     <script>
 $(document).ready(function(){
   
