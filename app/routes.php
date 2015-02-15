@@ -36,6 +36,7 @@ Route::get('/', function()
 		return 'hello';
 		//return View::make('qualification/home');
 	});
+	Route::get('pdf','QualificationController@pdf'); 
 	Route::get('personnel', 'QualificationController@personnel');
 	Route::get('education', 'QualificationController@education');
 	Route::get('employment', 'QualificationController@employment');

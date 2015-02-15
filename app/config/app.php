@@ -94,6 +94,7 @@ return array(
 	*/
 
 	'providers' => array(
+	     'Thujohn\Pdf\PdfServiceProvider',//pdf
 		'Way\Generators\GeneratorsServiceProvider','Way\Generators\GeneratorsServiceProvider',//laravel 4 generator
 		'Illuminate\Foundation\Providers\ArtisanServiceProvider',
 		'Illuminate\Auth\AuthServiceProvider',
@@ -149,7 +150,7 @@ return array(
 	*/
 
 	'aliases' => array(
-
+		'PDF' => 'Thujohn\Pdf\PdfFacade',
 		'App'               => 'Illuminate\Support\Facades\App',
 		'Artisan'           => 'Illuminate\Support\Facades\Artisan',
 		'Auth'              => 'Illuminate\Support\Facades\Auth',

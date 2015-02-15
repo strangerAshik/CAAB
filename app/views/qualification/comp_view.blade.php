@@ -755,5 +755,13 @@
                             </div>    
                             </div>
 <!------------------------------End Other Membership----------------------------------------->
+
+<a class="btn btn-primary"id='printOption'href="javascript:void();" onclick="document.getElementById('printOption').style.visibility = 'hidden'; myFunction(); return true;">Print/Save</a>
 </section>
+
+<script>
+function myFunction() {
+    window.print();
+}
+</script>
 @stop

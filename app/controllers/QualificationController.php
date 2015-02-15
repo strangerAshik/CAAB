@@ -9,7 +9,7 @@ class QualificationController extends \BaseController {
 	 */
 	public function years(){
 		$years['']='Year';
-		for($i =date("Y"); $i >=1971; $i--){$years[$i] = $i;} return $years;
+		for($i =date('Y'); $i >=1971; $i--){$years[$i] = $i;} return $years;
 	}
 	public function dates(){
 		$dates['']='Day';
@@ -260,6 +260,17 @@ class QualificationController extends \BaseController {
 		->with('publication',$query12)
 		->with('membership',$query13);
 	}
+	public function pdf()
+		{
+			$id = Auth::user()->emp_id();		
+			$personnel=DB::table('qualification_personal')->where('emp_id', '=', $id )->get();
+			$html = '<html><body>'
+			
+            .'<p>Put your html here, or generate it with your favourite '
+            . 'templating system.</p>'
+            . '</body></html>'; ;
+			return PDF::load($html, 'A4', 'portrait')->show();
+		}
 	
 	//Insert data
 	public function savePersonnel(){		
