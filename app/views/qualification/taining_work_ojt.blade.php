@@ -420,7 +420,7 @@
                                 <div class="col-xs-6">
 										<div class="radio">
 									 
-									  <label> <label> {{ Form::radio('proof', 'Yes',Input::old('proof', $info->proof == 'Yes'),array()) }} &nbsp  Yes</label>
+									   <label> {{ Form::radio('proof', 'Yes',Input::old('proof', $info->proof == 'Yes'),array()) }} &nbsp  Yes</label>
 									 <label> {{ Form::radio('proof', 'No',Input::old('proof', $info->proof == 'No'),array()) }} &nbsp  No</label>
 									</div>
 									

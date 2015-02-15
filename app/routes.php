@@ -13,16 +13,23 @@
 
 Route::get('/', function()
 {
-	return View::make('hello');
+	return Redirect::to('qualification/personnel');
 });
+
 Route::get('resume', function()
 {
 	//return 'hello';
 	return View::make('resume/resume');
 });
+Route::get('logout',function(){
+	Auth::logout();
+	Session::flush();
+	return "Logout";
+});
 
 Route::group(array('prefix' => 'qualification','before'=>'auth.basic'), function()
 {
+
 
 Route::get('/', function()
 	{

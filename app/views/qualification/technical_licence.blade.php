@@ -180,8 +180,8 @@
                                 <div class="col-xs-6">
 										<div class="radio">
 									 
-									  <label> <label> {{ Form::radio('active', 'Yes') }} &nbsp  Yes</label>
-									 <label> {{ Form::radio('active', 'No') }} &nbsp  No</label>
+									  <label> {{ Form::radio('active', 'Yes',Input::old('active', $info->active=='Yes'),array()) }} &nbsp  Yes</label>
+									 <label> {{ Form::radio('active', 'No',Input::old('active', $info->active == 'No'),array()) }} &nbsp  No</label>
 									</div>
 									
 								</div>
