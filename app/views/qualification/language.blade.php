@@ -195,6 +195,7 @@
             </div>
         </div>
     </div>
+	</section>
 	@endforeach
 	<!-----------------End Update Pop up----------------------------->
  <script>

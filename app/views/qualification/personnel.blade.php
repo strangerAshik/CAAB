@@ -97,7 +97,7 @@
                             </tr>
 							<tr>
                                 <td>Photo</td>
-                                <td>{{ HTML::image('img/PersonnelPhoto/'.$info->photo, 'Employee Photo', array('class' => '')) }}</td>
+                                <td>{{ HTML::image('img/PersonnelPhoto/'.$info->photo, 'Employee Photo', array('class' => 'img-thumbnail','width'=>'250','height'=>'250')) }}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -424,7 +424,7 @@
                                             
 											 {{ Form::label('image', 'Upload New Photo: ',array('class'=>'control-label col-xs-4')) }}
 											 <div class="col-xs-6">
-											 {{ HTML::image('img/PersonnelPhoto/'.$info->photo, 'Employee Photo', array('class' => '')) }}
+											 {{ HTML::image('img/PersonnelPhoto/'.$info->photo, 'Employee Photo', array('class' => 'img-thumbnail','width'=>'250','height'=>'250')) }}
 											 {{ Form::file('photo') }}
 											 
 											 <p class="help-block">Photo size : 300px250px</p>

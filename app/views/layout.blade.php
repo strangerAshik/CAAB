@@ -37,13 +37,13 @@
     <body class="skin-blue">
         <!-- header logo: style can be found in header.less -->
         <header class="header">
-           @include('qualification/header')
+           @include('header')
 		   @yield('header')
         </header>
         <div class="wrapper row-offcanvas row-offcanvas-left">
             <!-- Left side column. contains the logo and sidebar -->
             <aside class="left-side sidebar-offcanvas">
-               @include('qualification/left_sidebar')
+               @include('left_sidebar')
 			   @yield('left_sidebar')
             </aside>
 
@@ -60,7 +60,13 @@
                         <li class="active">{{$PageName}}</li>
                     </ol>
 				 </section>
-
+			
+				@if(Session::has('message'))
+				 <div class="alert alert-success">
+				 {{Session::get('message')}}
+				 </div>
+				 @endif
+				
                 <!-- Main content -->
                @yield('content')
             </aside><!-- /.right-side -->

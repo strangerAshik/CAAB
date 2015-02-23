@@ -10,22 +10,17 @@
 | and give it the Closure to execute when that URI is requested.
 |
 */
+Route::group(array('before'=>'auth.basic'),function(){
+	
+Route::get('/','DashboardController@index');
 
-Route::get('/', function()
-{
-	return Redirect::to('qualification/personnel');
-});
-
-Route::get('resume', function()
-{
-	//return 'hello';
-	return View::make('resume/resume');
-});
 Route::get('logout',function(){
 	Auth::logout();
 	Session::flush();
 	return "Logout";
 });
+});
+
 
 Route::group(array('prefix' => 'qualification','before'=>'auth.basic'), function()
 {
@@ -149,3 +144,16 @@ Route::get('/', function()
 	
 
 });
+
+Route::group(array('prefix'=>'safety','before'=>'auth.basic'),function(){
+	Route::get('entry','safetyConcernsController@entry');
+	Route::get('issuedList','safetyConcernsController@issuedList');
+	Route::get('deleteSafety/{id}',function($id){
+			DB::table('safeties')->where('id', '=', $id)->delete();
+			return Redirect::to('safety/issuedList')->with('message', 'Successfully Deleted!!');
+	});
+});
+	//save entry 
+	Route::post('safetyConcern/save','safetyConcernsController@save');
+	Route::post('safetyConcern/update','safetyConcernsController@update');
+
