@@ -88,7 +88,7 @@
             <div class="modal-body">
                 <!-- The form is placed inside the body of modal -->
                
-				{{Form::open(array('url' => 'safetyConcern/save', 'method' => 'post',  'class'=>'form-horizontal','data-toggle'=>'validator', 'role'=>'form'))}}
+				{{Form::open(array('url' => 'safety/safetyConcern/save', 'method' => 'post',  'class'=>'form-horizontal','data-toggle'=>'validator', 'role'=>'form'))}}
 						@if (Auth::check())						
 							   {{Form::hidden('user_id',Auth::user()->id)}}							
 						@endif
@@ -295,5 +295,5 @@
         </div>
     </div>
 	</div>
-	
+	</div>
 @stop

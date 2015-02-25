@@ -146,14 +146,49 @@ Route::get('/', function()
 });
 
 Route::group(array('prefix'=>'safety','before'=>'auth.basic'),function(){
+	//entry Form
 	Route::get('entry','safetyConcernsController@entry');
+	//view list
 	Route::get('issuedList','safetyConcernsController@issuedList');
+	//delete
 	Route::get('deleteSafety/{id}',function($id){
 			DB::table('safeties')->where('id', '=', $id)->delete();
 			return Redirect::to('safety/issuedList')->with('message', 'Successfully Deleted!!');
 	});
-});
 	//save entry 
 	Route::post('safetyConcern/save','safetyConcernsController@save');
 	Route::post('safetyConcern/update','safetyConcernsController@update');
+});
+
+Route::group(array('prefix'=>'admin','before'=>'auth.basic'),function(){
+	
+	//entry Form
+	Route::get('entry','AdminTrackingController@entry');
+	//view list
+	Route::get('issuedList','AdminTrackingController@issuedList');
+	//delete
+	Route::get('deleteAdmin/{id}',function($id){
+			DB::table('admin_trackings')->where('id', '=', $id)->delete();
+			return Redirect::to('admin/issuedList')->with('message', 'Successfully Deleted!!');
+	});
+	//save entry 
+	Route::post('save','AdminTrackingController@save');
+	Route::post('update','AdminTrackingController@update');
+});
+Route::group(array('prefix'=>'doc','before'=>'auth.basic'),function(){
+	Route::get('entry','DocController@entry');
+	Route::get('listView','DocController@listView');
+	//entry 
+	Route::post('save','DocController@save');
+	//update
+	Route::post('update','DocController@update');
+	//delete
+	Route::get('delete/{id}', function($id){
+		DB::table('document_controllers')->where('id', '=', $id)->delete();
+		return Redirect::to('doc/listView')->with('message', 'Successfully Deleted!!');
+		
+		});
+	
+	
+});
 

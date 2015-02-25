@@ -51,7 +51,7 @@
 								 <li><a href="{{URL::to('qualification/reference')}}"><i class="fa fa-angle-double-right"></i>References</a></li>
 								 <li><a href="{{URL::to('qualification/emp_verification')}}"><i class="fa fa-angle-double-right"></i>Employee Verification</a></li>
                                 <li><a href="{{URL::to('qualification/other')}}"><i class="fa fa-angle-double-right"></i>Others</a></li>
-                                <li><a href="{{URL::to('safetyConcerns/test')}}"><i class="fa fa-angle-double-right"></i>Comprehensive View </a></li>
+                                <li><a href="{{URL::to('qualification/comp_view')}}"><i class="fa fa-angle-double-right"></i>Comprehensive View </a></li>
                             </ul>
                         </li>
 						<li class="treeview">
@@ -62,6 +62,26 @@
                             <ul class="treeview-menu">
                                 <li><a href="{{URL::to('safety/entry');}}"><i class="fa fa-angle-double-right"></i>Issue Safety Concern </a></li>
                                 <li><a href="{{URL::to('safety/issuedList');}}"><i class="fa fa-angle-double-right"></i>Safety Concerns List </a></li>
+                            </ul>
+                        </li>
+						<li class="treeview">
+                            <a href="#">
+                                <i class="glyphicon glyphicon-eye-open"></i> <span>Admin Tracking </span>
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </a>
+                            <ul class="treeview-menu">
+                                <li><a href="{{URL::to('admin/entry');}}"><i class="fa fa-angle-double-right"></i>Admin Tracking Entry</a></li>
+                                <li><a href="{{URL::to('admin/issuedList');}}"><i class="fa fa-angle-double-right"></i>Admin Tracking View</a></li>
+                            </ul>
+                        </li>
+						<li class="treeview">
+                            <a href="#">
+                                <i class="glyphicon glyphicon-tags"></i> <span>Document Control</span>
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </a>
+                            <ul class="treeview-menu">
+                                <li><a href="{{URL::to('doc/entry');}}"><i class="fa fa-angle-double-right"></i>Document Control Entry</a></li>
+                                <li><a href="{{URL::to('doc/listView');}}"><i class="fa fa-angle-double-right"></i>Document Control List</a></li>
                             </ul>
                         </li>
                       

@@ -19,7 +19,7 @@
     top:7px;
 }
 .widthController{
-max-width:760px;margin:0 auto;
+max-width:700px;margin:0 auto;
 }
 /*Search */
 /*Search Custom*/
@@ -32,7 +32,7 @@ max-width:760px;margin:0 auto;
 .search-form .form-group {
   float: right !important;
   transition: all 0.35s, border-radius 0s;
-  width: 32px;
+  width: 100%;
   height: 32px;
   background-color: #fff;
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
@@ -79,7 +79,15 @@ max-width:760px;margin:0 auto;
   left: initial;
   font-size: 14px;
 }
+.position_for_doc{
+float: right;
+  margin-bottom: -20px;
+ 
+}
 /*End Search*/
+/*display control*/
+.disNon{display:none;}
+/*End display control*/
 /*End Custom*/
 html,
 body {
