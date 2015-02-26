@@ -50,15 +50,16 @@
             <!-- Right side column. Contains the navbar and content of the page -->
             <aside class="right-side">
                 <!-- Content Header (Page header) -->
+			
 				 <section class="content-header">
-                    <h1>
+                   <!-- <h1>
                         Qualification
                         <small>Employee Qualification</small>
                     </h1>
                     <ol class="breadcrumb">
                         <li><a href="#"><i class="fa fa-dashboard"></i> Qualification</a></li>
                         <li class="active">{{$PageName}}</li>
-                    </ol>
+                    </ol>-->
 				 </section>
 			
 				@if(Session::has('message'))

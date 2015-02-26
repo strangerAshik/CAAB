@@ -18,7 +18,8 @@ Route::get('logout',function(){
 	Auth::logout();
 	Session::flush();
 	return "Logout";
-});
+	});
+
 });
 
 
