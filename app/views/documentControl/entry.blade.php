@@ -2,9 +2,36 @@
 @section('content')
 <div class='content' style="max-width:760px;margin:0 auto;">
 <div class="row">
+	 <div class="col-md-12">
+                            <!-- general form elements -->
+                            <div class="box box-primary">
+							 <div class="box-header">
+									<h3 class="box-title">Instructions</h3>
+							  </div>
+                <!-- /.box-header -->
+				
+					<div class="box-body">
+						<table class='table table-bordered'>
+							<tr>
+								<td class="col-md-3">Instruction 1</td>
+							<td>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras id posuere mauris. montes, nascetur</td>
+							</tr>							
+							<tr>
+								<td class="col-md-3" >Instruction 2</td>
+								<td>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras id posuere mauris. Quisque mi enim, interdum </td>
+							</tr>
+							
+						</table>
+					
+					</div>
+                <!-- /.box-body -->
+                               
+                            </div><!-- /.box -->
+						
 	<p class="text-center">
     <button class="btn btn-primary btn-block" data-toggle="modal" data-target="#safety">Issue New Document Control</button>	
 	</p>
+	</div>
 </div>
 <div class="modal fade" id="safety" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">

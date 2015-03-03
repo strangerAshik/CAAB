@@ -14,24 +14,22 @@ Route::group(array('before'=>'auth.basic'),function(){
 	
 Route::get('/','DashboardController@index');
 
-Route::get('logout',function(){
-	Auth::logout();
-	Session::flush();
-	return "Logout";
-	});
+
 
 });
+Route::get('/logout',function(){
+	 session_start();
+     session_destroy();
+     session_unset();
+	// return 'Hello';
+	return Redirect::to('qualification/pro_degree')->with('message', 'Successfully Deleted!!');
+	});
+
 
 
 Route::group(array('prefix' => 'qualification','before'=>'auth.basic'), function()
 {
 
-
-Route::get('/', function()
-	{
-		return 'hello';
-		//return View::make('qualification/home');
-	});
 	Route::get('pdf','QualificationController@pdf'); 
 	Route::get('personnel', 'QualificationController@personnel');
 	Route::get('education', 'QualificationController@education');
