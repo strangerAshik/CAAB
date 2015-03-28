@@ -2,7 +2,7 @@
  <a href="#" class="logo">
                 <!-- Add the class icon to your logo image or logo icon to add the margining -->
 				
-                CAAB
+                ASTRM
             </a>
             <!-- Header Navbar: style can be found in header.less -->
             <nav class="navbar navbar-static-top" role="navigation">
@@ -46,10 +46,11 @@
                                 <!-- Menu Footer-->
                                 <li class="user-footer">
                                     <div class="pull-left">
-                                        <a href="#" class="btn btn-default btn-flat">Settings</a>
+									{{ HTML::linkAction('SettingsController@index', 'Settings',array(), array('class' => 'btn btn-default btn-flat')) }}
+									
                                     </div>
                                     <div class="pull-right">
-                                        <a href="{{'logout'}}" class="btn btn-default btn-flat">Sign out</a>
+										{{ HTML::linkAction('SettingsController@logout', 'Sign out',array(), array('class' => 'btn btn-default btn-flat')) }}
                                     </div>
                                 </li>
                             </ul>

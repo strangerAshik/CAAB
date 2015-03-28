@@ -29,18 +29,20 @@
                     <!-- sidebar menu: : style can be found in sidebar.less -->
                     <ul class="sidebar-menu">
                         <li class="active">
-                            <a href="{{URL::to('/')}}">
+                            <a href="{{URL::to('dashboard')}}">
                                 <i class="fa fa-dashboard"></i> <span>Dashboard</span>
                             </a>
                         </li>
                       
                         <li class="treeview">
                             <a href="#">
-                                <i class="glyphicon glyphicon-user"></i> <span>Qualification</span>
+                                <i class="glyphicon glyphicon-user"></i> <span>Employee</span>
                                 <i class="fa fa-angle-left pull-right"></i>
                             </a>
                             <ul class="treeview-menu">
-                                <li><a href="{{URL::to('qualification/personnel');}}"><i class="fa fa-angle-double-right"></i>Personnel Info. </a></li>
+                                <li><a href="{{URL::to('qualification/main');}}"><i class="fa fa-angle-double-right"></i>Main</a></li>  
+								<li><a href="{{URL::to('qualification/employees');}}"><i class="fa fa-angle-double-right"></i>Employees List</a></li> 
+								<li><a href="{{URL::to('qualification/personnel');}}"><i class="fa fa-angle-double-right"></i>Personnel Info. </a></li>
                                 <li><a href="{{URL::to('qualification/education')}}"><i class="fa fa-angle-double-right"></i>Education</a></li>
                                 <li><a href="{{URL::to('qualification/employment')}}"><i class="fa fa-angle-double-right"></i>Employment</a></li>
                                 <li><a href="{{URL::to('qualification/pro_degree')}}"><i class="fa fa-angle-double-right"></i>Professional Degree</a></li>
@@ -60,7 +62,8 @@
                                 <i class="fa fa-angle-left pull-right"></i>
                             </a>
                             <ul class="treeview-menu">
-                                <li><a href="{{URL::to('safety/entry');}}"><i class="fa fa-angle-double-right"></i>Issue Safety Concern </a></li>
+                                <li><a href="{{URL::to('safety/main');}}"><i class="fa fa-angle-double-right"></i>Main</a></li>
+								<li><a href="{{URL::to('safety/entry');}}"><i class="fa fa-angle-double-right"></i>Issue Safety Concern </a></li>
                                 <li><a href="{{URL::to('safety/issuedList');}}"><i class="fa fa-angle-double-right"></i>Safety Concerns List </a></li>
                             </ul>
                         </li>
@@ -70,7 +73,8 @@
                                 <i class="fa fa-angle-left pull-right"></i>
                             </a>
                             <ul class="treeview-menu">
-                                <li><a href="{{URL::to('admin/entry');}}"><i class="fa fa-angle-double-right"></i>Admin Tracking Entry</a></li>
+                                <li><a href="{{URL::to('admin/main');}}"><i class="fa fa-angle-double-right"></i>Main</a></li>
+								<li><a href="{{URL::to('admin/entry');}}"><i class="fa fa-angle-double-right"></i>Admin Tracking Entry</a></li>
                                 <li><a href="{{URL::to('admin/issuedList');}}"><i class="fa fa-angle-double-right"></i>Admin Tracking View</a></li>
                             </ul>
                         </li>
@@ -80,8 +84,19 @@
                                 <i class="fa fa-angle-left pull-right"></i>
                             </a>
                             <ul class="treeview-menu">
-                                <li><a href="{{URL::to('doc/entry');}}"><i class="fa fa-angle-double-right"></i>Document Control Entry</a></li>
+                                <li><a href="{{URL::to('doc/main');}}"><i class="fa fa-angle-double-right"></i>Main</a></li>
+								<li><a href="{{URL::to('doc/entry');}}"><i class="fa fa-angle-double-right"></i>Document Control Entry</a></li>
                                 <li><a href="{{URL::to('doc/listView');}}"><i class="fa fa-angle-double-right"></i>Document Control List</a></li>
+                            </ul>
+                        </li>
+						<li class="treeview">
+                            <a href="#">
+                                <i class="glyphicon glyphicon-plane"></i> <span> Aircraft </span>
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </a>
+                            <ul class="treeview-menu">
+                                <li><a href="{{URL::to('aircraft/main');}}"><i class="fa fa-angle-double-right"></i>Main</a></li>
+								
                             </ul>
                         </li>
                       

@@ -2,44 +2,19 @@
 
 class AdminTrackingController extends \BaseController {
 //Default Start 
-	public function years(){
-		$years['']='Year';
-		$j=2017;
-		for($i =date('Y'); $i <=$j; $i++){$years[$i] = $i;} return $years;
+		public function main(){
+		//return "Hello";
+		return View::make('adminTracking/main')
+		->with('PageName','Admin control')
+		->with('personnel',parent::getPersonnelInfo());
 	}
-	public function dates(){
-		$dates['']='Day';
-		for($i =1; $i <=31; $i++){$dates[$i] = $i;}	return $dates;
-	}
-	public function months(){
-		$months = [
-		''=>'Month',
-    'January' => 'January',
-    'February' => 'February',
-    'March' => 'March',
-    'April' => 'April',
-    'May' => 'May',
-    'June' => 'June',
-    'July' => 'July',
-    'August' => 'August',
-    'September' => 'September',
-    'October' => 'October',
-    'November' => 'November',
-    'December' => 'December'
-	];
-		return $months;
-	}
-	private function getPersonnelInfo(){
-		$id = Auth::user()->emp_id();
-		$query=DB::table('qualification_personal')->where('emp_id', '=', $id )->get();
-		return $query;
-	}
-	//Default End 
+
+//Default End 
 	public function entry(){
 		$today=date("d F Y");
-		$dates=$this->dates();
-		$months=$this->months();
-		$years=$this->years();		
+		$dates=parent::dates();
+		$months=parent::months();
+		$years=parent::years_from();		
 		$id = Auth::user()->emp_id();
 		//R-Open
 		$rOpen1=COUNT(DB::table('admin_trackings')
@@ -83,7 +58,7 @@ class AdminTrackingController extends \BaseController {
 		->with('toDay',$today)
 		->with('months',$months)
 		->with('year',$years)
-		->with('personnel',$this->getPersonnelInfo())
+		->with('personnel',parent::getPersonnelInfo())
 		
 		->with('OH',$rOpen1)
 		->with('OM',$rOpen2)
@@ -98,9 +73,9 @@ class AdminTrackingController extends \BaseController {
 	public function issuedList(){
 		//return 'Hello';
 		$today=date("d F Y");
-		$dates=$this->dates();
-		$months=$this->months();
-		$years=$this->years();		
+		$dates=parent::dates();
+		$months=parent::months();
+		$years=parent::years_from();		
 		$id = Auth::user()->emp_id();
 		//query for getting list sorted by Corrective Status
 		$displayQuery=DB::table('admin_trackings')
@@ -117,7 +92,7 @@ class AdminTrackingController extends \BaseController {
 		->with('months',$months)
 		->with('year',$years)
 		->with('infos',$displayQuery)
-		->with('personnel',$this->getPersonnelInfo());
+		->with('personnel',parent::getPersonnelInfo());
 	}
 	public function save(){
 		DB::table('admin_trackings')->insert(array(

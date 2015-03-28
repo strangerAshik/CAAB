@@ -10,26 +10,193 @@
 | and give it the Closure to execute when that URI is requested.
 |
 */
-Route::group(array('before'=>'auth.basic'),function(){
-	
-Route::get('/','DashboardController@index');
-
-
-
-});
-Route::get('/logout',function(){
-	 session_start();
-     session_destroy();
-     session_unset();
-	// return 'Hello';
-	return Redirect::to('qualification/pro_degree')->with('message', 'Successfully Deleted!!');
-	});
-
-
-
-Route::group(array('prefix' => 'qualification','before'=>'auth.basic'), function()
+//Start Role Initialization 
+Route::get('/secret', function()
 {
+   // Auth::loginUsingId(2);
+ 
+    $user = Auth::user();
+	return View::make('test')
+			->with('user',$user)
+			->with('lavel1','Chief Admin')
+			->with('lavel2','Admin')
+	;
+ 
+    
+});
+Route::get('roleInit', function()
+{
+//ROll define   
+    $cAdmin = new Role();
+    $cAdmin->role_name = 'Chief Admin';
+    $cAdmin->save();
+ 
+    $admin = new Role();
+    $admin->role_name = 'Admin';
+    $admin->save();
+	
+	$dAdmin=new Role();
+	$dAdmin->role_name='Deputy Admin';
+	$dAdmin->save();
+	
+	$inspector=new Role();
+	$inspector->role_name='Inspector';
+	$inspector->save();
+	
+	$org=new Role();
+	$org->role_name='Organization';
+	$org->save();
+	
+	$executive=new Role();
+	$executive->role_name='Executive';
+	$executive->save();
+	
+	$user=new Role();
+	$user->role_name='User';
+	$user->save();
+	
+	$visitor=new Role();
+	$visitor->role_name='visitor';
+	$visitor->save();
+//End Roll Define
 
+//Permission define
+ 
+    $read = new Permission();
+    $read->name = 'can_read';
+    $read->display_name = 'Can Read ';
+    $read->save();
+	
+	$write = new Permission();
+    $write->name = 'can_write';
+    $write->display_name = 'Can write';
+    $write->save();
+ 
+    $edit = new Permission();
+    $edit->name = 'can_edit';
+    $edit->display_name = 'Can Update';
+    $edit->save();
+	
+	$softDelete = new Permission();
+    $softDelete->name = 'can_soft_delete';
+    $softDelete->display_name = 'Can Soft Delete';
+    $softDelete->save();
+	
+	$delete = new Permission();
+    $delete->name = 'can_delete';
+    $delete->display_name = 'Can Delete';
+    $delete->save();
+ //End Permission 
+ //chief Admin power
+    $cAdmin->attachPermission($read);
+    $cAdmin->attachPermission($write);
+    $cAdmin->attachPermission($edit);
+    $cAdmin->attachPermission($softDelete);
+    $cAdmin->attachPermission($delete);
+//End chief Admin Power
+// Admin power
+    $admin->attachPermission($read);
+    $admin->attachPermission($write);
+    $admin->attachPermission($edit);
+    $admin->attachPermission($softDelete);
+   // $cAdmin->attachPermission($delete);
+//End  Admin Power
+//Deputy Admin power
+    $dAdmin->attachPermission($read);
+    $dAdmin->attachPermission($write);
+    $dAdmin->attachPermission($edit);
+    $dAdmin->attachPermission($softDelete);
+   // $cAdmin->attachPermission($delete);
+//End  Deputy Admin Power
+//Inspector power
+    $inspector->attachPermission($read);
+    $inspector->attachPermission($write);
+    //$inspector->attachPermission($edit);
+   // $inspector->attachPermission($softDelete);
+   // $cAdmin->attachPermission($delete);
+//End Inspector Power
+//ORG power
+    $org->attachPermission($read);
+    $org->attachPermission($write);
+    $org->attachPermission($edit);
+   // $inspector->attachPermission($softDelete);
+   // $cAdmin->attachPermission($delete);
+//End ORG Power
+//executive power
+    $executive->attachPermission($read);
+    //$executive->attachPermission($write);
+   // $executive->attachPermission($edit);
+   // $inspector->attachPermission($softDelete);
+   // $cAdmin->attachPermission($delete);
+//End executive Power
+	
+//User power
+    $user->attachPermission($read);
+    //$executive->attachPermission($write);
+   // $executive->attachPermission($edit);
+   // $inspector->attachPermission($softDelete);
+   // $cAdmin->attachPermission($delete);
+//End User Power
+//Visitor power
+    $user->attachPermission($read);
+    //$executive->attachPermission($write);
+   // $executive->attachPermission($edit);
+   // $inspector->attachPermission($softDelete);
+   // $cAdmin->attachPermission($delete);
+//End Visitor Power
+	
+  
+ 
+    $user1 = User::find(1);
+    //$user2 = User::find(2);
+ 
+    $user1->attachRole($cAdmin);
+   // $user2->attachRole($admin);
+ 
+    return 'Woohoo!';
+});
+//End Role Initialization 
+Route::get('login',function(){
+	return Redirect::to('/');
+});
+Route::post('login','SettingsController@login');
+
+Route::group(array('before'=>'auth'),function(){	
+	Route::get('dashboard','DashboardController@index');
+});
+
+Route::get('/',function(){
+	return View::make('welcome.index');
+});
+Route::get('contact',function(){
+	return View::make('welcome.contact');
+});
+Route::get('faq',function(){
+	return View::make('welcome.faq');
+});
+Route::get('about',function(){
+	return View::make('welcome.about');
+});
+
+Route::group(array('before'=>'auth'),function(){
+	Route::get('settings','SettingsController@index');
+	Route::get('logout','SettingsController@logout');
+	Route::get('viewUsers','SettingsController@viewUsers');
+	Route::post('newUser/save','SettingsController@saveUser');
+	Route::post('newUser/update','SettingsController@update');
+	Route::post('user/delete','SettingsController@delete');
+	Route::post('changePassword','SettingsController@changePassword');
+});
+Route::group(array('prefix' => 'aircraft','before'=>'auth'),function(){
+	Route::get('main','AircraftController@main');
+	Route::post('savePrimary','AircraftController@savePrimary');
+	Route::get('single/{mm}/{msn}','AircraftController@aircraftSingle');
+});
+Route::group(array('prefix' => 'qualification','before'=>'auth'), function()
+{
+	
+	Route::get('employees','QualificationController@employees'); 
+	Route::get('main','QualificationController@main'); 
 	Route::get('pdf','QualificationController@pdf'); 
 	Route::get('personnel', 'QualificationController@personnel');
 	Route::get('education', 'QualificationController@education');
@@ -42,7 +209,8 @@ Route::group(array('prefix' => 'qualification','before'=>'auth.basic'), function
 	Route::get('reference', 'QualificationController@reference');
 	Route::get('emp_verification', 'QualificationController@emp_verification');
 	Route::get('other', 'QualificationController@other');
-	Route::get('comp_view', 'QualificationController@comp_view');
+	Route::get('comp_view', 'QualificationController@comp_view_per');
+	Route::get('comp_view/{id}', 'QualificationController@comp_view');
 	//insert data
 	Route::post('savePersonnel', 'QualificationController@savePersonnel');
 	Route::post('saveAccademic', 'QualificationController@saveAccademic');
@@ -144,7 +312,8 @@ Route::group(array('prefix' => 'qualification','before'=>'auth.basic'), function
 
 });
 
-Route::group(array('prefix'=>'safety','before'=>'auth.basic'),function(){
+Route::group(array('prefix'=>'safety','before'=>'auth'),function(){
+	Route::get('main','safetyConcernsController@main');
 	//entry Form
 	Route::get('entry','safetyConcernsController@entry');
 	//view list
@@ -159,8 +328,8 @@ Route::group(array('prefix'=>'safety','before'=>'auth.basic'),function(){
 	Route::post('safetyConcern/update','safetyConcernsController@update');
 });
 
-Route::group(array('prefix'=>'admin','before'=>'auth.basic'),function(){
-	
+Route::group(array('prefix'=>'admin','before'=>'auth'),function(){
+	Route::get('main','AdminTrackingController@main');
 	//entry Form
 	Route::get('entry','AdminTrackingController@entry');
 	//view list
@@ -174,7 +343,9 @@ Route::group(array('prefix'=>'admin','before'=>'auth.basic'),function(){
 	Route::post('save','AdminTrackingController@save');
 	Route::post('update','AdminTrackingController@update');
 });
-Route::group(array('prefix'=>'doc','before'=>'auth.basic'),function(){
+Route::group(array('prefix'=>'doc','before'=>'auth'),function(){
+	
+	Route::get('main','DocController@main');
 	Route::get('entry','DocController@entry');
 	Route::get('listView','DocController@listView');
 	//entry 
@@ -190,4 +361,5 @@ Route::group(array('prefix'=>'doc','before'=>'auth.basic'),function(){
 	
 	
 });
+
 

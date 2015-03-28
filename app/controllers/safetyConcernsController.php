@@ -2,43 +2,18 @@
 
 class SafetyConcernsController extends \BaseController {
 
-	public function years(){
-		$years['']='Year';
-		$j=2017;
-		for($i =date('Y'); $i <=$j; $i++){$years[$i] = $i;} return $years;
-	}
-	public function dates(){
-		$dates['']='Day';
-		for($i =1; $i <=31; $i++){$dates[$i] = $i;}	return $dates;
-	}
-	public function months(){
-		$months = [
-		''=>'Month',
-    'January' => 'January',
-    'February' => 'February',
-    'March' => 'March',
-    'April' => 'April',
-    'May' => 'May',
-    'June' => 'June',
-    'July' => 'July',
-    'August' => 'August',
-    'September' => 'September',
-    'October' => 'October',
-    'November' => 'November',
-    'December' => 'December'
-	];
-		return $months;
-	}
-	private function getPersonnelInfo(){
-		$id = Auth::user()->emp_id();
-		$query=DB::table('qualification_personal')->where('emp_id', '=', $id )->get();
-		return $query;
+	
+		public function main(){
+		//return "Hello";
+		return View::make('safetyConcerns/main')
+		->with('PageName','Safety Concerns')
+		->with('personnel',parent::getPersonnelInfo());
 	}
 	public function entry(){
 		$today=date("d F Y");
-		$dates=$this->dates();
-		$months=$this->months();
-		$years=$this->years();		
+		$dates=parent::dates();
+		$months=parent::months();
+		$years=parent::years_from();		
 		$id = Auth::user()->emp_id();
 		//R-Open
 		$rOpen1=COUNT(DB::table('safeties')
@@ -78,11 +53,11 @@ class SafetyConcernsController extends \BaseController {
 		
 		return View::make('safetyConcerns/entry')
 		->with('PageName','Safety Concern Entry')
-		->with('dates',$dates)
-		->with('toDay',$today)
-		->with('months',$months)
-		->with('year',$years)
-		->with('personnel',$this->getPersonnelInfo())
+		->with('dates',parent::dates())
+		->with('toDay',date("d F Y"))
+		->with('months',parent::months())
+		->with('year',parent::years_from())
+		->with('personnel',parent::getPersonnelInfo())
 		
 		->with('OH',$rOpen1)
 		->with('OM',$rOpen2)
@@ -96,9 +71,9 @@ class SafetyConcernsController extends \BaseController {
 	}
 	public function issuedList(){
 		$today=date("d F Y");
-		$dates=$this->dates();
-		$months=$this->months();
-		$years=$this->years();		
+		$dates=parent::dates();
+		$months=parent::months();
+		$years=parent::years_from();		
 		$id = Auth::user()->emp_id();
 		//query for getting list sorted by Corrective Status
 		$displayQuery=DB::table('safeties')
@@ -115,7 +90,7 @@ class SafetyConcernsController extends \BaseController {
 		->with('months',$months)
 		->with('year',$years)
 		->with('infos',$displayQuery)
-		->with('personnel',$this->getPersonnelInfo());
+		->with('personnel',parent::getPersonnelInfo());
 	}
 	public function save(){
 		DB::table('safeties')->insert(array(

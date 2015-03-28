@@ -11,6 +11,11 @@
 ----------------------------
 */
 /*Custom*/
+/*metro menu*/
+.height{height:120px;}
+.title{font-weight:bold;}
+/*end metro menu*/
+
 .form-group.required .control-label:after { 
     color: #d00;
     content: "*";
@@ -19,7 +24,7 @@
     top:7px;
 }
 .widthController{
-max-width:700px;margin:0 auto;
+max-width:900px;margin:0 auto;
 }
 /*Search */
 /*Search Custom*/

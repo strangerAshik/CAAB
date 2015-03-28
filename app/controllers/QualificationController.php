@@ -7,62 +7,44 @@ class QualificationController extends \BaseController {
 	 *
 	 * @return Response
 	 */
-	public function years(){
-		$years['']='Year';
-		for($i =date('Y'); $i >=1971; $i--){$years[$i] = $i;} return $years;
+	public function main(){
+		//return "Hello";
+		return View::make('qualification/main')
+		->with('PageName','Main')
+		->with('personnel',parent::getPersonnelInfo());
 	}
-	public function dates(){
-		$dates['']='Day';
-		for($i =1; $i <=31; $i++){$dates[$i] = $i;}	return $dates;
-	}
-	public function months(){
-		$months = [
-		''=>'Month',
-    'January' => 'January',
-    'February' => 'February',
-    'March' => 'March',
-    'April' => 'April',
-    'May' => 'May',
-    'June' => 'June',
-    'July' => 'July',
-    'August' => 'August',
-    'September' => 'September',
-    'October' => 'October',
-    'November' => 'November',
-    'December' => 'December'
-	];
-		return $months;
-	}
-	private function getPersonnelInfo(){
-		$id = Auth::user()->emp_id();
-		$query=DB::table('qualification_personal')->where('emp_id', '=', $id )->get();
-		return $query;
+	public function employees(){
+		 $query=DB::table('qualification_personal')
+            ->leftJoin('users', 'users.emp_id', '=', 'qualification_personal.emp_id')
+            ->select('qualification_personal.emp_id','users.role','users.email', 'qualification_personal.first_name','qualification_personal.middle_name','qualification_personal.last_name', 'qualification_personal.mobile_no')
+            ->get();
+			
+		return View::make('qualification.index')
+		->with('PageName','Employee List')
+		->with('emps',$query)
+		->with('personnel', parent::getPersonnelInfo());
 	}
 	public function personnel()
 	{
-		$dates=$this->dates();
-		$months=$this->months();
-		$years=$this->years();
-		
 		$id = Auth::user()->emp_id();
 		$query=DB::table('qualification_personal')->where('emp_id', '=', $id )->get();
 		return View::make('qualification/personnel')
 		->with('PageName','Personnel')
-		->with('personnel',$this->getPersonnelInfo())
-		->with('dates',$dates)
-		->with('months',$months)
-		->with('years',$years)
+		->with('personnel', parent::getPersonnelInfo())
+		->with('dates',parent::dates())
+		->with('months',parent::months())
+		->with('years',parent::years())
 		->with('infos',$query);
 	}
 	public function education()
 	{	
-		$years=$this->years();
+		$years=parent::years();
 		$id = Auth::user()->emp_id();
 		$query1=DB::table('qualification_edu_accademic')->where('emp_id', '=', $id)->get();
 		$query2=DB::table('qualification_edu_thesis')->where('emp_id', '=', $id)->get();
 		return View::make('qualification/education')
 		->with('PageName','Education')
-		->with('personnel',$this->getPersonnelInfo())
+		->with('personnel',parent::getPersonnelInfo())
 		->with('a_sl','0')
 		->with('t_sl','0')
 		->with('year',$years)
@@ -73,32 +55,30 @@ class QualificationController extends \BaseController {
 	public function employment()
 	{
 		$id = Auth::user()->emp_id();
-		$dates=$this->dates();
-		$months=$this->months();
-		$years=$this->years();
+		
 		$query=DB::table('qualification_emplyment')->where('emp_id', '=', $id)->get();
 		
 		return View::make('qualification/employment')
 		->with('PageName','employment')
-		->with('personnel',$this->getPersonnelInfo())
+		->with('personnel',parent::getPersonnelInfo())
 		->with('a_sl','0')
-		->with('dates',$dates)
-		->with('months',$months)
-		->with('years',$years)
+		->with('dates',parent::dates())
+		->with('months',parent::months())
+		->with('years',parent::years())
 		->with('infos',$query)
 		;
 	}
 	public function pro_degree()
 	{	
 		$id = Auth::user()->emp_id();
-		$dates=$this->dates();
-		$months=$this->months();
-		$years=$this->years();
+		$dates=parent::dates();
+		$months=parent::months();
+		$years=parent::years();
 		$query=DB::table('qualification_pro_degree')->where('emp_id', '=', $id)->get();
 		
 		return View::make('qualification/pro_degree')
 		->with('PageName','pro_degree')
-		->with('personnel',$this->getPersonnelInfo())
+		->with('personnel',parent::getPersonnelInfo())
 		->with('a_sl','0')
 		->with('year',$years)
 		->with('infos',$query)
@@ -110,7 +90,7 @@ class QualificationController extends \BaseController {
 		$query=DB::table('qualification_training_ojt')->where('emp_id', '=', $id)->get();
 		return View::make('qualification/taining_work_ojt')
 		->with('PageName','Training/ Workshop/ OJT')
-		->with('personnel',$this->getPersonnelInfo())
+		->with('personnel',parent::getPersonnelInfo())
 		->with('a_sl','0')
 		->with('infos',$query)		
 		;
@@ -121,23 +101,23 @@ class QualificationController extends \BaseController {
 		$query=DB::table('qualification_language')->where('emp_id', '=', $id)->get();
 		return View::make('qualification/language')
 		->with('PageName','Language')
-		->with('personnel',$this->getPersonnelInfo())
+		->with('personnel',parent::getPersonnelInfo())
 		->with('a_sl','0')
 		->with('infos',$query)	
 		;
 	}
 	public function technical_licence()
 	{
-		$dates=$this->dates();
-		$months=$this->months();
-		$years=$this->years();
+		$dates=parent::dates();
+		$months=parent::months();
+		$years=parent::years();
 		
 		$id = Auth::user()->emp_id();
 		$query=DB::table('qualification_technical_licence')->where('emp_id', '=', $id)->get();
 		
 		return View::make('qualification/technical_licence')
 		->with('PageName','Technical Licence')
-		->with('personnel',$this->getPersonnelInfo())
+		->with('personnel',parent::getPersonnelInfo())
 		->with('a_sl','0')
 		->with('dates',$dates)
 		->with('months',$months)
@@ -147,16 +127,16 @@ class QualificationController extends \BaseController {
 	}
 	public function aircraft_qualification()
 	{
-		$dates=$this->dates();
-		$months=$this->months();
-		$years=$this->years();
+		$dates=parent::dates();
+		$months=parent::months();
+		$years=parent::years();
 		
 		$id = Auth::user()->emp_id();
 		$query=DB::table('qualification_aircraft')->where('emp_id', '=', $id)->get();
 		
 		return View::make('qualification/aircraft_qualification')
 				->with('PageName','Aircraft Qualification')
-				->with('personnel',$this->getPersonnelInfo())
+				->with('personnel',parent::getPersonnelInfo())
 				->with('a_sl','0')
 				->with('dates',$dates)
 				->with('months',$months)
@@ -169,7 +149,7 @@ class QualificationController extends \BaseController {
 		$id = Auth::user()->emp_id();
 		$query=DB::table('qualification_reference')->where('emp_id', '=', $id)->get();
 		return View::make('qualification/reference')
-		->with('personnel',$this->getPersonnelInfo())
+		->with('personnel',parent::getPersonnelInfo())
 		->with('PageName','Reference')
 		->with('a_sl','0')
 		->with('infos',$query)	
@@ -177,16 +157,16 @@ class QualificationController extends \BaseController {
 	}
 	public function emp_verification()
 	{
-		$dates=$this->dates();
-		$months=$this->months();
-		$years=$this->years();
+		$dates=parent::dates();
+		$months=parent::months();
+		$years=parent::years();
 		
 		$id = Auth::user()->emp_id();
 		$query=DB::table('qualification_employee_verification')->where('emp_id', '=', $id)->get();
 		
 		return View::make('qualification/emp_verification')
 		->with('PageName','Employee Verification')
-		->with('personnel',$this->getPersonnelInfo())
+		->with('personnel',parent::getPersonnelInfo())
 		->with('a_sl','0')
 		->with('dates',$dates)
 		->with('months',$months)
@@ -206,17 +186,15 @@ class QualificationController extends \BaseController {
 		
 		return View::make('qualification/other')
 		->with('PageName','other')
-		->with('personnel',$this->getPersonnelInfo())
+		->with('personnel',parent::getPersonnelInfo())
 		->with('a_sl','0')
 		->with('t_sl','0')
 		->with('pubs',$query1)
 		->with('membs',$query2);
 	}
-	public function comp_view()
+	public function comp_view($id)
 	{
-		
-		
-		$id = Auth::user()->emp_id();		
+	    //$id = Auth::user()->emp_id();		
 		$query1=DB::table('qualification_personal')->where('emp_id', '=', $id )->get();
 		$query2=DB::table('qualification_edu_accademic')->where('emp_id', '=', $id)->get();
 		$query3=DB::table('qualification_edu_thesis')->where('emp_id', '=', $id)->get();
@@ -233,7 +211,53 @@ class QualificationController extends \BaseController {
 		
 		return View::make('qualification/comp_view')
 		->with('PageName','Comprehensive View')
-		->with('personnel',$this->getPersonnelInfo())
+		->with('personnel',parent::getPersonnelInfo())
+		->with('sl1','0')
+		->with('sl2','0')
+		->with('sl3','0')
+		->with('sl4','0')
+		->with('sl5','0')
+		->with('sl6','0')
+		->with('sl7','0')
+		->with('sl8','0')
+		->with('sl9','0')
+		->with('sl10','0')
+		->with('sl11','0')
+		->with('sl12','0')
+		->with('personnel',$query1)
+		->with('accademic',$query2)
+		->with('thesis',$query3)
+		->with('emplyment',$query4)
+		->with('pro_degree',$query5)
+		->with('training_ojt',$query6)
+		->with('language',$query7)
+		->with('technical_licence',$query8)
+		->with('aircraft',$query9)
+		->with('reference',$query10)
+		->with('verification',$query11)
+		->with('publication',$query12)
+		->with('membership',$query13);
+	}
+	public function comp_view_per()
+	{
+	    $id = Auth::user()->emp_id();		
+		$query1=DB::table('qualification_personal')->where('emp_id', '=', $id )->get();
+		$query2=DB::table('qualification_edu_accademic')->where('emp_id', '=', $id)->get();
+		$query3=DB::table('qualification_edu_thesis')->where('emp_id', '=', $id)->get();
+		$query4=DB::table('qualification_emplyment')->where('emp_id', '=', $id)->get();
+		$query5=DB::table('qualification_pro_degree')->where('emp_id', '=', $id)->get();
+		$query6=DB::table('qualification_training_ojt')->where('emp_id', '=', $id)->get();
+		$query7=DB::table('qualification_language')->where('emp_id', '=', $id)->get();
+		$query8=DB::table('qualification_technical_licence')->where('emp_id', '=', $id)->get();
+		$query9=DB::table('qualification_aircraft')->where('emp_id', '=', $id)->get();
+		$query10=DB::table('qualification_reference')->where('emp_id', '=', $id)->get();
+		$query11=DB::table('qualification_employee_verification')->where('emp_id', '=', $id)->get();
+		$query12=DB::table('qualification_others_publication')->where('emp_id', '=', $id)->get();
+		$query13=DB::table('qualification_others_membership')->where('emp_id', '=', $id)->get();
+		
+		return View::make('qualification/comp_view')
+		->with('PageName','Comprehensive View')
+		->with('personnel',parent::getPersonnelInfo())
 		->with('sl1','0')
 		->with('sl2','0')
 		->with('sl3','0')

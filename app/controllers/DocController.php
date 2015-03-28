@@ -1,45 +1,18 @@
 <?php
 
 class DocController extends \BaseController {
-//Default Start 
-	public function years(){
-		$years['']='Year';
-		$j=2017;
-		for($i =date('Y'); $i <=$j; $i++){$years[$i] = $i;} return $years;
+
+    public function main(){
+		//return "Hello";
+		return View::make('documentControl/main')
+		->with('PageName','Document Control')
+		->with('personnel',parent::getPersonnelInfo());
 	}
-	public function dates(){
-		$dates['']='Day';
-		for($i =1; $i <=31; $i++){$dates[$i] = $i;}	return $dates;
-	}
-	public function months(){
-		$months = [
-		''=>'Month',
-    'January' => 'January',
-    'February' => 'February',
-    'March' => 'March',
-    'April' => 'April',
-    'May' => 'May',
-    'June' => 'June',
-    'July' => 'July',
-    'August' => 'August',
-    'September' => 'September',
-    'October' => 'October',
-    'November' => 'November',
-    'December' => 'December'
-	];
-		return $months;
-	}
-	private function getPersonnelInfo(){
-		$id = Auth::user()->emp_id();
-		$query=DB::table('qualification_personal')->where('emp_id', '=', $id )->get();
-		return $query;
-	}
-	//Default End 
 	public function entry(){
 		$today=date("d F Y");
-		$dates=$this->dates();
-		$months=$this->months();
-		$years=$this->years();		
+		$dates=parent::dates();
+		$months=parent::months();
+		$years=parent::years_from();		
 		$id = Auth::user()->emp_id();
 		return View::make('documentControl/entry')
 		->with('PageName','Document Entry')
@@ -47,13 +20,13 @@ class DocController extends \BaseController {
 		->with('toDay',$today)
 		->with('months',$months)
 		->with('year',$years)
-		->with('personnel',$this->getPersonnelInfo());
+		->with('personnel',parent::getPersonnelInfo());
 		
 	}public function listView(){
 		$today=date("d F Y");
-		$dates=$this->dates();
-		$months=$this->months();
-		$years=$this->years();		
+		$dates=parent::dates();
+		$months=parent::months();
+		$years=parent::years_from();		
 		
 		//query 
 		$queryAll=DB::table('document_controllers')->orderBy('id', 'desc')->get();
@@ -73,7 +46,7 @@ class DocController extends \BaseController {
 		->with('infos',$queryAll)
 		->with('actives',$queryActive)
 		->with('inactives',$queryInactive)
-		->with('personnel',$this->getPersonnelInfo());
+		->with('personnel',parent::getPersonnelInfo());
 		
 	}
 	public function save(){
