@@ -15,11 +15,10 @@ Route::get('/secret', function()
 {
    // Auth::loginUsingId(2);
  
-    $user = Auth::user();
+    $role = Auth::user()->Role();
 	return View::make('test')
-			->with('user',$user)
-			->with('lavel1','Chief Admin')
-			->with('lavel2','Admin')
+			->with('role',$role)
+			
 	;
  
     
@@ -226,71 +225,19 @@ Route::group(array('prefix' => 'qualification','before'=>'auth'), function()
 	Route::post('savePublication','QualificationController@savePublication');
 	Route::post('saveMembership','QualificationController@saveMembership');
 	//delete data 
-	Route::get('deletePersonnel/{id}', function($id){
-		DB::table('qualification_personal')->where('id', '=', $id)->delete();
-		return Redirect::to('qualification/personnel')->with('message', 'Successfully Deleted!!');
-		
-		});
-	Route::get('deleteAccademic/{id}', function($id){
-		DB::table('qualification_edu_accademic')->where('id', '=', $id)->delete();
-		return Redirect::to('qualification/education')->with('message', 'Successfully Deleted!!');
-		
-		});
-	Route::get('deleteThesis/{id}', function($id){
-		DB::table('qualification_edu_thesis')->where('id', '=', $id)->delete();
-		return Redirect::to('qualification/education')->with('message', 'Successfully Deleted!!');
-		
-		});
-	Route::get('deleteEmployment/{id}', function($id){
-		DB::table('qualification_emplyment')->where('id', '=', $id)->delete();
-		return Redirect::to('qualification/employment')->with('message', 'Successfully Deleted!!');
-		
-		});
-	Route::get('deleteProDegree/{id}', function($id){
-		DB::table('qualification_pro_degree')->where('id', '=', $id)->delete();
-		return Redirect::to('qualification/pro_degree')->with('message', 'Successfully Deleted!!');
-		
-		});
-	Route::get('deleteTraining/{id}', function($id){
-		DB::table('qualification_training_ojt')->where('id', '=', $id)->delete();
-		return Redirect::to('qualification/taining_work_ojt')->with('message', 'Successfully Deleted!!');
-		
-		});
-	Route::get('deleteLanguage/{id}', function($id){
-		DB::table('qualification_language')->where('id', '=', $id)->delete();
-		return Redirect::to('qualification/language')->with('message', 'Successfully Deleted!!');
-		
-		});
-	Route::get('deleteTechlicence/{id}', function($id){
-		DB::table('qualification_technical_licence')->where('id', '=', $id)->delete();
-		return Redirect::to('qualification/technical_licence')->with('message', 'Successfully Deleted!!');
-		
-		});
-	Route::get('deleteAirQualification/{id}', function($id){
-		DB::table('qualification_aircraft')->where('id', '=', $id)->delete();
-		return Redirect::to('qualification/aircraft_qualification')->with('message', 'Successfully Deleted!!');
-		
-		});
-	Route::get('deleteReference/{id}', function($id){
-		DB::table('qualification_reference')->where('id', '=', $id)->delete();
-		return Redirect::to('qualification/reference')->with('message', 'Successfully Deleted!!');
-		
-		});
-	Route::get('deleteEnpVeri/{id}', function($id){
-		DB::table('qualification_employee_verification')->where('id', '=', $id)->delete();
-		return Redirect::to('qualification/emp_verification')->with('message', 'Successfully Deleted!!');
-		
-		});
-	Route::get('deletePublication/{id}', function($id){
-		DB::table('qualification_others_publication')->where('id', '=', $id)->delete();
-		return Redirect::to('qualification/other')->with('message', 'Successfully Deleted!!');
-		
-		});
-	Route::get('deleteMembership/{id}', function($id){
-		DB::table('qualification_others_membership')->where('id', '=', $id)->delete();
-		return Redirect::to('qualification/other')->with('message', 'Successfully Deleted!!');
-		
-		});
+	Route::get('deletePersonnel/{id}','QualificationController@deletePersonnel' );
+	Route::get('deleteAccademic/{id}', 'QualificationController@deleteAccademic');
+	Route::get('deleteThesis/{id}', 'QualificationController@deleteThesis');
+	Route::get('deleteEmployment/{id}','QualificationController@deleteEmployment');
+	Route::get('deleteProDegree/{id}', 'QualificationController@deleteProDegree');
+	Route::get('deleteTraining/{id}', 'QualificationController@deleteTraining');
+	Route::get('deleteLanguage/{id}', 'QualificationController@deleteLanguage');
+	Route::get('deleteTechlicence/{id}','QualificationController@deleteTechlicence');
+	Route::get('deleteAirQualification/{id}','QualificationController@deleteAirQualification' );
+	Route::get('deleteReference/{id}','QualificationController@deleteReference');
+	Route::get('deleteEnpVeri/{id}','QualificationController@deleteEnpVeri');
+	Route::get('deletePublication/{id}','QualificationController@deletePublication');
+	Route::get('deleteMembership/{id}','QualificationController@deleteMembership');
 	//Edit data
 	Route::post('editPersonnel', 'QualificationController@editPersonnel');
 	Route::post('updateAccademic', 'QualificationController@updateAccademic');
@@ -305,6 +252,8 @@ Route::group(array('prefix' => 'qualification','before'=>'auth'), function()
 	Route::post('updateEmpVerification', 'QualificationController@updateEmpVerification');
 	Route::post('updatePublication', 'QualificationController@updatePublication');
 	Route::post('updateMembership', 'QualificationController@updateMembership');
+	//Approve Data
+	Route::get('approve/{table}/{id}','QualificationController@approve');
 	
 	
 

@@ -1,6 +1,6 @@
 <h2>TEst </h2>
-@if($user->hasRole($lavel1))
-	<p>OK Man It works Your Role: {{$lavel1}}</p>
-@elseif($user->hasRole($lavel2))
-	<p>OK Man It works Your Role: {{$lavel2}}</p>
+@if($role=='Chief Admin')
+	<p>OK Man It works Your Role: {{$role}}</p>
+@elseif($role=='Employee')
+	<p>OK Man It works Your Role: {{$role}}</p>
 @endif

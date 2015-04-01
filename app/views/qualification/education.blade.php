@@ -16,6 +16,7 @@
 									
                                     <table class="table table-bordered">
                                         <tbody>
+										{{Employee::notApproved($acca)}}										
 										<tr>                                           
                                             <th colspan='2' >Academic Qualification   #{{++$a_sl}}
 											
@@ -164,9 +165,9 @@
                     
 
                     <div class="form-group">
-                        <div class="col-xs-5 col-xs-offset-3">
-                            <button type="submit" class="btn btn-primary">Save</button>
-                        </div>
+                        
+                            <button type="submit" class="btn btn-lg btn-block btn-primary">Save</button>
+                        
                     </div>
 					{{Form::close()}}
             </div>
@@ -187,12 +188,14 @@
 								@foreach($thesis as $thes)
                                     <table class="table table-bordered">
                                         <tbody>
+										{{Employee::notApproved($thes)}}		
 										<tr>                                           
                                             <th colspan='2'>Thesis/Project/Internship/Dissertation    #{{++$t_sl}}
 											<a href="{{'deleteThesis/'.$thes->id}}" style='color:red;float:right;padding:5px;'><span class="glyphicon glyphicon-trash"></span></a>
 											<a data-toggle="modal" data-target="#{{'thesis'.$thes->id}}" href='' style='color:green;float:right;padding:5px;'>
                                         <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                                     </a>
+									</th>
                                         </tr>
                                         <tr>
                                            
@@ -295,7 +298,7 @@
                                            
 											{{Form::label('duration', 'Duration', array('class' => 'col-xs-4 control-label'))}}
 											<div class="col-xs-6">
-											{{Form::text('duration','', array('class' => 'form-control','placeholder'=>'','required'=>''))}}
+											{{Form::text('duration','', array('class' => 'form-control','placeholder'=>'i.e 1 day or 1 Month or 1 Year ','required'=>''))}}
 											</div>
 											
                     </div>
@@ -305,9 +308,9 @@
                     
 
                     <div class="form-group">
-                        <div class="col-xs-5 col-xs-offset-3">
-                            <button type="submit" class="btn btn-primary">Save</button>
-                        </div>
+                        
+                            <button type="submit" class="btn btn-primary btn-lg btn-block">Save</button>
+                        
                     </div>
                 
 				{{Form::close()}}

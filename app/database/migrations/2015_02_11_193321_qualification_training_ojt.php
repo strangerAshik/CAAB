@@ -34,6 +34,7 @@ class QualificationTrainingOjt extends Migration {
 			$table->string('pdf');
 			$table->string('certification');
 			$table->string('duration');
+			$table->string('verify',10);
 			$table->timestamps();
 		});
 	}

@@ -14,6 +14,7 @@
 					@foreach($infos as $info)
                     <table class="table table-bordered">
                         <tbody>
+						{{Employee::notApproved($info)}}	
                             <tr>
                                 <th colspan='2' >Reference  #{{++$a_sl}}
                                     <a href="{{'deleteReference/'.$info->id}}" style='color:red;float:right;padding:5px;'>
@@ -142,15 +143,14 @@
 											{{Form::label('may_we_request', ' May we request a reference?', array('class' => 'col-xs-4 control-label'))}}
 											
                             <div class="col-xs-6">
-											{{Form::select('may_we_request', array('' => '--Select--', 'Yes' => 'Yes','No'=>'No'), null,array('class'=>'form-control','id'=>''))}}
+											{{Form::select('may_we_request', array('' => '--Select--', 'Yes' => 'Yes','No'=>'No'), null,array('class'=>'form-control','id'=>'','required'=>''))}}
 							</div>
                         </div>
 					
                        
                         <div class="form-group">
-                            <div class="col-xs-5 col-xs-offset-3">
-                                <button type="submit" class="btn btn-primary">Save</button>
-                            </div>
+                                <button type="submit" class="btn btn-primary btn-lg btn-block">Save</button>
+
                         </div>
 					{{Form::close()}}
                 </div>
@@ -232,14 +232,14 @@
 											{{Form::label('may_we_request', ' May we request a reference?', array('class' => 'col-xs-4 control-label'))}}
 											
                             <div class="col-xs-6">
-											{{Form::select('may_we_request', array('' => '--Select--', 'Yes' => 'Yes','No'=>'No'), $info->may_we_request ,array('class'=>'form-control','id'=>''))}}
+											{{Form::select('may_we_request', array('' => '--Select--', 'Yes' => 'Yes','No'=>'No'), $info->may_we_request ,array('class'=>'form-control','id'=>'','required'=>''))}}
 							</div>
                         </div>
 					
                        
                         <div class="form-group">
                             <div class="col-xs-5 col-xs-offset-3">
-                                <button type="submit" class="btn btn-primary">Save</button>
+                              <button type="submit" class="btn btn-primary btn-lg btn-block">Save</button>
                             </div>
                         </div>
 					{{Form::close()}}

@@ -11,6 +11,7 @@
 								
                                     <table class="table table-bordered">
                                         <tbody>
+										
 										<tr>                                           
                                             <th >Name of professional degree</th>
                                             <th >Institute</th>
@@ -23,6 +24,7 @@
                                             
                                         </tr>
 										@foreach($infos as $info)
+										{{Employee::notApproved($info)}}	
                                         <tr>
                                            
                                             <td>{{$info->pro_degree_name}}</td>
@@ -70,18 +72,18 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title">Update Professional Degree </h4>
+                <h4 class="modal-title">Add Professional Degree </h4>
             </div>
 
             <div class="modal-body">
                 <!-- The form is placed inside the body of modal -->
                {{Form::open(array('url'=>'qualification/pro_degree','method'=>'post','class'=>'form-horizontal','role'=>'form','data-toggle'=>'validator'))}}
 					
-					<div class="form-group">
+					<div class="form-group required">
                                            
 											{{Form::label('pro_degree_name', 'Name of professional degree', array('class' => 'col-xs-5 control-label'))}}
 											<div class="col-xs-6">
-											{{Form::text('pro_degree_name','', array('class' => 'form-control','placeholder'=>''))}}
+											{{Form::text('pro_degree_name','', array('class' => 'form-control','placeholder'=>'','required'=>''))}}
 											</div>
 											
                     </div>
@@ -109,19 +111,19 @@
 											</div>
 											
                     </div>
-					<div class="form-group">
+					<div class="form-group required">
                                            
 											{{Form::label('pro_degree_major_area', 'Major/Area', array('class' => 'col-xs-5 control-label'))}}
 											<div class="col-xs-6">
-											{{Form::text('pro_degree_major_area','', array('class' => 'form-control','placeholder'=>''))}}
+											{{Form::text('pro_degree_major_area','', array('class' => 'form-control','placeholder'=>'','required'=>''))}}
 											</div>
 											
                     </div>
-					<div class="form-group">
+					<div class="form-group required">
                                            
 											{{Form::label('pro_degree_year', 'Year', array('class' => 'col-xs-5 control-label'))}}
 											<div class="col-xs-6">
-											{{Form::select('pro_degree_year', $year, '01', array('class' => 'form-control','placeholder'=>'')) }}
+											{{Form::select('pro_degree_year', $year, '01', array('class' => 'form-control','placeholder'=>'','required'=>'')) }}
 											</div>
 											
                     </div>
@@ -129,9 +131,9 @@
                     
 
                     <div class="form-group">
-                        <div class="col-xs-5 col-xs-offset-3">
-                            <button type="submit" class="btn btn-primary">Save</button>
-                        </div>
+                        
+                            <button type="submit" class="btn btn-primary btn-lg btn-block">Save</button>
+                        
                     </div>
 					
 					{{Form::close()}}
@@ -146,7 +148,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title">New Professional Degree </h4>
+                <h4 class="modal-title">Update Professional Degree </h4>
             </div>
 
             <div class="modal-body">

@@ -16,6 +16,7 @@
 					@foreach($infos as $info)
                     <table class="table table-bordered">
                         <tbody>
+						{{Employee::notApproved($info)}}	
                             <tr>
                                 <th colspan='2'>Aircraft Qualification  #{{++$a_sl}}
                                     <a href="{{'deleteAirQualification/'.$info->id}}" style='color:red;float:right;padding:5px;'>
@@ -70,6 +71,18 @@
                                 <td>Management Certification</td>
                                 <td>{{$info->certification}}</td>
                             </tr>
+							<tr>
+                                            <td>
+												PDF Document :
+											</td>
+                                            <td>
+										@if($info->pdf!='Null'){{HTML::link('files/AircraftQualification/'.$info->pdf,'Document',array('target'=>'_blank'))}}
+											@else
+												{{HTML::link('#','No Document Provided')}}
+											@endif
+                                            </td>
+                                            
+                            </tr>
 							
                         </tbody>
                     </table>
@@ -101,7 +114,7 @@
                                 <div class="col-xs-6">
 										<div class="radio">
 									 
-									  <label> <label> {{ Form::radio('active', 'Yes') }} &nbsp  Yes</label>
+									  <label> <label> {{ Form::radio('active', 'Yes', true) }} &nbsp  Yes</label>
 									 <label> {{ Form::radio('active', 'No') }} &nbsp  No</label>
 									</div>
 									
@@ -120,7 +133,7 @@
 											{{Form::label('total_hours', 'Total Hours', array('class' => 'col-xs-4 control-label'))}}
 											
                                 <div class="col-xs-6">
-											{{Form::text('total_hours','', array('class' => 'form-control','placeholder'=>'','required'=>''))}}
+											{{Form::text('total_hours','', array('class' => 'form-control','placeholder'=>''))}}
 											</div>
                         </div>
 						<div class="form-group required">
@@ -147,15 +160,15 @@
 												
 													<div class="row">
 														<div class="col-xs-2">
-														{{Form::select('completion_date', $dates, '0',array('class'=>'form-control'))}}
+														{{Form::select('completion_date', $dates, '0',array('class'=>'form-control','required'=>''))}}
 														</div>
 														<div class="col-xs-3">
-														{{Form::select('completion_month',$months,'0',array('class'=>'form-control'))}}
+														{{Form::select('completion_month',$months,'0',array('class'=>'form-control','required'=>''))}}
 											
 															
 														</div>
 														<div class="col-xs-2">
-															{{Form::select('completion_year',$years, '0',array('class'=>'form-control'))}}
+															{{Form::select('completion_year',$years, '0',array('class'=>'form-control','required'=>''))}}
 														</div>
 													</div>
 						</div>
@@ -163,7 +176,7 @@
                                         
 											{{Form::label('status', 'Status', array('class' => 'col-xs-4 control-label'))}}
 											<div class="col-xs-6">
-											{{Form::select('status', array('' => '--Select--', 'Training' => 'Training','OJT'=>'OJT','Workshop'=>'Workshop'), null,array('class'=>'form-control','id'=>'category','required'=>''))}}
+											{{Form::select('status', array('' => '--Select--', 'Training' => 'Training','OJT'=>'OJT','Workshop'=>'Workshop'), null,array('class'=>'form-control','id'=>'category'))}}
 											</div>
 											
 						</div>
@@ -172,7 +185,7 @@
 											{{Form::label('institute', 'Training Institute', array('class' => 'col-xs-4 control-label'))}}
 											
                                 <div class="col-xs-6">
-											{{Form::text('institute','', array('class' => 'form-control','placeholder'=>'','required'=>''))}}
+											{{Form::text('institute','', array('class' => 'form-control','placeholder'=>''))}}
 											</div>
                         </div>
 						<div class="form-group ">
@@ -180,7 +193,7 @@
 											{{Form::label('instructor', 'Instructor name', array('class' => 'col-xs-4 control-label'))}}
 											
                                 <div class="col-xs-6">
-											{{Form::text('instructor','', array('class' => 'form-control','placeholder'=>'','required'=>''))}}
+											{{Form::text('instructor','', array('class' => 'form-control','placeholder'=>''))}}
 											</div>
                         </div>
 						
@@ -191,7 +204,7 @@
                                 <div class="col-xs-6">
 										<div class="radio">
 									 
-									  <label> <label> {{ Form::radio('proof', 'Yes') }} &nbsp  Yes</label>
+									  <label> <label> {{ Form::radio('proof', 'Yes',true) }} &nbsp  Yes</label>
 									 <label> {{ Form::radio('proof', 'No') }} &nbsp  No</label>
 									</div>
 									
@@ -222,9 +235,9 @@
 					
                        
                         <div class="form-group">
-                            <div class="col-xs-5 col-xs-offset-3">
-                                <button type="submit" class="btn btn-primary">Save</button>
-                            </div>
+                           
+                                <button type="submit" class="btn btn-lg btn-block btn-primary">Save</button>
+                           
                         </div>
 						{{Form::close()}}
                 </div>
@@ -373,9 +386,7 @@
 					
                        
                         <div class="form-group">
-                            <div class="col-xs-5 col-xs-offset-3">
-                                <button type="submit" class="btn btn-primary">Update</button>
-                            </div>
+                           <button type="submit" class="btn btn-lg btn-block btn-primary">Save</button>
                         </div>
 						{{Form::close()}}
                 </div>

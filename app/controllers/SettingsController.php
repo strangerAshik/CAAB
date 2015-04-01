@@ -161,7 +161,7 @@ class SettingsController extends \BaseController {
 		
 			$id = Auth::user()->getId();
 			$password=Hash::make(Input::get('password'));
-			$success = User::where('id', '=', $id)->update(array('password' =>$password));
+			$success = User::where('id', '=', $id)->update(array('password' =>$password,'pass_change'=>1));
 			if($success)
 				return Redirect::to('settings')->with('message','Password Changed!');
 			return Redirect::to('settings')->with('message','Password Not Changed!');

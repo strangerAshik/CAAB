@@ -11,6 +11,7 @@
 								@foreach($infos as $info)
                                  <table class="table table-bordered">
                                         <tbody>
+										{{Employee::notApproved($info)}}	
 										<tr>                                           
                                             <th colspan='2'>Training/ Workshop/ OJT  #{{++$a_sl}}
 											<a href="{{'deleteTraining/'.$info->id}}" style='color:red;float:right;padding:5px;'><span class="glyphicon glyphicon-trash"></span></a>
@@ -114,6 +115,18 @@
 											</td>
                                             <td>
                                                 {{$info->duration}}
+                                            </td>
+                                            
+                                        </tr>
+										<tr>
+                                            <td>
+												PDF Document :
+											</td>
+                                            <td>
+										@if($info->pdf!='Null'){{HTML::link('files/TrainingWorkshopOJT/'.$info->pdf,'Document',array('target'=>'_blank'))}}
+											@else
+												{{HTML::link('#','No Document Provided')}}
+											@endif
                                             </td>
                                             
                                         </tr>
@@ -289,9 +302,9 @@
                     
 
                     <div class="form-group">
-                        <div class="col-xs-5 col-xs-offset-3">
-                            <button type="submit" class="btn btn-primary">Save</button>
-                        </div>
+                       
+                            <button type="submit" class="btn btn-primary btn-lg btn-block ">Save</button>
+                       
                     </div>
 					{{Form::close()}}
             </div>
@@ -365,7 +378,7 @@
 					</div>
 					<!--If OJT -->
 					<div id='ojt' style='display:none;'> 
-						<div class="form-group required required">
+						<div class="form-group required">
                                            
 											{{Form::label('training_task', 'Training Task', array('class' => 'col-xs-4 control-label '))}}
 											<div class="col-xs-6">
@@ -438,7 +451,7 @@
 					<div class="form-group ">
                                            
                                             
-											 {{ Form::label('pdf', 'Upload PDF Document: ',array('class'=>'control-label col-xs-4')) }}
+											 {{ Form::label('pdf', 'Upload Updated Document ',array('class'=>'control-label col-xs-4')) }}
 											 <div class="col-xs-6">
 											 {{ Form::file('pdf') }}
 											 
@@ -451,9 +464,7 @@
                     
 
                     <div class="form-group">
-                        <div class="col-xs-5 col-xs-offset-3">
-                            <button type="submit" class="btn btn-primary">Save</button>
-                        </div>
+                           <button type="submit" class="btn btn-primary btn-lg btn-block ">Save</button>
                     </div>
 					{{Form::close()}}
             </div>

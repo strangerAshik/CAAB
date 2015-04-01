@@ -16,7 +16,7 @@ class BaseController extends Controller {
 	}
 	public function years(){
 		$years['']='Year';
-		for($i =date('Y'); $i >=1971; $i--){$years[$i] = $i;} return $years;
+		for($i =date('Y'); $i >=1930; $i--){$years[$i] = $i;} return $years;
 	}
 	public function years_from(){
 		$years['']='Year';

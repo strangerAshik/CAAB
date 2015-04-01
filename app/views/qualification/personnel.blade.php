@@ -8,7 +8,7 @@
                             <!-- general form elements -->
                             <div class="box box-primary">
 							 <div class="box-header">
-									<h3 class="box-title">Personnel Info.</h3>
+									<h3 class="box-title">Personal Info.</h3>
 							  </div>
                 <!-- /.box-header -->
 				
@@ -16,6 +16,7 @@
 					@foreach($infos as $info)
                     <table class="table table-bordered">
                         <tbody>
+						{{Employee::notApproved($info)}}	
                             <tr>
                                 
                                 <th colspan='2' >
@@ -124,7 +125,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title">Add Personnel Info. </h4>
+                    <h4 class="modal-title">Add Personal Info. </h4>
                 </div>
 				 <div class="modal-body">
                     <!-- The form is placed inside the body of modal -->
@@ -136,7 +137,7 @@
                                            
 											{{Form::label('', 'Title', array('class' => 'control-label col-xs-4 '))}}
 											<div class="col-xs-6">
-											{{Form::select('title', array('0' => '--Select--', 'Mr.' => 'Mr.','Ms.'=>'Ms.','Dr.'=>'Dr.','Prof.'=>'Prof.'), '0',array('class'=>'form-control'))}}
+											{{Form::select('title', array('0' => '--Select--', 'Mr.' => 'Mr.','Ms.'=>'Ms.','Dr.'=>'Dr.','Prof.'=>'Prof.'), '0',array('class'=>'form-control','required'=>''))}}
 											</div>
 											
                                         </div>										
@@ -146,7 +147,7 @@
 										<div class="form-group required ">
 											{{Form::label('', 'First Name', array('class' => 'control-label col-xs-4 '))}}
 											<div class="col-xs-6">
-											{{Form::text('first_name','', array('class' => 'form-control','placeholder'=>''))}}
+											{{Form::text('first_name','', array('class' => 'form-control','placeholder'=>'','required'=>''))}}
 											</div>
 										</div>
 										<div class="form-group">
@@ -158,7 +159,7 @@
 										<div class="form-group required">
 											{{Form::label('', 'Last Name', array('class' => 'control-label col-xs-4'))}}
 											<div class="col-xs-6">
-											{{Form::text('last_name','', array('class' => 'form-control','placeholder'=>''))}}
+											{{Form::text('last_name','', array('class' => 'form-control','placeholder'=>'','required'=>''))}}
 											 </div>
 										</div>
 										<div class="form-group ">
@@ -178,13 +179,13 @@
 										<div class="form-group required">											
 											{{Form::label('', 'Mailing Address', array('class' => 'control-label col-xs-4'))}}
 											<div class="col-xs-6">
-											{{Form::textarea('mailing_address','', array('class' => 'form-control','placeholder'=>'','size'=>'30x3'))}}
+											{{Form::textarea('mailing_address','', array('class' => 'form-control','placeholder'=>'','size'=>'30x3','required'=>''))}}
 											 </div>
 										</div>
 										<div class="form-group required">
 											{{Form::label('', 'Permanent Address', array('class' => 'control-label col-xs-4'))}}
 											<div class="col-xs-6">
-											{{Form::textarea('parmanent_address','', array('class' => 'form-control','placeholder'=>'','size'=>'30x3'))}}
+											{{Form::textarea('parmanent_address','', array('class' => 'form-control','placeholder'=>'','size'=>'30x3','required'=>''))}}
 											 </div>
 										</div>
 										
@@ -203,26 +204,26 @@
 										<div class="form-group required">
 											{{Form::label('', 'Mobile no', array('class' => 'control-label col-xs-4'))}}
 											<div class="col-xs-6">
-											{{Form::text('mobile_no','', array('class' => 'form-control','placeholder'=>''))}}
+											{{Form::text('mobile_no','', array('class' => 'form-control','placeholder'=>'','required'=>''))}}
 											 </div>
 										</div>
 										<div class="form-group required">
 											{{Form::label('', 'Nationality', array('class' => 'control-label col-xs-4'))}}
 											<div class="col-xs-6">
-											{{Form::text('nationality','', array('class' => 'form-control','placeholder'=>''))}}
+											{{Form::text('nationality','', array('class' => 'form-control','placeholder'=>'','required'=>''))}}
 											 </div>
 										</div>
 										<div class="form-group required">
 											{{Form::label('', 'National ID', array('class' => 'control-label col-xs-4'))}}
 											<div class="col-xs-6">
-											{{Form::text('national_id','', array('class' => 'form-control','placeholder'=>''))}}
+											{{Form::text('national_id','', array('class' => 'form-control','placeholder'=>'','required'=>''))}}
 											 </div>
 										</div>
 										<div class="form-group required ">
                                            
 											{{Form::label('', 'Sex', array('class' => 'control-label col-xs-4'))}}
 											<div class="col-xs-6">
-											{{Form::select('sex', array('' => '--Select--', 'Male' => 'Male','Female'=>'Female','Others'=>'Others'), null,array('class'=>'form-control'))}}
+											{{Form::select('sex', array('' => '--Select--', 'Male' => 'Male','Female'=>'Female','Others'=>'Others'), null,array('class'=>'form-control','required'=>''))}}
 											 </div>
 											
                                         </div>
@@ -231,7 +232,7 @@
 											
 											{{Form::label('', 'Blood Group', array('class' => 'control-label col-xs-4'))}}
 											<div class="col-xs-6">
-											{{Form::select('blood_group', array('' => '--Select--', 'A+' => 'A+','A-'=>'A-','B+'=>'B+','B-'=>'B-','O+'=>'O+','O-'=>'O-','AB+'=>'AB+','AB-'=>'AB-','Unknown'=>'Unknown'), null,array('class'=>'form-control'))}}
+											{{Form::select('blood_group', array('' => '--Select--', 'A+' => 'A+','A-'=>'A-','B+'=>'B+','B-'=>'B-','O+'=>'O+','O-'=>'O-','AB+'=>'AB+','AB-'=>'AB-','Unknown'=>'Unknown'), null,array('class'=>'form-control','required'=>''))}}
                                              </div>								
 											
 											
@@ -244,15 +245,15 @@
 												
 													<div class="row">
 														<div class="col-xs-2">
-														{{Form::select('date_of_birth', $dates,'0',array('class'=>'form-control'))}}
+														{{Form::select('date_of_birth', $dates,'0',array('class'=>'form-control','required'=>''))}}
 														</div>
 														<div class="col-xs-3">
-														{{Form::select('month_of_birth',$months,'0',array('class'=>'form-control'))}}
+														{{Form::select('month_of_birth',$months,'0',array('class'=>'form-control','required'=>''))}}
 											
 															
 														</div>
 														<div class="col-xs-2">
-															{{Form::select('year_of_birth',$years,'0',array('class'=>'form-control'))}}
+															{{Form::select('year_of_birth',$years,'0',array('class'=>'form-control','required'=>''))}}
 														</div>
 													</div>
 										</div>
@@ -261,7 +262,7 @@
                                             
 											 {{ Form::label('image', 'Upload Photo: ',array('class'=>'control-label col-xs-4')) }}
 											 <div class="col-xs-6">
-											 {{ Form::file('photo') }}
+											 {{ Form::file('photo', array('required'=>'')) }}
 											 
 											 <p class="help-block">Photo size : 300px250px</p>
 											 </div>
@@ -269,10 +270,14 @@
                                       
                                     </div><!-- /.box-body -->
 
-                                   <p class="text-center">
-									<button class="btn btn-primary btn-block" data-toggle="modal" data-target="#EmploymentDetails">Save</button>
+                                   
+									<div class="form-group">
+                           
+										<button type="submit" class="btn btn-lg btn-block btn-primary">Save</button>
+                           
+									</div>
 	
-									</p>
+									
 					{{Form::close()}}
 				</div>
 			</div>
@@ -285,7 +290,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title">Edit Personnel Info. </h4>
+                    <h4 class="modal-title">Edit Personal Info. </h4>
                 </div>
 				 <div class="modal-body">
                     <!-- The form is placed inside the body of modal -->

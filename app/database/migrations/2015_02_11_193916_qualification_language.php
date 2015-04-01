@@ -22,6 +22,7 @@ class QualificationLanguage extends Migration {
 			$table->string('lang_understanding');
 			$table->string('lang_reading');
 			$table->string('lang_writing');
+			$table->string('verify',10);
 			$table->timestamps();
 		});
 	}

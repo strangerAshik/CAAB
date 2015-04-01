@@ -29,6 +29,7 @@ class QualificationEmployment extends Migration {
 			$table->string('end_year');
 			$table->string('supervisor_name');
 			$table->string('supervisor_phone');
+			$table->string('verify',10);
 			$table->timestamps();
 		});
 	}

@@ -17,6 +17,7 @@ class QualificationOthersPublication extends Migration {
 			$table->integer('emp_id');
 			$table->string('title');
 			$table->string('description');
+			$table->string('verify',10);
 			$table->timestamps();
 		});
 	}

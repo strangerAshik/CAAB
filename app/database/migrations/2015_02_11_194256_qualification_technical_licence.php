@@ -26,6 +26,7 @@ class QualificationTechnicalLicence extends Migration {
 			$table->string('expiration_month');
 			$table->string('expiration_year');
 			$table->string('rating');
+			$table->string('verify',10);
 			$table->timestamps();
 		});
 	}

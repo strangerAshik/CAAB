@@ -6,7 +6,7 @@
         <div class="col-md-12">
             <div class="box box-primary">
                 <div class="box-header">
-                    <h3 class="box-title">Employee verification</h3>
+                    <h3 class="box-title">Employee Assignment </h3>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
@@ -16,9 +16,9 @@
 					@foreach($infos as $info)
                     <table class="table table-bordered">
                         <tbody>
+						{{Employee::notApproved($info)}}	
                             <tr>
-                                <th >Employee verification</th>
-                                <th >
+                                <th colspan="2">Employee Assignment #{{++$a_sl}}
                                     <a href="{{'deleteEnpVeri/'.$info->id}}" style='color:red;float:right;padding:5px;'>
                                         <span class="glyphicon glyphicon-trash"></span>
                                     </a>
@@ -52,6 +52,13 @@
                                 <td>{{$info->position}}</td>
                             </tr>
 							<tr>
+                                <td>Assigned Task </td>
+                                <td>{{$info->assigned_task}}</td>
+                            </tr><tr>
+                                <td>Assigned By </td>
+                                <td>{{$info->assigned_by}}</td>
+                            </tr>
+							<tr>
                                 <td>Note </td>
                                 <td>{{$info->note}}
 								</td>
@@ -75,7 +82,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title">Add Employee verification </h4>
+                    <h4 class="modal-title">Add Employee Assignment </h4>
                 </div>
                 <div class="modal-body">
                     <!-- The form is placed inside the body of modal -->
@@ -96,15 +103,15 @@
 												
 													<div class="row">
 														<div class="col-xs-2">
-														{{Form::select('entry_date',$dates,'0',array('class'=>'form-control'))}}
+														{{Form::select('entry_date',$dates,'0',array('class'=>'form-control','required'=>''))}}
 														</div>
 														<div class="col-xs-3">
-														{{Form::select('entry_month',$months,'0',array('class'=>'form-control'))}}
+														{{Form::select('entry_month',$months,'0',array('class'=>'form-control','required'=>''))}}
 											
 															
 														</div>
 														<div class="col-xs-2">
-															{{Form::select('entry_year', $years,'0',array('class'=>'form-control'))}}
+															{{Form::select('entry_year', $years,'0',array('class'=>'form-control','required'=>''))}}
 														</div>
 													</div>
 						</div>
@@ -115,7 +122,7 @@
                                 <div class="col-xs-6">
 										<div class="radio">
 									 
-									  <label> <label> {{ Form::radio('active', 'Yes') }} &nbsp  Yes</label>
+									  <label> <label> {{ Form::radio('active', 'Yes',true) }} &nbsp  Yes</label>
 									 <label> {{ Form::radio('active', 'No') }} &nbsp  No</label>
 									</div>
 									
@@ -150,19 +157,31 @@
 											{{Form::text('position','', array('class' => 'form-control','placeholder'=>'','required'=>''))}}
 											</div>
                         </div>
+						<div class="form-group required" >											
+											{{Form::label('assigned_task', 'Assigned Task', array('class' => 'col-xs-4 control-label'))}}
+											<div class="col-xs-6">
+											{{Form::textarea('assigned_task','', array('class' => 'form-control','placeholder'=>'','size'=>'4x1', 'required'=>''))}}
+											</div>
+					    </div>
+						<div class="form-group required" >											
+											{{Form::label('assigned_by', 'Assigned By', array('class' => 'col-xs-4 control-label'))}}
+											<div class="col-xs-6">
+											{{Form::textarea('assigned_by','', array('class' => 'form-control','placeholder'=>'','size'=>'4x1', 'required'=>''))}}
+											</div>
+					    </div>
 						<div class="form-group " >											
 											{{Form::label('note', 'Note', array('class' => 'col-xs-4 control-label'))}}
 											<div class="col-xs-6">
-											{{Form::textarea('note','', array('class' => 'form-control','placeholder'=>'','size'=>'30x3'))}}
+											{{Form::textarea('note','', array('class' => 'form-control','placeholder'=>'','size'=>'4x1'))}}
 											</div>
-					</div>
+					    </div>
 						
 					
                        
                         <div class="form-group">
-                            <div class="col-xs-5 col-xs-offset-3">
-                                <button type="submit" class="btn btn-primary">Save</button>
-                            </div>
+                          
+                                <button type="submit" class="btn btn-primary btn-lg btn-block">Save</button>
+                          
                         </div>
 						{{Form::close()}}
                 </div>
@@ -176,7 +195,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title">Add Employee verification </h4>
+                    <h4 class="modal-title">Update Employee Assignment </h4>
                 </div>
                 <div class="modal-body">
                     <!-- The form is placed inside the body of modal -->
@@ -251,6 +270,18 @@
 											{{Form::text('position', $info->position , array('class' => 'form-control','placeholder'=>'','required'=>''))}}
 											</div>
                         </div>
+						<div class="form-group required" >											
+											{{Form::label('assigned_task', 'Assigned Task', array('class' => 'col-xs-4 control-label'))}}
+											<div class="col-xs-6">
+											{{Form::textarea('assigned_task',$info->assigned_task, array('class' => 'form-control','placeholder'=>'','size'=>'4x1', 'required'=>''))}}
+											</div>
+					    </div>
+						<div class="form-group required" >											
+											{{Form::label('assigned_by', 'Assigned By', array('class' => 'col-xs-4 control-label'))}}
+											<div class="col-xs-6">
+											{{Form::textarea('assigned_by',$info->assigned_by, array('class' => 'form-control','placeholder'=>'','size'=>'4x1', 'required'=>''))}}
+											</div>
+					    </div>
 						<div class="form-group " >											
 											{{Form::label('note', 'Note', array('class' => 'col-xs-4 control-label'))}}
 											<div class="col-xs-6">
@@ -261,9 +292,7 @@
 					
                        
                         <div class="form-group">
-                            <div class="col-xs-5 col-xs-offset-3">
-                                <button type="submit" class="btn btn-primary">Save</button>
-                            </div>
+                          <button type="submit" class="btn btn-primary btn-lg btn-block">Save</button>
                         </div>
 						{{Form::close()}}
                 </div>

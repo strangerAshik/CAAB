@@ -49,5 +49,6 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	//end functions
 	
 	//
-    public function Role() {return $this->hasOne('role');}
+    public function Role() {return $this->role;}
+    public function PassChange() {return $this->pass_change;}
 }

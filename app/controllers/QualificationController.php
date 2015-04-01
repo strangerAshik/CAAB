@@ -122,6 +122,7 @@ class QualificationController extends \BaseController {
 		->with('dates',$dates)
 		->with('months',$months)
 		->with('years',$years)
+		->with('years_from',parent::years_from())
 		->with('infos',$query)	
 		;
 	}
@@ -157,10 +158,6 @@ class QualificationController extends \BaseController {
 	}
 	public function emp_verification()
 	{
-		$dates=parent::dates();
-		$months=parent::months();
-		$years=parent::years();
-		
 		$id = Auth::user()->emp_id();
 		$query=DB::table('qualification_employee_verification')->where('emp_id', '=', $id)->get();
 		
@@ -168,9 +165,9 @@ class QualificationController extends \BaseController {
 		->with('PageName','Employee Verification')
 		->with('personnel',parent::getPersonnelInfo())
 		->with('a_sl','0')
-		->with('dates',$dates)
-		->with('months',$months)
-		->with('years',$years)
+		->with('dates',parent::dates())
+		->with('months',parent::months())
+		->with('years',parent::years())
 		->with('infos',$query)	
 		
 		;
@@ -212,6 +209,10 @@ class QualificationController extends \BaseController {
 		return View::make('qualification/comp_view')
 		->with('PageName','Comprehensive View')
 		->with('personnel',parent::getPersonnelInfo())
+		->with('dates',parent::dates())
+		->with('months',parent::months())
+		->with('years',parent::years())
+		->with('years_from',parent::years_from())
 		->with('sl1','0')
 		->with('sl2','0')
 		->with('sl3','0')
@@ -224,6 +225,7 @@ class QualificationController extends \BaseController {
 		->with('sl10','0')
 		->with('sl11','0')
 		->with('sl12','0')
+		->with('ev','0')
 		->with('personnel',$query1)
 		->with('accademic',$query2)
 		->with('thesis',$query3)
@@ -258,6 +260,10 @@ class QualificationController extends \BaseController {
 		return View::make('qualification/comp_view')
 		->with('PageName','Comprehensive View')
 		->with('personnel',parent::getPersonnelInfo())
+		->with('dates',parent::dates())
+		->with('months',parent::months())
+		->with('years',parent::years())
+		->with('years_from',parent::years_from())
 		->with('sl1','0')
 		->with('sl2','0')
 		->with('sl3','0')
@@ -270,6 +276,7 @@ class QualificationController extends \BaseController {
 		->with('sl10','0')
 		->with('sl11','0')
 		->with('sl12','0')
+		->with('ev','0')
 		->with('personnel',$query1)
 		->with('accademic',$query2)
 		->with('thesis',$query3)
@@ -385,7 +392,7 @@ class QualificationController extends \BaseController {
 			
 			));
 			
-			return Redirect::to('qualification/personnel')->with('message', 'Successfully Saved!!');
+			return Redirect::back()->with('message', 'Successfully Saved!!');
 	}
 
 	public function saveAccademic(){
@@ -442,7 +449,7 @@ class QualificationController extends \BaseController {
 		));
 		return Redirect::to('qualification/employment')->with('message', 'Successfully Saved!!');
 	}
-   public function proDegree(){
+    public function proDegree(){
 	
 	DB::table('qualification_pro_degree')->insert(array(
 		'emp_id' => Auth::user()->emp_id(),
@@ -595,6 +602,8 @@ class QualificationController extends \BaseController {
 	   'termination_month' =>Input::get('termination_month'),
 	   'termination_year' =>Input::get('termination_year'),
 	   'position' =>Input::get('position'),
+	   'assigned_task' =>Input::get('assigned_task'),	     
+	   'assigned_by' =>Input::get('assigned_by'),	     
 	   'note' =>Input::get('note'),	     
 	   'created_at' => time(),
 	   'updated_at' =>time()	
@@ -640,7 +649,7 @@ class QualificationController extends \BaseController {
 				'updated_at' =>time()	
 			));
 			
-		return Redirect::to('qualification/education')->with('message', 'Successfully Updated!!');
+		return Redirect::back()->with('message', 'Successfully Updated!!');
    }
    public function updateThesis(){
 	 $id= Input::get('idThesis');
@@ -656,7 +665,7 @@ class QualificationController extends \BaseController {
 				'updated_at' =>time()
 			));
 			
- 	return Redirect::to('qualification/education')->with('message', 'Successfully Updated!!');
+ 	return Redirect::back()->with('message', 'Successfully Updated!!');
    }
    public function updateEmployment(){
 	    $id= Input::get('id');
@@ -678,7 +687,7 @@ class QualificationController extends \BaseController {
 				'supervisor_phone' => Input::get('supervisor_phone'),	
 				'updated_at' =>time()	
 			));
-		return Redirect::to('qualification/employment')->with('message', 'Successfully Updated!!');
+		return Redirect::back()->with('message', 'Successfully Updated!!');
    }
    public function updatePro_degree(){
 	    $id= Input::get('id');
@@ -693,7 +702,7 @@ class QualificationController extends \BaseController {
 				'pro_degree_year' => Input::get('pro_degree_year'),	
 				'updated_at' =>time()	
 			));
-		return Redirect::to('qualification/pro_degree')->with('message', 'Successfully Updated!!');
+		return Redirect::back()->with('message', 'Successfully Updated!!');
    }
   public function updateTrainingWorkOJT(){
 		
@@ -734,7 +743,7 @@ class QualificationController extends \BaseController {
 				'duration' => Input::get('duration'),
 				'updated_at' =>time()	
 			));
-		return Redirect::to('qualification/taining_work_ojt')->with('message', 'Successfully Updated!!');
+		return Redirect::back()->with('message', 'Successfully Updated!!');
   }
   public function updateLanguage(){
 	  $id= Input::get('id');
@@ -748,7 +757,7 @@ class QualificationController extends \BaseController {
 			   'lang_writing' =>Input::get('lang_writing'),	
 			   'updated_at' =>time()	
 			));
-		return Redirect::to('qualification/language')->with('message', 'Successfully Updated!!');
+		return Redirect::back()->with('message', 'Successfully Updated!!');
 	  
   }
   public function updateTechnicalLicence(){
@@ -768,7 +777,7 @@ class QualificationController extends \BaseController {
 			   'rating' =>Input::get('rating'),	
 			   'updated_at' =>time()	
 			));
-		return Redirect::to('qualification/technical_licence')->with('message', 'Successfully Updated!!');
+		return Redirect::back()->with('message', 'Successfully Updated!!');
 	  
   }
   public function updateAircraftQualification(){
@@ -806,7 +815,7 @@ class QualificationController extends \BaseController {
 			   'certification' =>Input::get('certification'),	
 			   'updated_at' =>time()	
 			));
-		return Redirect::to('qualification/aircraft_qualification')->with('message', 'Successfully Updated!!');
+		return Redirect::back()->with('message', 'Successfully Updated!!');
 	  
   }
   public function updateReference(){
@@ -824,7 +833,7 @@ class QualificationController extends \BaseController {
 			   'may_we_request' =>Input::get('may_we_request'), 
 			   'updated_at' =>time()	
 			));
-		return Redirect::to('qualification/reference')->with('message', 'Successfully Updated!!');
+		return Redirect::back()->with('message', 'Successfully Updated!!');
 	  
   }
   public function updateEmpVerification(){
@@ -841,10 +850,12 @@ class QualificationController extends \BaseController {
 			   'termination_month' =>Input::get('termination_month'),
 			   'termination_year' =>Input::get('termination_year'),
 			   'position' =>Input::get('position'),
+			   'assigned_task' =>Input::get('assigned_task'),
+			   'assigned_by' =>Input::get('assigned_by'),
 			   'note' =>Input::get('note'),	
 			   'updated_at' =>time()	
 			));
-		return Redirect::to('qualification/emp_verification')->with('message', 'Successfully Updated!!');
+		return Redirect::back()->with('message', 'Successfully Updated!!');
 	  
   }
   public function updatePublication(){
@@ -856,7 +867,7 @@ class QualificationController extends \BaseController {
 			  'description' =>Input::get('description'), 
 			  'updated_at' =>time()	
 			));
-		return Redirect::to('qualification/other')->with('message', 'Successfully Updated!!');
+		return Redirect::back()->with('message', 'Successfully Updated!!');
 	  
   }
   public function updateMembership(){
@@ -868,9 +879,89 @@ class QualificationController extends \BaseController {
 			  'description' =>Input::get('description'), 
 			  'updated_at' =>time()	
 			));
-		return Redirect::to('qualification/other')->with('message', 'Successfully Updated!!');
+		return Redirect::back()->with('message', 'Successfully Updated!!');
 	  
   }
    /******************End Update Area **********************/
+   /******************Delete Area **********************/
+   public function deletePersonnel($id){
+		DB::table('qualification_personal')->where('id', '=', $id)->delete();
+		return Redirect::back()->with('message', 'Successfully Deleted!!');
+		
+		}
+   public function deleteAccademic($id){
+		DB::table('qualification_edu_accademic')->where('id', '=', $id)->delete();
+		return Redirect::back()->with('message', 'Successfully Deleted!!');
+		
+		}
+   public function deleteThesis($id){
+		DB::table('qualification_edu_thesis')->where('id', '=', $id)->delete();
+		return Redirect::back()->with('message', 'Successfully Deleted!!');
+		
+		}
+   public function deleteEmployment($id){
+		DB::table('qualification_emplyment')->where('id', '=', $id)->delete();
+		return Redirect::back()->with('message', 'Successfully Deleted!!');
+		
+		}
+   public function deleteProDegree($id){
+		DB::table('qualification_pro_degree')->where('id', '=', $id)->delete();
+		return Redirect::back()->with('message', 'Successfully Deleted!!');
+		
+		}
+   public function deleteTraining($id){
+		DB::table('qualification_training_ojt')->where('id', '=', $id)->delete();
+		return Redirect::back()->with('message', 'Successfully Deleted!!');
+		
+		}
+   public function deleteLanguage($id){
+		DB::table('qualification_language')->where('id', '=', $id)->delete();
+		return Redirect::back()->with('message', 'Successfully Deleted!!');
+		
+		}
+   public function deleteTechlicence($id){
+		DB::table('qualification_technical_licence')->where('id', '=', $id)->delete();
+		return Redirect::back()->with('message', 'Successfully Deleted!!');
+		
+		}
+   public function deleteAirQualification($id){
+		DB::table('qualification_aircraft')->where('id', '=', $id)->delete();
+		return Redirect::back()->with('message', 'Successfully Deleted!!');
+		
+		}
+   public function deleteReference($id){
+		DB::table('qualification_reference')->where('id', '=', $id)->delete();
+		return Redirect::back()->with('message', 'Successfully Deleted!!');
+		
+		}
+   public function deleteEnpVeri($id){
+		DB::table('qualification_employee_verification')->where('id', '=', $id)->delete();
+		return Redirect::back()->with('message', 'Successfully Deleted!!');
+		
+		}
+    public function deleteMembership($id){
+		DB::table('qualification_others_membership')->where('id', '=', $id)->delete();
+		return Redirect::back()->with('message', 'Successfully Deleted!!');
+		
+		}
+	public function deletePublication($id){
+		DB::table('qualification_others_publication')->where('id', '=', $id)->delete();
+		return Redirect::back()->with('message', 'Successfully Deleted!!');
+		
+		}
+   /******************End Delete Area **********************/
+   /******************Approve data **********************/
+   public function approve($table,$id){
+	     DB::table($table)
+            ->where('id',$id)
+            ->update(array(
+			   'verify' =>'1',
+			   'updated_at' =>time()	
+			));
+	   return Redirect::back()->with('message', 'Data Approved !!');
+   }
+   /******************End Approve data **********************/
 	
-}
+
+	}
+

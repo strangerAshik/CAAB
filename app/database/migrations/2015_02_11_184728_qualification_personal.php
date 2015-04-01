@@ -35,6 +35,7 @@ class QualificationPersonal extends Migration {
 			$table->string('month_of_birth');
 			$table->string('year_of_birth');
 			$table->string('photo');
+			$table->string('verify',10);
 			$table->timestamps();
 			
 			});

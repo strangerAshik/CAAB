@@ -2,7 +2,7 @@
 <html>
     <head>
       <meta charset="UTF-8">
-        <title>CAAB | Civil Aviation Authority Bangladesh</title>
+        <title>ASRTM | Aviation ERP</title>
         <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
       <!-- On-line -->
    	   <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
@@ -75,21 +75,28 @@
 			
 			<!--Success Massage--->
 			@if(Session::has('message'))
-				 <div class="alert alert-success">
-				 {{Session::get('message')}}
-				 </div>
+				 
+				 <div id='myAlert' class='alert alert-success'>
+							   <a href='#' class='close' data-dismiss='alert'>&times;</a>
+							   <strong>Message: </strong>  {{Session::get('message')}}
+				</div>
 			@endif 
 			<!--End success massage-->
 			<!--Start error massage-->
 			@if(Session::has('error'))
-				 <div class="alert alert-warning">
-				 {{Session::get('error')}}
-				 </div>
+				
+				 <div id='myAlert' class='alert alert-warning'>
+							   <a href='#' class='close' data-dismiss='alert'>&times;</a>
+							   <strong>Error: </strong> {{Session::get('error')}}
+				</div>
 				@endif 
 			  @if($errors->any())
 			  <div>
 				<ul class="alert alert-warning">
-				  {{ implode('', $errors->all('<li>:message</li>'))}}
+				   <div id='myAlert' class='alert alert-warning'>
+							   <a href='#' class='close' data-dismiss='alert'>&times;</a>
+							   <strong>Error list: </strong>  {{ implode('', $errors->all('<li>:message</li>'))}}
+
 				</ul>
 			  </div>
 			  @endif
@@ -98,6 +105,7 @@
                 <!-- Main content -->
                @yield('content')
             </aside><!-- /.right-side -->
+			
         </div><!-- ./wrapper -->
 
         <!-- add new calendar event modal -->

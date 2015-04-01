@@ -23,6 +23,7 @@ class QualificationReference extends Migration {
 			$table->string('years_acquainted');
 			$table->string('email_address');
 			$table->string('may_we_request');
+			$table->string('verify',10);
 			$table->timestamps();
 		});
 	}

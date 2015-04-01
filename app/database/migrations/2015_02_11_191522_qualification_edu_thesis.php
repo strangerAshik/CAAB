@@ -21,6 +21,7 @@ class QualificationEduThesis extends Migration {
 			$table->string('title');			
 			$table->string('institute');
 			$table->string('duration');
+			$table->string('verify',10);
 			$table->timestamps();
 		});
 	}

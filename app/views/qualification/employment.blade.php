@@ -11,6 +11,7 @@
 								@foreach($infos as $info)
                                     <table class="table table-bordered">
                                         <tbody class="table-bordered">
+										{{Employee::notApproved($info)}}	
 										<tr>                                           
                                             <th colspan='2'>Previous Employment #{{++$a_sl}}
 											<a href="{{'deleteEmployment/'.$info->id}}" style='color:red;float:right;padding:5px;'><span class="glyphicon glyphicon-trash"></span></a>
@@ -138,7 +139,7 @@
                                            
 											{{Form::label('organisation_name', 'Name Of Organisation', array('class' => 'col-xs-4 control-label'))}}
 											<div class="col-xs-6">
-											{{Form::text('organisation_name','', array('class' => 'form-control','placeholder'=>''))}}
+											{{Form::text('organisation_name','', array('class' => 'form-control','placeholder'=>'','required'=>''))}}
 											</div>
 											
                     </div>
@@ -146,7 +147,7 @@
                                         
 											{{Form::label('organisation_type', 'Type of organization', array('class' => 'col-xs-4 control-label'))}}
 											<div class="col-xs-6">
-											{{Form::select('organisation_type', array('' => '--Select--', 'International' => 'International','Multinational'=>'Multinational','Government organization'=>'Government organization','Public limited company'=>'Public limited company','Private company'=>'Private company','Others'=>'Others'), null,array('class'=>'form-control'))}}
+											{{Form::select('organisation_type', array('' => '--Select--', 'International' => 'International','Multinational'=>'Multinational','Government organization'=>'Government organization','Public limited company'=>'Public limited company','Private company'=>'Private company','Others'=>'Others'), null,array('class'=>'form-control','required'=>''))}}
 											</div>
 											
                     </div>
@@ -163,7 +164,7 @@
                                            
 											{{Form::label('designation', 'Your designation', array('class' => 'col-xs-4 control-label'))}}
 											<div class="col-xs-6">
-											{{Form::text('designation','', array('class' => 'form-control','placeholder'=>''))}}
+											{{Form::text('designation','', array('class' => 'form-control','placeholder'=>'','required'=>''))}}
 											</div>
 											
                     </div>
@@ -172,7 +173,7 @@
                                         
 											{{Form::label('responsibility', 'Major responsibilities', array('class' => 'col-xs-4 control-label'))}}
 											<div class="col-xs-6">
-											{{Form::textarea('responsibility','', array('class' => 'form-control','placeholder'=>'','size'=>'30x3'))}}
+											{{Form::textarea('responsibility','', array('class' => 'form-control','placeholder'=>'','size'=>'30x3','required'=>''))}}
 											</div>
 											
                     </div>
@@ -183,15 +184,15 @@
 												
 													<div class="row">
 														<div class="col-xs-2">
-														{{Form::select('start_date',$dates,'0',array('class'=>'form-control'))}}
+														{{Form::select('start_date',$dates,'0',array('class'=>'form-control','required'=>''))}}
 														</div>
 														<div class="col-xs-3">
-														{{Form::select('start_month',$months,'0',array('class'=>'form-control'))}}
+														{{Form::select('start_month',$months,'0',array('class'=>'form-control','required'=>''))}}
 											
 															
 														</div>
 														<div class="col-xs-2">
-															{{Form::select('start_year',$years,'01',array('class'=>'form-control'))}}
+															{{Form::select('start_year',$years,'01',array('class'=>'form-control','required'=>''))}}
 														</div>
 													</div>
 					</div>
@@ -203,7 +204,7 @@
 											</div>
 											
                     </div>-->
-					<div class="form-group required">
+					<div class="form-group ">
 												
 													{{Form::label('end_date', 'End Date', array('class' => 'col-xs-4 control-label'))}}
 												
@@ -230,7 +231,7 @@
                                            
 											{{Form::label('supervisor_name', ' Name of supervisor', array('class' => 'col-xs-4 control-label'))}}
 											<div class="col-xs-6">
-											{{Form::text('supervisor_name','', array('class' => 'form-control','placeholder'=>''))}}
+											{{Form::text('supervisor_name','', array('class' => 'form-control','placeholder'=>'','required'=>''))}}
 											</div>
 											
                     </div>
@@ -245,9 +246,9 @@
                     
 
                     <div class="form-group">
-                        <div class="col-xs-5 col-xs-offset-3">
-                            <button type="submit" class="btn btn-primary">Save</button>
-                        </div>
+                        
+                            <button type="submit" class="btn btn-primary btn-lg btn-block">Save</button>
+                        
                     </div>
 					{{Form::close()}}
             </div>

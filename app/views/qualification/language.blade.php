@@ -25,6 +25,7 @@
 					@foreach($infos as $info)
                     <table class="table table-bordered">
                         <tbody>
+						{{Employee::notApproved($info)}}	
                             <tr>
                                 <th colspan='2'> Language  #{{++$a_sl}}
                                     <a href="{{'deleteLanguage/'.$info->id}}" style='color:red;float:right;padding:5px;'>
@@ -137,7 +138,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title">Add Language </h4>
+                    <h4 class="modal-title">Update Language </h4>
                 </div>
                 <div class="modal-body">
                     <!-- The form is placed inside the body of modal -->

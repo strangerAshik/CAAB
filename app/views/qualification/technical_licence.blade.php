@@ -16,6 +16,7 @@
 					@foreach($infos as $info)
                     <table class="table table-bordered">
                         <tbody>
+						{{Employee::notApproved($info)}}	
                             <tr>
                                 <th colspan='2'>LICENSE  #{{++$a_sl}}
                                     <a href="{{'deleteTechlicence/'.$info->id}}" style='color:red;float:right;padding:5px;'>
@@ -82,7 +83,7 @@
                                 <div class="col-xs-6">
 										<div class="radio">
 									 
-									  <label> <label> {{ Form::radio('active', 'Yes') }} &nbsp  Yes</label>
+									  <label> <label> {{ Form::radio('active', 'Yes',true) }} &nbsp  Yes</label>
 									 <label> {{ Form::radio('active', 'No') }} &nbsp  No</label>
 									</div>
 									
@@ -110,15 +111,15 @@
 												
 													<div class="row">
 														<div class="col-xs-2">
-														{{Form::select('issue_date',$dates, '0',array('class'=>'form-control'))}}
+														{{Form::select('issue_date',$dates, '0',array('class'=>'form-control','required'=>''))}}
 														</div>
 														<div class="col-xs-3">
-														{{Form::select('issue_month',$months,'0',array('class'=>'form-control'))}}
+														{{Form::select('issue_month',$months,'0',array('class'=>'form-control','required'=>''))}}
 											
 															
 														</div>
 														<div class="col-xs-2">
-															{{Form::select('issue_year',$years,'0',array('class'=>'form-control'))}}
+															{{Form::select('issue_year',$years,'0',array('class'=>'form-control','required'=>''))}}
 														</div>
 													</div>
 						</div>
@@ -137,7 +138,7 @@
 														</div>
 														<div class="col-xs-2">
 															
-															{{Form::select('expiration_year',$years,'0',array('class'=>'form-control'))}}
+															{{Form::select('expiration_year',$years_from,'0',array('class'=>'form-control'))}}
 														</div>
 													</div>
 						</div>
@@ -235,7 +236,7 @@
 														</div>
 														<div class="col-xs-2">
 															
-															{{Form::select('expiration_year',$years, $info->expiration_year ,array('class'=>'form-control'))}}
+															{{Form::select('expiration_year',$years_from, $info->expiration_year ,array('class'=>'form-control'))}}
 														</div>
 													</div>
 						</div>

@@ -13,6 +13,7 @@
 								@foreach($pubs as $pub)
                                     <table class="table table-bordered">
                                         <tbody>
+										{{Employee::notApproved($pub)}}	
 										<tr>                                           
                                             <th colspan='2'>Publication   #{{++$a_sl}}
 											<a href="{{'deletePublication/'.$pub->id}}" style='color:red;float:right;padding:5px;'><span class="glyphicon glyphicon-trash"></span></a>
@@ -67,21 +68,21 @@
                                         
 											{{Form::label('title', 'Title', array('class' => 'col-xs-4 control-label'))}}
 											<div class="col-xs-6">
-											{{Form::text('title','', array('class' => 'form-control','placeholder'=>''))}}
+											{{Form::text('title','', array('class' => 'form-control','placeholder'=>'','required'=>''))}}
 											</div>
 											
                     </div>
 					<div class="form-group required">
 											{{Form::label('description', 'Description', array('class' => 'control-label col-xs-4'))}}
 											<div class="col-xs-6">
-											{{Form::textarea('description','', array('class' => 'form-control','placeholder'=>'','size'=>'30x3'))}}
+											{{Form::textarea('description','', array('class' => 'form-control','placeholder'=>'','size'=>'30x3','required'=>''))}}
 											 </div>
 					</div>
 					
 					<div class="form-group">
-                        <div class="col-xs-5 col-xs-offset-3">
-                            <button type="submit" class="btn btn-primary">Save</button>
-                        </div>
+                      
+                            <button type="submit" class="btn btn-primary btn-lg btn-block">Save</button>
+                      
                     </div>
 					{{Form::close()}}
             </div>
@@ -102,6 +103,7 @@
 								@foreach($membs as $memb)
                                     <table class="table table-bordered">
                                         <tbody>
+										{{Employee::notApproved($memb)}}	
 										<tr>                                           
                                             <th colspan='2'>Membership   #{{++$t_sl}}
 											<a href="{{'deleteMembership/'.$memb->id}}" style='color:red;float:right;padding:5px;'><span class="glyphicon glyphicon-trash"></span></a>
@@ -155,21 +157,21 @@
                                         
 											{{Form::label('title', 'Title', array('class' => 'col-xs-4 control-label'))}}
 											<div class="col-xs-6">
-											{{Form::text('title','', array('class' => 'form-control','placeholder'=>''))}}
+											{{Form::text('title','', array('class' => 'form-control','placeholder'=>'','required'=>''))}}
 											</div>
 											
                     </div>
 					<div class="form-group required">
 											{{Form::label('description', 'Description', array('class' => 'control-label col-xs-4'))}}
 											<div class="col-xs-6">
-											{{Form::textarea('description','', array('class' => 'form-control','placeholder'=>'','size'=>'30x3'))}}
+											{{Form::textarea('description','', array('class' => 'form-control','placeholder'=>'','size'=>'30x3','required'=>''))}}
 											 </div>
 					</div>
 					
 					<div class="form-group">
-                        <div class="col-xs-5 col-xs-offset-3">
-                            <button type="submit" class="btn btn-primary">Save</button>
-                        </div>
+                        
+                            <button type="submit" class="btn btn-primary btn-lg btn-block">Save</button>
+                        
                     </div>
 					{{Form::close()}}
             </div>
@@ -210,9 +212,9 @@
 					</div>
 					
 					<div class="form-group">
-                        <div class="col-xs-5 col-xs-offset-3">
-                            <button type="submit" class="btn btn-primary">Update</button>
-                        </div>
+                       
+                            <button type="submit" class="btn btn-primary btn-lg btn-block">Update</button>
+                       
                     </div>
 					{{Form::close()}}
             </div>
@@ -252,9 +254,7 @@
 					</div>
 					
 					<div class="form-group">
-                        <div class="col-xs-5 col-xs-offset-3">
-                            <button type="submit" class="btn btn-primary">Save</button>
-                        </div>
+                          <button type="submit" class="btn btn-primary btn-lg btn-block">Update</button>
                     </div>
 					{{Form::close()}}
             </div>

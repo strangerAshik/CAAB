@@ -23,6 +23,7 @@ class QualificationProDegree extends Migration {
 			$table->string('pro_degree_major_area');
 			$table->string('pro_degree_major');
 			$table->string('pro_degree_year');
+			$table->string('verify',10);
 			$table->timestamps();
 		});
 	}

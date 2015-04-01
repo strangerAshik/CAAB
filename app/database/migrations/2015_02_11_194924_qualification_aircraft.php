@@ -30,6 +30,7 @@ class QualificationAircraft extends Migration {
 			$table->string('proof');
 			$table->string('pdf');
 			$table->string('certification');
+			$table->string('verify',10);
 			$table->timestamps();
 		});
 	}
