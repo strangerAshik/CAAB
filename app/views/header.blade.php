@@ -1,8 +1,11 @@
  @section('header')
+ <div style='display:none'>
+{{$emp_id = Auth::user()->emp_id();}}
+</div>
  <a href="#" class="logo">
                 <!-- Add the class icon to your logo image or logo icon to add the margining -->
 				
-                ASTRM
+                ASRTM
             </a>
             <!-- Header Navbar: style can be found in header.less -->
             <nav class="navbar navbar-static-top" role="navigation">
@@ -31,16 +34,16 @@
                             </a>
                             <ul class="dropdown-menu">
                                 <!-- User image -->
-								@foreach($personnel as $personal)
+							
                                 <li class="user-header bg-light-blue">
                                    
-									{{HTML::Image('img/PersonnelPhoto/'.$personal->photo,'User image',array('class'=>'img-circle'))}}
+									{{HTML::Image('img/PersonnelPhoto/'.Employee::profilePic($emp_id),'User image',array('class'=>'img-circle'))}}
                                    <!-- <p>
                                         Jane Doe - Web Developer
                                         <small>Member since Nov. 2012</small>
                                     </p>-->
                                 </li>
-								@endforeach
+							
                                 <!-- Menu Body -->
                                
                                 <!-- Menu Footer-->

@@ -13,22 +13,15 @@
 <a href="#" class="list-group-item">Wild Life Stike Reporting</a>
 
 <a href="#" class="list-group-item active widget" ">
-   News
+{{--News--}} Notice Board
 </a>
-<marquee style="border:1px dotted #DDD"  scrollamount=2 behavior=ALTERNATE height=300 direction=up> 
-<a href="#" class="list-group-item">E-library</a>
-<a href="#" class="list-group-item">Volunteer Reporting</a>
-<a href="#" class="list-group-item">Wild Life Stike Reporting</a>
-<a href="#" class="list-group-item">E-library</a>
-<a href="#" class="list-group-item">Volunteer Reporting</a>
-<a href="#" class="list-group-item">Wild Life Stike Reporting</a>
-<a href="#" class="list-group-item">E-library</a>
-<a href="#" class="list-group-item">Volunteer Reporting</a>
-<a href="#" class="list-group-item">Wild Life Stike Reporting</a>
-<a href="#" class="list-group-item">E-library</a>
-<a href="#" class="list-group-item">Volunteer Reporting</a>
-<a href="#" class="list-group-item">Wild Life Stike Reporting</a>
-</marquee>
+{{--<marquee style="border:1px dotted #DDD"  scrollamount='2' behavior=ALTERNATE height='300' direction=up> --}}
+<a href="#" class="list-group-item">ASRTM Partially Released</a>
+<a href="#" class="list-group-item">Employee Information Update Is Going On</a>
+<a href="#" class="list-group-item">Aircraft Certification Management Is up coming</a>
+<a href="#" class="list-group-item">Please Update Your Employee Information</a>
+
+{{--</marquee>--}}
 
 </div>
 <!--Carasol -->

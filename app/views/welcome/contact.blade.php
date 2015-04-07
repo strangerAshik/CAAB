@@ -55,8 +55,8 @@
                         <div>
                         Dhaka<br />
                        Bangladesh<br />
-                       (+880)17********<br />
-                       info@tecnologianova.com<br />
+                    
+                       ASRTM@tecnologianova.com<br />
                         </div>
                         <hr />
                         <div id="map1" class="map">

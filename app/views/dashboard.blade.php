@@ -8,12 +8,11 @@
 {{$role = Auth::user()->Role();}}
 </div>
 
-@if($role=='Chief Admin')
     <div class="row" style='margin:0px 0px 0px 0px;;'>
                       
 						
 						<div class="row">
-						
+						@if($role=='Chief Admin')
                         <div class="col-lg-3 col-xs-6 col-md-3 col-md-3">
                             <!-- small box -->
 						<div class="small-box bg-aqua height" >
@@ -28,6 +27,8 @@
 							</a>
 						</div>
                         </div><!-- ./col -->
+						@endif
+						@if($role=='Chief Admin')
                         <div class="col-lg-3 col-xs-6 col-md-3 col-md-3">
                             <!-- small box -->
                             <div class="small-box bg-green height" >
@@ -43,6 +44,8 @@
                                 </a>
                             </div>
                         </div><!-- ./col -->
+						@endif
+						@if($role=='Chief Admin'||$role=='Director'||$role=='Deputy Director'||$role=='Inspector'||$role=='Maintenance Eng.')
                         <div class="col-lg-3 col-xs-6 col-md-3 col-md-3">
                             <!-- small box -->
                             <div class="small-box bg-yellow height" >
@@ -58,6 +61,8 @@
                                 </a>
                             </div>
                         </div><!-- ./col -->
+						@endif
+						@if($role=='Chief Admin')
                         <div class="col-lg-3 col-xs-6 col-md-3 col-md-3">
                             <!-- small box -->
                             <div class="small-box bg-red height">
@@ -73,8 +78,10 @@
                                 </a>
                             </div>
                         </div><!-- ./col -->
+						@endif
                     </div>
 					<div class="row">
+					@if($role=='Chief Admin')
                         <div class="col-lg-3 col-xs-6 col-md-3">
                             <!-- small box -->
                             <div class="small-box bg-blue height">
@@ -92,6 +99,8 @@
                                 </a>
                             </div>
                         </div><!-- ./col -->
+						@endif
+						@if($role=='Chief Admin')
                         <div class="col-lg-3 col-xs-6 col-md-3">
                             <!-- small box -->
                             <div class="small-box bg-purple height">
@@ -109,6 +118,8 @@
                                 </a>
                             </div>
                         </div><!-- ./col -->
+						@endif
+						@if($role=='Chief Admin')
                         <div class="col-lg-3 col-xs-6 col-md-3">
                             <!-- small box -->
                             <div class="small-box bg-teal height">
@@ -126,6 +137,8 @@
                                 </a>
                             </div>
                         </div><!-- ./col -->
+						@endif
+						@if($role=='Chief Admin'|| $role=='Employee'|| $role=='Director'|| $role=='Inspector')
                         <div class="col-lg-3 col-xs-6 col-md-3">
                             <!-- small box -->
                             <div class="small-box bg-maroon height">
@@ -143,8 +156,10 @@
                                 </a>
                             </div>
                         </div><!-- ./col -->
+						@endif
                     </div>
 					<div class="row">
+					@if($role=='Chief Admin')
                         <div class="col-lg-3 col-xs-6 col-md-3">
                             <!-- small box -->
                             <div class="small-box bg-aqua height">
@@ -164,6 +179,8 @@
                                 </a>
                             </div>
                         </div><!-- ./col -->
+						@endif
+						@if($role=='Chief Admin')
                         <div class="col-lg-3 col-xs-6 col-md-3">
                             <!-- small box -->
                             <div class="small-box bg-green height">
@@ -180,6 +197,8 @@
                                 </a>
                             </div>
                         </div><!-- ./col -->
+						@endif
+						@if($role=='Chief Admin')
                         <div class="col-lg-3 col-xs-6 col-md-3">
                             <!-- small box -->
                             <div class="small-box bg-yellow height">
@@ -197,6 +216,8 @@
                                 </a>
                             </div>
                         </div><!-- ./col -->
+						@endif
+						@if($role=='Chief Admin')
                         <div class="col-lg-3 col-xs-6 col-md-3">
                             <!-- small box -->
                             <div class="small-box bg-red height">
@@ -214,8 +235,11 @@
                                 </a>
                             </div>
                         </div><!-- ./col -->
+						@endif
+
                     </div>
 					<div class="row">
+					@if($role=='Chief Admin')
                         <div class="col-lg-3 col-xs-6 col-md-3 ">
                             <!-- small box -->
                             <div class="small-box bg-blue height">
@@ -233,6 +257,8 @@
                                 </a>
                             </div>
                         </div><!-- ./col -->
+					@endif
+					@if($role=='Chief Admin')
                         <div class="col-lg-3 col-xs-6 col-md-3">
                             <!-- small box -->
                             <div class="small-box bg-purple height">
@@ -252,6 +278,8 @@
                                 </a>
                             </div>
                         </div><!-- ./col -->
+						@endif
+						@if($role=='Chief Admin')
                         <div class="col-lg-3 col-xs-6 col-md-3">
                             <!-- small box -->
                             <div class="small-box bg-teal height">
@@ -271,6 +299,8 @@
                                 </a>
                             </div>
                         </div><!-- ./col -->
+						@endif
+						@if($role=='Chief Admin')
                         <div class="col-lg-3 col-xs-6 col-md-3">
                             <!-- small box -->
                             <div class="small-box bg-maroon height">
@@ -287,38 +317,11 @@
                                 </a>
                             </div>
                         </div><!-- ./col -->
+						@endif
                     </div>
 	</div>
-	@elseif($role=='Employee')
-	  <div class="row" style='margin:0px 0px 0px 0px;;'>
-                      
-						
-					<div class="row">
-                        
-                        <div class="col-lg-3 col-xs-6 col-md-3">
-                            <!-- small box -->
-                            <div class="small-box bg-maroon height">
-                                <div class="inner">
-                                    <h4 class='title'>
-                                        Employee
-                                    </h4>
-                                   
-                                </div>
-                                <div class="icon">
-                                   <a href="{{URL::to('qualification/main');}}"> <i class="icon ion-person-stalker"></i></a>
-                                </div>
-                                <a class="small-box-footer" href="{{URL::to('qualification/main');}}">
-                                    More info <i class="fa fa-arrow-circle-right"></i>
-                                </a>
-                            </div>
-                        </div><!-- ./col -->
-                    </div>
-					
-                  
-	</div>
-	@else
 	
-    @endif
+ 
 
 {{--Password Change Check --}}
 @if(Auth::User()->PassChange()!='1')

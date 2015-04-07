@@ -4,9 +4,10 @@
 <div style="display:none">
 {{$role=Auth::user()->Role()}}
 </div>
-@if($role=="Chief Admin")
+
 <div class="row">
-                        <div class="col-lg-3 col-md-3 col-xs-6">
+                        @if($role=="Chief Admin")
+						<div class="col-lg-3 col-md-3 col-xs-6">
                             <!-- small box -->
                             <div class="small-box bg-yellow height">
                                 <div class="inner">
@@ -24,6 +25,8 @@
                                 </a>
                             </div>
                         </div>
+						@endif
+						@if($role=="Chief Admin")
                        <div class="col-lg-3 col-md-3 col-xs-6">
                             
                             <div class="small-box bg-red height">
@@ -41,6 +44,8 @@
                                 </a>
                             </div>
                         </div>
+						@endif
+						@if($role=="Chief Admin"|| $role='Employee')
 						<div class="col-lg-3 col-md-3 col-xs-6">
                             
                             <div class="small-box bg-aqua height">
@@ -58,29 +63,9 @@
                                 </a>
                             </div>
                         </div>
+						@endif
 </div>
-@elseif($role=='Employee')
-<div class="row">
-                        
-						<div class="col-lg-3 col-md-3 col-xs-6">
-                            
-                            <div class="small-box bg-aqua height">
-                                <div class="inner">
-                                  <h4 class='title'>
-								   <h4 style='font-weight:bold;'>Change Password</h4>
-                                  </h4>
-                                    
-                                </div>
-                                <div class="icon">
-                                    <a href="" href="#" data-toggle="modal" data-target="#changePassword"> <i class="ion ion-ios7-gear"></i></a>
-                                </div>
-                                <a class="small-box-footer" href="#" data-toggle="modal" data-target="#changePassword">
-                                    Change Password <i class="fa fa-arrow-circle-right"></i>
-                                </a>
-                            </div>
-                        </div>
-</div>
-@endif
+
 <!-- Add User-->
 <div class="modal fade" id="addUser" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">

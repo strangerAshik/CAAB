@@ -188,9 +188,46 @@ Route::group(array('before'=>'auth'),function(){
 });
 Route::group(array('prefix' => 'aircraft','before'=>'auth'),function(){
 	Route::get('main','AircraftController@main');
+	
 	Route::post('savePrimary','AircraftController@savePrimary');
+	Route::post('editPrimary','AircraftController@editPrimary');
+	Route::post('saveTCI','AircraftController@saveTCI');
+	Route::post('editTCI','AircraftController@editTCI');
+	Route::post('saveSTC','AircraftController@saveSTC');
+	Route::post('editSTC','AircraftController@editSTC');
+	Route::post('saveExemption','AircraftController@saveExemption');
+	Route::post('editExemption','AircraftController@editExemption');
+	Route::post('saveRegistrationInfo','AircraftController@saveRegistrationInfo');
+	Route::post('editRegistrationInfo','AircraftController@editRegistrationInfo');
+	Route::post('saveAC','AircraftController@saveAC');
+	Route::post('editAC','AircraftController@editAC');
+	Route::post('saveApproval','AircraftController@saveApproval');
+	Route::post('editApproval','AircraftController@editApproval');
+	Route::post('saveOwner','AircraftController@saveOwner');
+	Route::post('editOwner','AircraftController@editOwner');
+	Route::post('saveLessee','AircraftController@saveLessee');
+	Route::post('editLessee','AircraftController@editLessee');
+	Route::post('saveInsurer','AircraftController@saveInsurer');
+	Route::post('editInsurer','AircraftController@editInsurer');
+	Route::post('saveEquipmentReview','AircraftController@saveEquipmentReview');
+	Route::post('editEquipmentReview','AircraftController@editEquipmentReview');
+	
 	Route::get('single/{mm}/{msn}','AircraftController@aircraftSingle');
+	Route::get('new_aircraft','AircraftController@addNewAircraft');
+	Route::get('aircraftList','AircraftController@aircraftList');
+	//approve
+	Route::get('approve/{table}/{id}','AircraftController@approve');
+	Route::get('notApprove/{table}/{id}','AircraftController@notApprove');
+	//warning
+	Route::get('warning/{table}/{id}','AircraftController@warning');
+	Route::get('removeWarning/{table}/{id}','AircraftController@removeWarning');
+	//soft delete
+	Route::get('softDelete/{table}/{id}','AircraftController@softDelete');
+	Route::get('undoSoftDelete/{table}/{id}','AircraftController@undoSoftDelete');
+	//permanent delete 
+	Route::get('permanentDelete/{table}/{id}','AircraftController@permanentDelete');
 });
+
 Route::group(array('prefix' => 'qualification','before'=>'auth'), function()
 {
 	

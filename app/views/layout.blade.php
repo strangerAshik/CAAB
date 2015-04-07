@@ -4,21 +4,21 @@
       <meta charset="UTF-8">
         <title>ASRTM | Aviation ERP</title>
         <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
-      <!-- On-line -->
+      <!-- On-line-->
    	   <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
 	   <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
 	   <link href="//code.ionicframework.com/ionicons/1.5.2/css/ionicons.min.css" rel="stylesheet" type="text/css" />
 	   <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 		  
-	   <!--End On-Line--->
-	   <!--off Line--->
-	   <!--
+	 <!--End On-Line--->
+	   <!--off Line
+	  
 	   {{ HTML::style('css/onlineLinks/bootstrap.min.css') }}
 	   {{ HTML::style('css/onlineLinks/font-awesome.min.css') }}      
 	   {{ HTML::style('css/onlineLinks/ionicons.min.css') }}
 	   <script src="{{URL::asset('css/onlineLinks/jquery.min.js')}}" type="text/javascript"></script>
-		-->
-		<!--End Off Line--->
+		
+		End Off Line--->
         <!-- Morris chart -->
 		{{ HTML::style('css/morris/morris.css') }}
         <!-- jvectormap -->
